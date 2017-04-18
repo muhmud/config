@@ -1,0 +1,88 @@
+[global_config]
+  title_hide_sizetext = True
+  suppress_multiple_term_dialog = True
+  enabled_plugins = SqlMode, TerminalShot, MavenPluginURLHandler
+  title_receive_bg_color = "#c80003"
+  title_transmit_bg_color = "#0075ca"
+  tab_position = hidden
+[keybindings]
+  cycle_prev = F9
+  close_window = <Alt>F4
+  switch_to_tab_10 = <Shift>F10
+  resize_left = <Ctrl>KP_4
+  move_tab_left = <Ctrl><Alt>Page_Up
+  go_right = <Ctrl><Alt>Right
+  new_tab = <Ctrl><Shift>t
+  resize_right = <Ctrl>KP_6
+  resize_down = <Ctrl>KP_2
+  move_tab_right = <Ctrl><Alt>Page_Down
+  prev_tab = <Alt>Delete
+  switch_to_tab_6 = <Shift>F6
+  switch_to_tab_7 = <Shift>F7
+  switch_to_tab_4 = <Shift>F4
+  switch_to_tab_5 = <Shift>F5
+  cycle_next = <Ctrl><Shift>F9
+  switch_to_tab_3 = <Shift>F3
+  switch_to_tab_1 = <Shift>F1
+  split_vert = <Ctrl><Shift>e
+  switch_to_tab_8 = <Shift>F8
+  switch_to_tab_9 = <Shift>F9
+  switch_to_tab_2 = <Shift>F2
+  go_left = <Ctrl><Alt>Left
+  paste = <Shift>Insert
+  reset = <Ctrl><Alt>r
+  search = <Ctrl><Shift>at
+  go_up = <Ctrl>Up
+  resize_up = <Ctrl>KP_8
+  next_tab = <Alt>Insert
+  split_horiz = <Ctrl><Shift>o
+  go_down = <Ctrl>Down
+  toggle_scrollbar = <Ctrl><Shift>KP_Add
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    use_system_font = False
+    font = Ubuntu Mono 18
+    background_darkness = 0.89
+    scrollback_lines = 5000
+    background_type = transparent
+    background_image = None
+    foreground_color = "#ffffff"
+    show_titlebar = False
+    copy_on_selection = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
+[keycodes]
+  <Ctrl><Shift>O = 1b 5b 36 4f 36 7e
+  <Ctrl>Insert = 1b 5b 31 31 31 31
+  <Ctrl><Shift>L = 1b 5b 36 50 36 7e
+  <Ctrl>Home = 1b 5b 31 3b 35 48
+  <Shift>Page_Down = 1b 5b 36 3b 32 7e
+  <Ctrl><Shift>H = 1b 5b 36 48 36 7e
+  <Ctrl><Shift>F = 1b 5b 36 46 36 7e
+  <Ctrl><Shift>Up = 1b 5b 36 41 36 7e
+  <Ctrl><Shift>S = 1b 5b 36 53 36 7e
+  <Ctrl><Shift>R = 1b 5b 36 52 36 7e
+  <Ctrl><Shift>Q = 1b 5b 36 51 36 7e
+  <Ctrl><Shift>Right = 1b 5b 36 43 36 7e
+  <Ctrl><Shift>Page_Down = 1b 5b 36 3b 36 7e
+  <Ctrl><Shift>Tab = 1b 5b 36 3b 36 47
+  <Shift>End = 1b 5b 31 3b 32 46
+  <Ctrl>End = 1b 5b 31 3b 35 46
+  <Ctrl><Shift>Left = 1b 5b 36 44 36 7e
+  <Ctrl>BackSpace = 1b 5b 36 3b 35 21
+  <Ctrl><Shift>End = 1b 5b 31 3b 36 46
+  <Ctrl>Delete = 1b 5b 31 31 31 32
+  <Shift>Home = 1b 5b 31 3b 32 48
+  <Ctrl><Shift>Page_Up = 1b 5b 35 3b 36 7e
+  <Ctrl><Shift>Home = 1b 5b 31 3b 36 48
+  <Shift>Page_Up = 1b 5b 35 3b 32 7e
+  <Ctrl>Tab = 1b 5b 31 3b 35 47
+  <Ctrl><Shift>Down = 1b 5b 36 42 36 7e
