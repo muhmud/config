@@ -1,22 +1,18 @@
-(defun shift-region(numcols)
-" my trick to expand the region to the beginning and end of the area selected
- much in the handy way I liked in the Dreamweaver editor."
-  (if (< (point)(mark))
-    (if (not(bolp))    (progn (beginning-of-line)(exchange-point-and-mark) (end-of-line)))
-    (progn (end-of-line)(exchange-point-and-mark)(beginning-of-line)))
-  (setq region-start (region-beginning))
-  (setq region-finish (region-end))
-  (save-excursion
-    (if (< (point) (mark)) (exchange-point-and-mark))
-    (let ((save-mark (mark)))
-      (indent-rigidly region-start region-finish numcols))))
+(defun shift-region (distance)
+  (let ((mark (mark)))
+    (save-excursion
+      (indent-rigidly (region-beginning) (region-end) distance)
+      (push-mark mark t t)
+      ;; Tell the command loop not to deactivate the mark
+      ;; for transient mark mode
+      (setq deactivate-mark nil))))
 
 (defun indent-block()
   (interactive)
   (if (use-region-p)
     (progn
       (shift-region 2)
-      (setq deactivate-mark nil))
+      (activate-mark t))
     (tab-to-tab-stop)))
 
 (defun unindent-block()
@@ -25,9 +21,7 @@
     (progn
       (shift-region -2)
       (setq deactivate-mark nil))
-    (progn
-      (backward-char)
-      (backward-char))))
+    (delete-backward-char 2)))
 
 (defun smart-beginning-of-line ()
   "Move point to first non-whitespace character or beginning-of-line.
