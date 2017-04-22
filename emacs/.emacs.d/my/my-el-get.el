@@ -16,6 +16,7 @@
 ; List of packages to manage
 (setq my:el-get-packages
       '(buffer-stack
+        erc
         undo-tree
         xclip
         neotree

@@ -8,6 +8,7 @@
 (load "my-edit.el")
 (load "my-file.el")
 (load "my-keymap.el")
+(load "my-irc.el")
 
 (load "my-sql.el")
 (load "sql/my-pg-sql.el")
