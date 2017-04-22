@@ -33,12 +33,12 @@ floating_modifier $mod
 bindsym $mod+Return exec /usr/bin/terminator
 
 # Alt+Tab window switching!
-exec ~/.config/i3/scripts/cycle_windows.py
+exec --no-startup-id ~/.config/i3/scripts/cycle_windows.py
 bindsym Mod1+Tab exec ~/.config/i3/scripts/cycle_windows.py --switch
 bindsym Mod1+Shift+Tab exec ~/.config/i3/scripts/cycle_windows.py --rev-switch
 
 # Win+Tab workspace switching
-exec ~/.config/i3/scripts/cycle_workspaces.py
+exec --no-startup-id ~/.config/i3/scripts/cycle_workspaces.py
 bindsym $mod+Tab exec ~/.config/i3/scripts/cycle_workspaces.py --switch
 bindsym $mod+Shift+Tab exec ~/.config/i3/scripts/cycle_workspaces.py --rev-switch
 
@@ -222,10 +222,10 @@ exec --no-startup-id xset r rate 180 45
 exec_always --no-startup-id feh --bg-fill /home/muhmud/pictures/03577_standingatthetopofshanghaijinmaotower_3840x2160.jpg
 
 # ScreenSaver
-exec xscreensaver -no-splash
+exec --no-startup-id xscreensaver -no-splash
 
 # Transparency 
-exec_always compton -f
+exec_always --no-startup-id compton -f
 
 client.focused #dd4814 #dd4814 #ffffff #902a07
 client.focused_inactive #5e2750 #5e2750 #aea79f #5e2750
