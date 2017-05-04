@@ -15,12 +15,7 @@
 
 ; List of packages to manage
 (setq my:el-get-packages
-<<<<<<< HEAD
-      '(buffer-stack
-        erc
-=======
       '(erc
->>>>>>> release/0.13
         undo-tree
         xclip
         neotree
