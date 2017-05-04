@@ -41,7 +41,7 @@ font-1 = FontAwesome:pixelsize=19
 
 modules-left = i3
 modules-center = date
-modules-right = weather pavolume updates power
+modules-right = updates weather pavolume power
 
 [module/i3]
 type = internal/i3
