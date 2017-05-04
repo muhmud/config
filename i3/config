@@ -33,18 +33,21 @@ floating_modifier $mod
 bindsym $mod+Return exec /usr/bin/terminator
 
 # Alt+Tab window switching!
-exec ~/.config/i3/scripts/cycle_windows.py
+exec --no-startup-id ~/.config/i3/scripts/cycle_windows.py
 bindsym Mod1+Tab exec ~/.config/i3/scripts/cycle_windows.py --switch
 bindsym Mod1+Shift+Tab exec ~/.config/i3/scripts/cycle_windows.py --rev-switch
 
 # Win+Tab workspace switching
-exec ~/.config/i3/scripts/cycle_workspaces.py
+exec --no-startup-id ~/.config/i3/scripts/cycle_workspaces.py
 bindsym $mod+Tab exec ~/.config/i3/scripts/cycle_workspaces.py --switch
 bindsym $mod+Shift+Tab exec ~/.config/i3/scripts/cycle_workspaces.py --rev-switch
 
 # Focus parent/child
 bindsym $mod+Shift+z focus parent
 bindsym $mod+z focus child
+
+# Layouts
+bindsym $mod+F1 append_layout ~/.config/i3/layouts/split.json;exec /usr/bin/terminator;exec /usr/bin/google-chrome
 
 # kill focused window
 bindsym $mod+q kill
@@ -110,7 +113,7 @@ set $workspace5 "5: Skype "
 set $workspace6 "6: Toptal "
 set $workspace7 "7: Virtual "
 set $workspace8 "8: Tmp "
-set $workspace9 "9: Other "
+set $workspace9 "9: Other "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -142,12 +145,15 @@ assign [class="Eclipse"] $workspace2
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to logout?' -b 'Yes, logout' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to logout?' -b 'Yes, logout' 'i3-msg exit'"
 
-# Shutdown with the suspend key
-bindsym XF86Sleep exec "i3-nagbar -t warning -m 'Do you really want to shutdown?' -b 'Yes, shutdown' 'i3-msg exit'"
+# Suspend key gives logout/shutdown options
+bindsym XF86Sleep exec oblogout
 
+# Ctrl+Alt+Del
+bindsym Control+Mod1+Delete exec oblogout
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -177,19 +183,22 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-  status_command i3blocks -c ~/.config/i3/i3blocks.conf
-  tray_output primary
-  colors {
-    separator #333333
-    background #2c001e
-    statusline #aea79f
-    focused_workspace #dd4814 #dd4814 #ffffff
-    active_workspace #902a07 #902a07 #aea79f
-    inactive_workspace #902a07 #902a07 #aea79f
-    urgent_workspace #77216f #77216f #ffffff
-  }
-}
+#bar {
+#  status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#  tray_output primary
+#  colors {
+#    separator #333333
+#    background #2c001e
+#    statusline #aea79f
+#    focused_workspace #dd4814 #dd4814 #ffffff
+#    active_workspace #902a07 #902a07 #aea79f
+#    inactive_workspace #902a07 #902a07 #aea79f
+#    urgent_workspace #77216f #77216f #ffffff
+#  }
+#}
+
+# Polybar
+exec_always --no-startup-id ~/.config/polybar/launch
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
@@ -213,21 +222,28 @@ bindsym XF86AudioPrev exec playerctl previous
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id gnome-sound-applet
 exec --no-startup-id nm-applet
+
 bindsym $mod+l exec "gnome-screensaver-command --lock"
+
+bindsym Print exec gnome-screenshot 
+bindsym $mod+Print exec "gnome-screenshot --window"
 
 # Key delay
 exec --no-startup-id xset r rate 180 45
 
 # Background
-exec_always --no-startup-id feh --bg-fill /home/muhmud/pictures/03577_standingatthetopofshanghaijinmaotower_3840x2160.jpg
+exec_always --no-startup-id ~/.config/i3/scripts/wallpaper.sh
 
 # ScreenSaver
-exec xscreensaver -no-splash
+exec --no-startup-id xscreensaver -no-splash
 
 # Transparency 
-exec_always compton -f
+exec_always --no-startup-id compton -f
 
 client.focused #dd4814 #dd4814 #ffffff #902a07
 client.focused_inactive #5e2750 #5e2750 #aea79f #5e2750
 client.unfocused #5e2750 #5e2750 #aea79f #5e2750
 client.urgent #77216f #77216f #ffffff #efb73e
+
+# Make the logout screen fullscreen
+for_window [class="Oblogout"] fullscreen enable

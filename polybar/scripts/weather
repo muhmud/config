@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+
+import urllib.request, json
+import re
+
+city = "Kuala%20Lumpur"
+api_key = "e14523135da6bb74b72f55527eda1126"
+units = "Metric"
+unit_key = "C"
+
+url = "http://api.openweathermap.org/data/2.5/weather?q={}&APPID={}&units={}".format(city, api_key, units)
+weather = eval(str(urllib.request.urlopen(url).read())[2:-1])
+
+info = weather["weather"][0]["description"].capitalize()
+temp = int(float(weather["main"]["temp"]))
+
+temp_icon = ""
+if temp >= 25 and temp <= 29:
+    temp_icon = ""
+elif temp >= 30 and temp <= 35:
+    temp_icon = ""
+elif temp > 35:
+    temp_icon = ""
+
+weather_icon = ""
+if re.match(".*rain", info, re.I):
+    weather_icon = ""
+elif re.match(".*cloud", info, re.I):
+    weather_icon = ""
+
+print("%s %i°%s" % (weather_icon, temp, unit_key))
