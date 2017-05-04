@@ -1,3 +1,5 @@
+(load "buffer-stack.el")
+
 (require 'buffer-stack)
 (global-set-key "\e[6;6G" 'buffer-stack-up)     ; Ctrl+Shift+Tab
 (global-set-key "\e[1;5G" 'buffer-stack-down)   ; Ctrl+Tab
