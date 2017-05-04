@@ -1,0 +1,182 @@
+;
+; this config is written for an unreleased version (polybar "wip-lemonbar" branch)
+; it might need some tweaking to run on the latest released version... try for yourself
+;
+
+[bar/top]
+monitor=DisplayPort-0
+width = 100%
+height = 30
+offset-x = 0
+offset-y = 10
+
+background = #ee1d1d1d
+foreground = #ccfafafa
+linecolor = #666
+
+border-top-size = 2
+border-bottom-size = 2
+border-color = ee2d2d2d
+;border-top = 1
+;border-top-color = #ccfafafa
+;border-left = 50
+;border-left-color = #00ff00
+;border-bottom = 1
+;border-bottom-color = #ccfafafa
+;border-left = 0
+;border-left-color = #0f0
+;border-right = 0
+;border-right-color = #00f
+
+spacing = 1
+lineheight = 2
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+
+; font-0 = ypn envypn:size=10;0
+font-0 = Hack-Regular:size=15;1
+font-1 = FontAwesome:pixelsize=19
+
+modules-left = i3
+modules-center = date
+modules-right = weather pavolume updates power
+
+[module/i3]
+type = internal/i3
+
+; Only show workspaces defined on the same output as the bar
+;
+; Useful if you want to show monitor specific workspaces
+; on different bars
+;
+; Default: false
+pin-workspaces = true
+
+; This will split the workspace name on ':'
+; Default: false
+strip-wsnumbers = true
+
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = true
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Wrap around when reaching the first/last workspace
+; Default: true
+wrapping-scroll = false
+
+; Set the scroll cycle direction 
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = false
+
+; ws-icon-[0-9]+ = label;icon
+; NOTE: The label needs to match the name of the i3 workspace
+ws-icon-0 = "1: Main ;"
+ws-icon-1 = "2: Dev ;"
+ws-icon-2 = "3: Term ;"
+ws-icon-3 = "4: Chrome ;"
+ws-icon-4 = "5: Skype ;"
+ws-icon-5 = "6: Toptal ;"
+ws-icon-6 = "7: Virtual ;"
+ws-icon-7 = "8: Tmp ;"
+ws-icon-8 = "9: Other ;"
+ws-icon-default = 
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+
+; Available tokens:
+;   %mode%
+; Default: %mode%
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = #e60053
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-focused = %icon%
+label-focused-foreground = #ffffff
+label-focused-background = #3f3f3f
+label-focused-underline = #ffa922
+label-focused-padding = 4
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-unfocused = %icon%
+label-unfocused-padding = 4
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-visible = %icon%
+label-visible-underline = #555555
+label-visible-padding = 4
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-urgent = %icon%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 4
+
+[module/date]
+type = custom/script
+interval = 1
+label = %output%
+exec = ~/.config/polybar/scripts/datetime.sh
+click-left = gsimplecal
+
+[module/pavolume]
+type = custom/script
+interval = 2
+label = %output%
+exec = ~/.config/polybar/scripts/pavolume.sh
+click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
+
+[module/updates]
+type = custom/script
+interval = 1800
+format = <label>
+label = "%output%"
+exec = ~/.config/polybar/scripts/updates.sh
+
+[module/power]
+type = custom/text
+content = ""
+click-left = oblogout
+
+[module/weather]
+type = custom/script
+interval = 1800
+format = <label>
+exec = ~/.config/polybar/scripts/weather

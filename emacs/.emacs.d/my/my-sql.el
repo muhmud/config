@@ -3,22 +3,22 @@
 (defun write-sql-region-to-buffer()
   (interactive)
   "Write some sql to a buffer file"
-  (write-region (region-beginning) (region-end) "/tmp/buffer.sql"))
+  (write-region (region-beginning) (region-end) "/ram/buffer.sql"))
 
 ; Appends the selected text to a file. Related to sql client implementation
 (defun append-sql-to-buffer ()
   (interactive)
-  (write-region (region-beginning) (region-end) "/tmp/buffer.sql" t))
+  (write-region (region-beginning) (region-end) "/ram/buffer.sql" t))
 
 ; Takes the text at point, searching backwards for a newline and forwards
 ; for a semi-colon, and writes it to a file. Sql client implementation related.
 (defun create-sql-region-and-write-to-buffer()
   (interactive)
   (setq current-point (point))
-  (search-backward-regexp "^\n")
+  (search-backward-regexp ";" nil "")
   (cua-set-mark)
-  (search-forward-regexp ";")
-  (write-sql-to-buffer)
+  (search-forward-regexp ";" nil "")
+  (write-sql-region-to-buffer)
   (cua-set-mark)
   (goto-char current-point)
   (message "Sql >>>"))
@@ -28,5 +28,5 @@
   (interactive)
   (if (use-region-p)
       (delete-region (point) (mark)))
-    (insert-file-contents "/tmp/script.sql"))
+    (insert-file-contents "/ram/script.sql"))
 

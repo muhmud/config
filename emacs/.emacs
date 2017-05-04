@@ -1,4 +1,4 @@
-
+7
 ; Add the libs folder to the load path
 (add-to-list 'load-path "~/.emacs.d/my")
 
@@ -66,6 +66,9 @@
 ; Use mouse wheel for scrolling through the buffer
 (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down-line 3)))
 (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up-line 3)))
+
+; Make mouse region select work properly
+(global-set-key [drag-mouse-0] 'mouse-set-region)
 
 ; Enable ibuffer
 (ibuffer)

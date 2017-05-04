@@ -1,0 +1,43 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 598,
+       "width": 962,
+       "x": 0,
+       "y": 0
+    },
+    "name": "Terminator",
+    "percent": 0.5,
+    "swallows": [
+       {
+          "class": "^Terminator$",
+          "instance": "^terminator$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "normal",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 2098,
+       "width": 1916,
+       "x": 2,
+       "y": 60
+    },
+    "name": "Google Chrome",
+    "percent": 0.5,
+    "swallows": [
+       {
+          "class": "^Google\\-chrome$",
+          "instance": "^google\\-chrome$"
+       }
+    ],
+    "type": "con"
+}
+
