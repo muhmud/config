@@ -87,3 +87,6 @@
   <Ctrl>Tab = 1b 5b 31 3b 35 47
   <Ctrl><Shift>Down = 1b 5b 36 42 36 7e
   <Ctrl>Return = 1b 5b 32 34 3b 39 7e
+  <Alt>D = 1b 5b 32 34 3b 39 7b
+  <Alt><Shift>D = 1b 5b 32 34 3b 39 7d
+  
