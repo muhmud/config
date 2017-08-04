@@ -1,3 +1,24 @@
+
+# Theme
+color15_i3wmthemer	    = ${xrdb:color15}
+color14_i3wmthemer	    = ${xrdb:color14}
+color13_i3wmthemer	    = ${xrdb:color13}
+color12_i3wmthemer	    = ${xrdb:color12}
+color11_i3wmthemer	    = ${xrdb:color11}
+color10_i3wmthemer	    = ${xrdb:color10}
+color09_i3wmthemer	    = ${xrdb:color9}
+color08_i3wmthemer	    = ${xrdb:color8}
+color07_i3wmthemer	    = ${xrdb:color7}
+color06_i3wmthemer	    = ${xrdb:color6}
+color05_i3wmthemer	    = ${xrdb:color5}
+color04_i3wmthemer	    = ${xrdb:color4}
+color03_i3wmthemer	    = ${xrdb:color3}
+color02_i3wmthemer	    = ${xrdb:color2}
+color01_i3wmthemer          = ${xrdb:color1}
+color00_i3wmthemer	    = ${xrdb:color0}
+foreground_i3wmthemer 	    = ${xrdb:foreground}
+background_i3wmthemer 	    = ${xrdb:background}
+
 ;
 ; this config is written for an unreleased version (polybar "wip-lemonbar" branch)
 ; it might need some tweaking to run on the latest released version... try for yourself
@@ -41,7 +62,7 @@ font-1 = FontAwesome:pixelsize=19
 
 modules-left = i3
 modules-center = date
-modules-right = updates weather pavolume power
+modules-right = updates work_timer weather pavolume load_average power
 
 [module/i3]
 type = internal/i3
@@ -88,13 +109,13 @@ fuzzy-match = false
 
 ; ws-icon-[0-9]+ = label;icon
 ; NOTE: The label needs to match the name of the i3 workspace
-ws-icon-0 = "1: Main ;"
+ws-icon-0 = "1: Main ;"
 ws-icon-1 = "2: Dev ;"
 ws-icon-2 = "3: Term ;"
 ws-icon-3 = "4: Chrome ;"
 ws-icon-4 = "5: Skype ;"
 ws-icon-5 = "6: Toptal ;"
-ws-icon-6 = "7: Virtual ;"
+ws-icon-6 = "7: Virtual ;"
 ws-icon-7 = "8: Tmp ;"
 ws-icon-8 = "9: Other ;"
 ws-icon-default = 
@@ -158,7 +179,7 @@ click-left = gsimplecal
 
 [module/pavolume]
 type = custom/script
-interval = 2
+interval = 1
 label = %output%
 exec = ~/.config/polybar/scripts/pavolume.sh
 click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
@@ -170,6 +191,20 @@ format = <label>
 label = "%output%"
 exec = ~/.config/polybar/scripts/updates.sh
 
+[module/yaourt_updates]
+type = custom/script
+interval = 1800
+format = <label>
+label = "%output%"
+exec = ~/.config/polybar/scripts/yaourt-updates.sh
+
+[module/work_timer]
+type = custom/script
+interval = 1
+format = <label>
+label = "%output%"
+exec = ~/.config/polybar/scripts/timer.sh
+
 [module/power]
 type = custom/text
 content = ""
@@ -180,3 +215,10 @@ type = custom/script
 interval = 1800
 format = <label>
 exec = ~/.config/polybar/scripts/weather
+
+[module/load_average]
+type = custom/script
+interval = 20
+format = <label>
+label = "%output%"
+exec = ~/.config/polybar/scripts/load-average.sh

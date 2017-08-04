@@ -391,7 +391,7 @@ This is THE switching command; all other motions are based on this."
   (if (not (boundp 'ctrl-up-code))
     (setq ctrl-up-code ""))
   (setq new-ctrl-up-code (with-temp-buffer
-    (insert-file-contents "/ram/emacs-ctrl-up")
+    (insert-file-contents "/tmp/emacs-ctrl-up")
     (buffer-string)))
   (if (string= new-ctrl-up-code ctrl-up-code)
       (setq buffer-stack-is-switching t)

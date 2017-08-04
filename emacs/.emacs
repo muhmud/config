@@ -1,4 +1,4 @@
-7
+
 ; Add the libs folder to the load path
 (add-to-list 'load-path "~/.emacs.d/my")
 
@@ -11,9 +11,28 @@
 (load "my-irc.el")
 
 (load "my-sql.el")
+
+; Functions to load different SQL environments
+(defun my-mssql-setter (switch)
+  (load "sql/my-ms-sql.el"))
+
+(defun my-pgsql-setter (switch)
+  (load "sql/my-pg-sql.el"))
+
+; Control which SQL environment is loaded using command line arguments
+(add-to-list 'command-switch-alist '("-mssql" . my-mssql-setter))
+(add-to-list 'command-switch-alist '("-pgsql" . my-pgsql-setter))
+
+; Default to postgresql
 (load "sql/my-pg-sql.el")
 
 (load "my-cpp.el")
+
+; Custom themes directory
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+
+; Theme
+(color-theme-ld-dark)
 
 ; Neotree
 (require 'neotree)
@@ -28,6 +47,18 @@
 (global-set-key (kbd "C-y") 'redo)
 
 (setq initial-major-mode (quote text-mode))
+
+; Company
+; Use company-irony
+(require 'company-irony)
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+; Projectile
+(require 'projectile)
+(projectile-global-mode)
 
 ; Truncate long lines
 (toggle-truncate-lines 1)
@@ -62,6 +93,9 @@
 
 ; Enable the mouse
 (xterm-mouse-mode)
+
+; Right click to paste
+(global-set-key (kbd "<mouse-3>") (lambda () (interactive) (clipboard-yank)))
 
 ; Use mouse wheel for scrolling through the buffer
 (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down-line 3)))
@@ -121,5 +155,30 @@
  ;; If there is more than one, they won't work right.
  '(ido-enable-flex-matching t)
  '(ido-enable-regexp t)
- '(ido-mode (quote both) nil (ido)))
+ '(ido-mode (quote both) nil (ido))
+ '(safe-local-variable-values
+   (quote
+    ((cmake-ide-build-dir . my-project-path)
+     (cmake-ide-build-dir concat my-project-path "build/debug")
+     (eval setq cmake-ide-build-dir
+           (concat my-project-path "build/debug"))
+     (cmake-ide-project-dir . my-project-path)
+     (eval set
+           (make-local-variable
+            (quote my-project-path))
+           (file-name-directory
+            (let
+                ((d
+                  (dir-locals-find-file ".")))
+              (if
+                  (stringp d)
+                  d
+                (car d)))))
+     (cmake-ide-build-dir . build/debug)))))
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -61,9 +61,21 @@
 (global-set-key "\M-d" 'delete-line-to-right)
 (global-set-key "\M-s" 'delete-line-to-left)
 (global-set-key "\C-i" 'quoted-insert)
+;(global-set-key "\C-/" 'pop-global-mark)
 
 (global-set-key "\e[1111" (lambda() (interactive) (other-window 1))) ; Ctrl+Ins
 (global-set-key "\e[1112" (lambda() (interactive) (other-window -1))) ; Ctrl+Del
 
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (define-key global-map (kbd "TAB") 'indent-block)
+
+; Change keys in org-mode-map
+(eval-after-load "org"
+  '(progn
+     (define-key org-mode-map (kbd "C-S-<right>") nil)
+     (define-key org-mode-map (kbd "S-<right>") nil)
+     (define-key org-mode-map (kbd "C-S-<left>") nil)
+     (define-key org-mode-map (kbd "S-<left>") nil)
+   )
+)
+

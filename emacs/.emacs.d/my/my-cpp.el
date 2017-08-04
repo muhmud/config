@@ -1,9 +1,9 @@
 ; rtags
 (require 'rtags)
 
-(global-set-key (kbd "C-.") 'rtags-find-symbol)
-
 ; irony
+(require 'irony)
+(require 'company-irony)
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c++-mode-hook #'global-flycheck-mode)
 (add-hook 'c-mode-hook 'irony-mode)
@@ -14,9 +14,8 @@
 ;; irony-mode's buffers by irony-mode's function
 (defun my-irony-mode-hook ()
   (define-key irony-mode-map "\C-@"
-    'irony-completion-at-point-async))
-;  (define-key irony-mode-map [remap complete-symbol]
-;    'irony-completion-at-point-async))
+    'company-complete))
+
 (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
@@ -27,6 +26,10 @@
      (set-face-attribute 'flycheck-error nil :foreground "black" :background "red")
      (set-face-attribute 'flycheck-warning nil :foreground "black" :background "yellow")
      (set-face-attribute 'flycheck-info nil :foreground "black" :background "green")))
+
+; Key bindings
+(add-hook 'c++-mode-hook (lambda () (interactive)
+                           (local-set-key (kbd "M-.") 'rtags-find-symbol-at-point)))
 
 ; Debugging
 (setq

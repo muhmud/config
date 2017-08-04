@@ -17,4 +17,4 @@ TimeSeparator() {
   fi
 }
 
-date +"%a%e`DaySuffix` %b %Y, %H`TimeSeparator`%M"
+date +"%a %e`DaySuffix` %b %Y, %H`TimeSeparator`%M"

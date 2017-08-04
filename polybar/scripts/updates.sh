@@ -1,7 +1,8 @@
 #!/bin/bash
 
-updates=$(apt-get -su upgrade | grep '^0' | wc -l)
-if [ "$updates" -eq "0" ]; then
+sudo pacman -Sy > /dev/null 2>&1
+updates=$(sudo pacman -Qu | wc -l)
+if [ "$updates" -ne "0" ]; then
     echo ""
 else
     echo ""

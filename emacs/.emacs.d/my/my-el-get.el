@@ -15,19 +15,23 @@
 
 ; List of packages to manage
 (setq my:el-get-packages
-      '(erc
+      '(color-theme
+	      erc
         undo-tree
         xclip
         neotree
         cmake-mode
         irony-mode
         company-mode
+        company-irony
         flycheck
         flycheck-irony
         rtags
         cmake-ide
         magit
-        js2-mode))
+        magit-gitflow
+        js2-mode
+        projectile))
 
 ; Sync packages
 (el-get 'sync my:el-get-packages)

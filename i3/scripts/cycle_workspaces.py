@@ -25,6 +25,7 @@ class FocusWatcher:
         self.listening_socket.bind(SOCKET_FILE)
         self.listening_socket.listen(1)
         self.cycler = Cycler(MAX_WS_HISTORY)
+        self.cycler.add(self.i3.get_tree().find_focused().workspace().name)
 
     def _focus_workspace(self, workspace_id):
         # Set focus to the workspace
