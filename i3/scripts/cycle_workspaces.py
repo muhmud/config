@@ -36,7 +36,7 @@ class FocusWatcher:
         self.cycler.add(workspace_id)
  
     def on_key_release(self, i3conn, event):
-        time.sleep(0.05)
+        time.sleep(0.07)
         if event.change == '133' or event.change == '134':
             self.cycler.release()
         

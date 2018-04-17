@@ -1,23 +1,23 @@
 
 # Theme
-color15_i3wmthemer	    = ${xrdb:color15}
-color14_i3wmthemer	    = ${xrdb:color14}
-color13_i3wmthemer	    = ${xrdb:color13}
-color12_i3wmthemer	    = ${xrdb:color12}
-color11_i3wmthemer	    = ${xrdb:color11}
-color10_i3wmthemer	    = ${xrdb:color10}
-color09_i3wmthemer	    = ${xrdb:color9}
-color08_i3wmthemer	    = ${xrdb:color8}
-color07_i3wmthemer	    = ${xrdb:color7}
-color06_i3wmthemer	    = ${xrdb:color6}
-color05_i3wmthemer	    = ${xrdb:color5}
-color04_i3wmthemer	    = ${xrdb:color4}
-color03_i3wmthemer	    = ${xrdb:color3}
-color02_i3wmthemer	    = ${xrdb:color2}
-color01_i3wmthemer          = ${xrdb:color1}
-color00_i3wmthemer	    = ${xrdb:color0}
-foreground_i3wmthemer 	    = ${xrdb:foreground}
-background_i3wmthemer 	    = ${xrdb:background}
+color15_i3wmthemer	    = ${xrdb:*.color15}
+color14_i3wmthemer	    = ${xrdb:*.color14}
+color13_i3wmthemer	    = ${xrdb:*.color13}
+color12_i3wmthemer	    = ${xrdb:*.color12}
+color11_i3wmthemer	    = ${xrdb:*.color11}
+color10_i3wmthemer	    = ${xrdb:*.color10}
+color09_i3wmthemer	    = ${xrdb:*.color9}
+color08_i3wmthemer	    = ${xrdb:*.color8}
+color07_i3wmthemer	    = ${xrdb:*.color7}
+color06_i3wmthemer	    = ${xrdb:*.color6}
+color05_i3wmthemer	    = ${xrdb:*.color5}
+color04_i3wmthemer	    = ${xrdb:*.color4}
+color03_i3wmthemer	    = ${xrdb:*.color3}
+color02_i3wmthemer	    = ${xrdb:*.color2}
+color01_i3wmthemer      = ${xrdb:*.color1}
+color00_i3wmthemer	    = ${xrdb:*.color0}
+foreground_i3wmthemer 	= ${xrdb:*.foreground}
+background_i3wmthemer 	= ${xrdb:*.background}
 
 ;
 ; this config is written for an unreleased version (polybar "wip-lemonbar" branch)
@@ -57,12 +57,12 @@ module-margin-left = 1
 module-margin-right = 2
 
 ; font-0 = ypn envypn:size=10;0
-font-0 = Hack-Regular:size=15;1
-font-1 = FontAwesome:pixelsize=19
+font-0 = Hack-Regular:size=15;3
+font-1 = FontAwesome:pixelsize=19;3
 
 modules-left = i3
 modules-center = date
-modules-right = updates work_timer weather pavolume load_average power
+modules-right = updates timer weather pavolume load_average xbanish power
 
 [module/i3]
 type = internal/i3
@@ -96,13 +96,13 @@ enable-scroll = false
 ; Default: true
 wrapping-scroll = false
 
-; Set the scroll cycle direction 
+; Set the scroll cycle direction
 ; Default: true
 reverse-scroll = false
 
-; Use fuzzy (partial) matching on labels when assigning 
+; Use fuzzy (partial) matching on labels when assigning
 ; icons to workspaces
-; Example: code;♚ will apply the icon to all workspaces 
+; Example: code;♚ will apply the icon to all workspaces
 ; containing 'code' in the label
 ; Default: false
 fuzzy-match = false
@@ -112,7 +112,7 @@ fuzzy-match = false
 ws-icon-0 = "1: Main ;"
 ws-icon-1 = "2: Dev ;"
 ws-icon-2 = "3: Term ;"
-ws-icon-3 = "4: Chrome ;"
+ws-icon-3 = "4: Firefox ;"
 ws-icon-4 = "5: Skype ;"
 ws-icon-5 = "6: Toptal ;"
 ws-icon-6 = "7: Virtual ;"
@@ -175,7 +175,7 @@ type = custom/script
 interval = 1
 label = %output%
 exec = ~/.config/polybar/scripts/datetime.sh
-click-left = gsimplecal
+click-left = gnome-calendar
 
 [module/pavolume]
 type = custom/script
@@ -183,6 +183,8 @@ interval = 1
 label = %output%
 exec = ~/.config/polybar/scripts/pavolume.sh
 click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
+scroll-up = ~/.config/polybar/scripts/pavolume.sh --up
+scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
 
 [module/updates]
 type = custom/script
@@ -198,12 +200,15 @@ format = <label>
 label = "%output%"
 exec = ~/.config/polybar/scripts/yaourt-updates.sh
 
-[module/work_timer]
+[module/timer]
 type = custom/script
 interval = 1
-format = <label>
-label = "%output%"
-exec = ~/.config/polybar/scripts/timer.sh
+label = %output%
+exec = ~/.config/polybar/scripts/timer-status.sh
+click-left = ~/.config/polybar/scripts/timer-pause-continue.sh
+click-middle = ~/.config/polybar/scripts/timer-switch.sh
+click-right = ~/.config/polybar/scripts/timer-stop.sh
+scroll-down = ~/.config/polybar/scripts/timer-change-task.sh
 
 [module/power]
 type = custom/text
@@ -222,3 +227,11 @@ interval = 20
 format = <label>
 label = "%output%"
 exec = ~/.config/polybar/scripts/load-average.sh
+
+[module/xbanish]
+type = custom/script
+interval = 604800
+format = <label>
+label = ""
+exec = dummy.sh
+click-left = ~/.config/polybar/scripts/xbanish.sh

@@ -17,6 +17,7 @@ class FocusWatcher:
         self.i3 = i3ipc.Connection()
         self.i3.on('window::focus', self.on_window_focus)
         self.i3.on('key_release', self.on_key_release)
+        self.i3.on('key_press', self.on_key_press)
         self.listening_socket = socket.socket(socket.AF_UNIX,
             socket.SOCK_STREAM)
         if os.path.exists(SOCKET_FILE):
@@ -24,6 +25,8 @@ class FocusWatcher:
         self.listening_socket.bind(SOCKET_FILE)
         self.listening_socket.listen(1)
         self.cycler = Cycler(MAX_WIN_HISTORY)
+        self.last_focussed_window = None
+        self.key_pressed = False
 
     def _focus_window(self, window_id):
         # Set focus to the window 
@@ -31,12 +34,24 @@ class FocusWatcher:
         
     def on_window_focus(self, i3conn, event):
         window_id = event.container.props.id
-        self.cycler.add(window_id)
- 
+        self.last_focussed_window = window_id
+        if (not self.key_pressed):
+            self.cycler.add(window_id)
+
+    def on_key_press(self, i3conn, event):
+        if event.change == '64' or event.change == '133' or event.change == '134':
+            self.last_focussed_window = None
+            self.key_pressed = True
+    
     def on_key_release(self, i3conn, event):
-        time.sleep(0.05)
-        if event.change == '64':
+        time.sleep(0.07)
+        if event.change == '64' or event.change == '133' or event.change == '134':
             self.cycler.release()
+
+            if (self.last_focussed_window != None):
+                self.cycler.add(self.last_focussed_window)
+                self.last_focussed_window = None
+            self.key_pressed = False
         
     def launch_i3(self):
         self.i3.main()

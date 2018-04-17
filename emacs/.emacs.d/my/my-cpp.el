@@ -6,6 +6,15 @@
 (require 'company-irony)
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c++-mode-hook #'global-flycheck-mode)
+
+(defun my-c++-mode-before-save-hook ()
+  (let (ext)
+    (setq ext (file-name-extension (buffer-file-name)))
+    (if (or (string= ext "cpp") (string= ext "hpp")) (clang-format-buffer))))
+
+(add-hook 'c++-mode-hook
+          (lambda () (add-hook 'before-save-hook #'my-c++-mode-before-save-hook)))
+
 (add-hook 'c-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook #'global-flycheck-mode)
 (add-hook 'objc-mode-hook 'irony-mode)
@@ -29,7 +38,9 @@
 
 ; Key bindings
 (add-hook 'c++-mode-hook (lambda () (interactive)
-                           (local-set-key (kbd "M-.") 'rtags-find-symbol-at-point)))
+                           (local-set-key (kbd "M-.") 'rtags-find-symbol-at-point)
+                           (local-set-key (kbd "M-/") 'rtags-print-symbol-info)
+                           (local-set-key (kbd "M-f") 'clang-format-buffer)))
 
 ; Debugging
 (setq
@@ -39,5 +50,7 @@
  ; Non-nil means display source file containing the main routine at startup
  gdb-show-main t
 )
+
+
 
 (cmake-ide-setup)

@@ -1,3 +1,5 @@
+(load "format-sql.el")
+
 ; Take the selected text and write it to a file, overwriting any existing data. 
 ; This is the first step in getting a cool sql client working.
 (defun write-sql-region-to-buffer()
@@ -47,5 +49,9 @@
   (setq sql-buffer-status-file (concat "/tmp/buffer-status." sql-tab-id))
   (setq sql-script-file (concat (concat "/tmp/script." sql-tab-id) ".sql")))
   
+(eval-after-load "sql"
+  '(progn
+     (define-key sql-mode-map (kbd "M-f") 'format-sql-buffer)))
+
 
 (global-set-key "\e[24;99" 'update-sql-tab-files) ; Special byte sequence to update the sql files used

@@ -31,7 +31,27 @@
         magit
         magit-gitflow
         js2-mode
-        projectile))
+        projectile
+        clang-format
+        semantic-refactor
+        evil
+        s
+        yaml-mode
+        yasnippet
+        expand-region
+        js2-mode
+        js2-refactor
+        json-mode
+        tern
+        company-tern
+        websocket
+        request
+        circe
+        alert
+        emojify
+        use-package
+        ensime
+	slack))
 
 ; Sync packages
 (el-get 'sync my:el-get-packages)

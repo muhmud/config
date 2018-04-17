@@ -7,20 +7,27 @@
   title_font = Sans 15
   title_hide_sizetext = True
 [keybindings]
+  broadcast_all = <Primary><Shift>a
+  broadcast_group = <Primary><Shift>g
+  broadcast_off = <Primary><Shift>o
   close_window = <Alt>F4
-  cycle_next = <Primary><Shift>F9
-  cycle_prev = F9
-  go_down = <Primary>Down
+  copy = <Primary><Shift>c
+  cycle_next = <Primary>Down
+  cycle_prev = <Primary>Up
+  go_down = <Shift>F9
   go_left = <Primary><Alt>Left
   go_right = <Primary><Alt>Right
-  go_up = <Primary>Up
+  go_up = F9
   help = F12
+  layout_launcher = <Primary><Shift>l
   move_tab_left = <Primary><Alt>Page_Up
   move_tab_right = <Primary><Alt>Page_Down
   new_tab = <Primary><Shift>t
-  next_tab = <Alt>Insert
+  next_tab = <Primary><Shift>Page_Down
+  page_down_half = <Primary><Alt>Down
+  page_up_half = <Primary><Alt>Up
   paste = <Shift>Insert
-  prev_tab = <Alt>Delete
+  prev_tab = <Primary><Shift>Page_Up
   reset = <Primary><Alt>r
   resize_down = <Primary>KP_2
   resize_left = <Primary>KP_4
@@ -40,6 +47,7 @@
   switch_to_tab_8 = <Shift>F8
   switch_to_tab_9 = <Shift>F9
   toggle_scrollbar = <Primary><Shift>KP_Add
+  zoom_in = <Primary>equal
 [keycodes]
   <Alt><Shift>D = 1b 5b 32 34 3b 39 7d
   <Alt>D = 1b 5b 32 34 3b 39 7b
@@ -70,6 +78,7 @@
   <Shift>Home = 1b 5b 31 3b 32 48
   <Shift>Page_Down = 1b 5b 36 3b 32 7e
   <Shift>Page_Up = 1b 5b 35 3b 32 7e
+  Pause = 1b 5b 35 3b 5a 7e
 [layouts]
   [[default]]
     [[[child1]]]
@@ -85,7 +94,7 @@
     background_type = transparent
     copy_on_selection = True
     cursor_color = "#aaaaaa"
-    font = Menlo 16
+    font = DejaVu Sans Mono 20
     scrollback_lines = 5000
     scrollbar_position = hidden
     show_titlebar = False

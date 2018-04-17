@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:FantasqueSansMono-Regular 14
+font pango:FantasqueSansMono-Regular 16
 
 # Borders
 # new_window pixel 5
@@ -37,12 +37,12 @@ floating_modifier $mod
 bindsym $mod+Return exec /usr/bin/terminator
 
 # Alt+Tab window switching!
-exec --no-startup-id ~/.config/i3/scripts/cycle_windows.py
+exec --no-startup-id ~/.config/i3/scripts/cycle_windows.py &
 bindsym Mod1+Tab exec ~/.config/i3/scripts/cycle_windows.py --switch
 bindsym Mod1+Shift+Tab exec ~/.config/i3/scripts/cycle_windows.py --rev-switch
 
 # Win+Tab workspace switching
-exec --no-startup-id ~/.config/i3/scripts/cycle_workspaces.py
+exec --no-startup-id ~/.config/i3/scripts/cycle_workspaces.py &
 bindsym $mod+Tab exec ~/.config/i3/scripts/cycle_workspaces.py --switch
 bindsym $mod+Shift+Tab exec ~/.config/i3/scripts/cycle_workspaces.py --rev-switch
 
@@ -57,7 +57,7 @@ bindsym $mod+F1 append_layout ~/.config/i3/layouts/split.json;exec /usr/bin/term
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show combi -config ~/.config/i3/rofi.conf
+bindsym $mod+space exec rofi -show combi -config ~/.config/i3/rofi.conf
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -88,6 +88,10 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+# Move to next and previous workspace
+bindsym $mod+Next workspace next
+bindsym $mod+Prior workspace prev
+
 # split in horizontal orientation
 bindsym $mod+h split h
 
@@ -96,6 +100,7 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen disable_special
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -106,13 +111,13 @@ bindsym $mod+w layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+d focus mode_toggle
 
 # Workspace names
 set $workspace1 "1: Main "
 set $workspace2 "2: Dev "
 set $workspace3 "3: Term "
-set $workspace4 "4: Chrome "
+set $workspace4 "4: Firefox "
 set $workspace5 "5: Skype "
 set $workspace6 "6: Toptal "
 set $workspace7 "7: Virtual "
@@ -153,8 +158,8 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to logout?' -b 'Yes, logout' 'i3-msg exit'"
 
-# Suspend key gives logout/shutdown options
-bindsym XF86Sleep exec oblogout
+# Suspend key goes to oblogout
+bindsym XF86Sleep oblogout
 
 # Ctrl+Alt+Del
 bindsym Control+Mod1+Delete exec oblogout
@@ -167,10 +172,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        #bindsym j resize shrink width 10 px or 10 ppt
-        #bindsym k resize grow height 10 px or 10 ppt
-        #bindsym l resize shrink height 10 px or 10 ppt
-        #bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -178,12 +183,32 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
+        # Shortcuts for large resizing
+        bindsym Ctrl+Down resize grow height 10 px or 10 ppt;resize grow height 10 px or 10 ppt;resize grow height 10 px or 10 ppt;resize grow height 10 px or 10 ppt
+        bindsym Ctrl+Up resize shrink height 10 px or 10 ppt;resize shrink height 10 px or 10 ppt;resize shrink height 10 px or 10 ppt;resize shrink height 10 px or 10 ppt
+        bindsym Ctrl+Left resize grow height 10 px or 10 ppt;resize grow height 10 px or 10 ppt;resize grow height 10 px or 10 ppt;resize grow height 10 px or 10 ppt;resize grow width 10 px or 10 ppt;resize grow width 10 px or 10 ppt;resize grow width 10 px or 10 ppt;resize grow width 10 px or 10 ppt
+        bindsym Ctrl+Right resize shrink height 10 px or 10 ppt;resize shrink height 10 px or 10 ppt;resize shrink height 10 px or 10 ppt;resize shrink height 10 px or 10 ppt;resize shrink width 10 px or 10 ppt;resize shrink width 10 px or 10 ppt;resize shrink width 10 px or 10 ppt;resize shrink width 10 px or 10 ppt
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
+
+# timer commands
+mode "timer" {
+        bindsym s exec --no-startup-id ~/.config/polybar/scripts/timer-stop.sh;mode "default"
+        bindsym p exec --no-startup-id ~/.config/polybar/scripts/timer-pause-continue.sh;mode "default"
+        bindsym r exec --no-startup-id ~/.config/polybar/scripts/timer-pause-continue.sh;mode "default"
+        bindsym t exec --no-startup-id ~/.config/polybar/scripts/timer-change-task.sh;mode "default"
+        bindsym w exec --no-startup-id ~/.config/polybar/scripts/timer-switch.sh;mode "default"
+
+        # back to normal: Enter or Escape
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+x mode "timer"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -226,17 +251,22 @@ bindsym XF86AudioPrev exec playerctl previous
 exec --no-startup-id pulseaudio --daemonize
 
 # Get some gnome stuff
-exec --no-startup-id gnome-settings-daemon
-exec --no-startup-id gnome-sound-applet
-exec --no-startup-id nm-applet
+#exec --no-startup-id /usr/lib/gsd-xsettings &
+exec --no-startup-id gnome-sound-applet &
+exec --no-startup-id nm-applet &
 
+# Screensaver activation
 bindsym $mod+l exec "xscreensaver-command --lock"
 
-bindsym Print exec gnome-screenshot 
+# Screenshot the screen
+bindsym Print exec gnome-screenshot
 bindsym $mod+Print exec "gnome-screenshot --window"
 
+# Lock up the mouse
+bindsym $mod+m exec --no-startup-id xdotool mousemove 3745 6 click 1
+
 # Numlock
-exec --no-startup-id numlockx
+exec --no-startup-id numlockx &
 
 # Key delay
 exec --no-startup-id xset r rate 180 45
@@ -245,33 +275,22 @@ exec --no-startup-id xset r rate 180 45
 exec_always --no-startup-id ~/.config/i3/scripts/wallpaper.sh
 
 # ScreenSaver
-exec --no-startup-id xscreensaver -no-splash
+exec --no-startup-id xscreensaver -no-splash &
 
-# Transparency 
-exec_always --no-startup-id compton -f
+# Transparency
+# exec_always --no-startup-id compton -f &
 
 # Razer mouse service
-exec --no-startup-id razer-daemon
+exec --no-startup-id razer-daemon &
+
+# Keyboard mouse navigation
+exec --no-startup-id keynav daemonize
 
 # Theme
-set_from_resource	$color15_i3wmthemer	    color15
-set_from_resource	$color14_i3wmthemer	    color14
-set_from_resource	$color13_i3wmthemer	    color13
-set_from_resource	$color12_i3wmthemer	    color12
-set_from_resource	$color11_i3wmthemer	    color11
-set_from_resource	$color10_i3wmthemer	    color10
-set_from_resource	$color09_i3wmthemer         color9
-set_from_resource	$color08_i3wmthemer	    color8
-set_from_resource	$color07_i3wmthemer	    color7
-set_from_resource 	$color06_i3wmthemer	    color6
-set_from_resource 	$color05_i3wmthemer 	    color5
-set_from_resource 	$color04_i3wmthemer 	    color4
-set_from_resource 	$color03_i3wmthemer 	    color3
-set_from_resource 	$color02_i3wmthemer 	    color2
-set_from_resource 	$color01_i3wmthemer 	    color1
-set_from_resource	$color00_i3wmthemer	    color0
-set_from_resource	$foreground_i3wmthemer	    foreground
-set_from_resource	$background_i3wmthemer	    background
+client.focused #664477 #664477 #ffffff #e7d8b1
+client.focused_inactive #222133 #222133 #AAAAAA #A074C4
+client.unfocused #222133 #222133 #AAAAAA #A074C4
+client.urgent #CE4045 #CE4045 #e7d8b1 #DCCD69
 
 # Make the logout screen fullscreen
 for_window [class="Oblogout"] fullscreen enable
@@ -281,9 +300,11 @@ for_window [title="Terminator Preferences"] floating enable
 for_window [class="keepassxc"] floating enable
 for_window [class="Skype"] floating enable
 for_window [title="Oracle VM VirtualBox Manager"] floating enable
+for_window [class="fs-uae"] floating enable
+for_window [class="Iscan"] floating enable
+for_window [class="Gnome-calendar"] floating enable
 
 # Apps Speed Keys
 bindsym $mod+c exec /usr/bin/google-chrome-stable
 bindsym $mod+i exec /usr/bin/firefox
 bindsym $mod+k exec /usr/bin/keepassxc
-
