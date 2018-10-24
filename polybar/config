@@ -27,16 +27,17 @@ background_i3wmthemer 	= ${xrdb:*.background}
 [bar/top]
 monitor=DisplayPort-0
 width = 100%
-height = 30
+height = 35
 offset-x = 0
 offset-y = 10
+underline-size = 1
 
 background = #ee1d1d1d
 foreground = #ccfafafa
 linecolor = #666
 
 border-top-size = 2
-border-bottom-size = 2
+border-bottom-size = 4
 border-color = ee2d2d2d
 ;border-top = 1
 ;border-top-color = #ccfafafa
@@ -59,10 +60,51 @@ module-margin-right = 2
 ; font-0 = ypn envypn:size=10;0
 font-0 = Hack-Regular:size=15;3
 font-1 = FontAwesome:pixelsize=19;3
+font-2 = Moon Phases:size=15;3
 
 modules-left = i3
 modules-center = date
-modules-right = updates timer weather pavolume load_average xbanish power
+modules-right = updates timer weather pavolume xbanish power
+
+[bar/bottom]
+monitor=DisplayPort-0
+width = 100%
+height = 40
+offset-x = 0
+offset-y = 10
+underline-size = 1
+bottom = true
+background = #ee1d1d1d
+foreground = #ccfafafa
+linecolor = #666
+
+border-top-size = 2
+border-bottom-size = 0
+border-color = ee2d2d2d
+;border-top = 1
+;border-top-color = #ccfafafa
+;border-left = 50
+;border-left-color = #00ff00
+;border-bottom = 1
+;border-bottom-color = #ccfafafa
+;border-left = 0
+;border-left-color = #0f0
+;border-right = 0
+;border-right-color = #00f
+
+spacing = 1
+lineheight = 2
+padding-left = 0
+padding-right = 2
+module-margin-left = 2
+module-margin-right = 2
+
+; font-0 = ypn envypn:size=10;0
+font-0 = Hack-Regular:size=15;3
+font-1 = FontAwesome:pixelsize=19;3
+
+modules-left = hn
+modules-right = keyboard xe memfree load_average
 
 [module/i3]
 type = internal/i3
@@ -109,15 +151,16 @@ fuzzy-match = false
 
 ; ws-icon-[0-9]+ = label;icon
 ; NOTE: The label needs to match the name of the i3 workspace
-ws-icon-0 = "1: Main ;"
-ws-icon-1 = "2: Dev ;"
-ws-icon-2 = "3: Term ;"
-ws-icon-3 = "4: Firefox ;"
-ws-icon-4 = "5: Skype ;"
-ws-icon-5 = "6: Toptal ;"
-ws-icon-6 = "7: Virtual ;"
-ws-icon-7 = "8: Tmp ;"
-ws-icon-8 = "9: Other ;"
+ws-icon-0 = "01: Main ;"
+ws-icon-1 = "02: Dev ;"
+ws-icon-2 = "03: Term ;"
+ws-icon-3 = "04: Firefox ;"
+ws-icon-4 = "05: Skype ;"
+ws-icon-5 = "06: Toptal ;"
+ws-icon-6 = "07: Virtual ;"
+ws-icon-7 = "08: Study ;"
+ws-icon-8 = "09: Tmp ;"
+ws-icon-9 = "10: Other ;"
 ws-icon-default = 
 
 ; Available tags:
@@ -235,3 +278,29 @@ format = <label>
 label = ""
 exec = dummy.sh
 click-left = ~/.config/polybar/scripts/xbanish.sh
+
+[module/xe]
+type = custom/script
+interval = 3600
+label = %output%
+exec = ~/.config/polybar/scripts/xe.sh
+
+[module/hn]
+type = custom/script
+label = %output%
+tail = true
+exec = ~/.config/polybar/scripts/scroll-hacker-news.sh
+click-left = ~/.config/polybar/scripts/scroll-hacker-news-click.sh
+
+[module/memfree]
+type = custom/script
+label = %output%
+interval = 5
+exec = ~/.config/polybar/scripts/mem-free.sh
+
+[module/keyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+format = <label-indicator>
+label-indicator = %name:0:4%
