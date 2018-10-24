@@ -72,12 +72,26 @@
   <Ctrl>End = 1b 5b 31 3b 35 46
   <Ctrl>Home = 1b 5b 31 3b 35 48
   <Ctrl>Insert = 1b 5b 31 31 31 31
+  <Ctrl>KP_0 = 1b 5b 31 31 31 31 7b
   <Ctrl>Return = 1b 5b 32 34 3b 39 7e
   <Ctrl>Tab = 1b 5b 31 3b 35 47
   <Shift>End = 1b 5b 31 3b 32 46
   <Shift>Home = 1b 5b 31 3b 32 48
   <Shift>Page_Down = 1b 5b 36 3b 32 7e
   <Shift>Page_Up = 1b 5b 35 3b 32 7e
+  <Super><Alt>C = 1b 5b 30 30 43 39 7b
+  <Super><Alt>Down = 1b 5b 30 30 5f 39 7b
+  <Super><Alt>F = 1b 5b 30 30 46 39 7b
+  <Super><Alt>H = 1b 5b 30 30 48 39 7b
+  <Super><Alt>Left = 1b 5b 30 30 5b 39 7b
+  <Super><Alt>M = 1b 5b 30 30 4d 39 7b
+  <Super><Alt>N = 1b 5b 30 30 4e 39 7b
+  <Super><Alt>Right = 1b 5b 30 30 5d 39 7b
+  <Super><Alt>S = 1b 5b 30 30 53 39 7b
+  <Super><Alt>Up = 1b 5b 30 30 5e 39 7b
+  <Super><Alt>V = 1b 5b 30 30 56 39 7b
+  <Super><Alt>W = 1b 5b 30 30 57 39 7b
+  <Super><Alt>X = 1b 5b 30 30 58 39 7b
   Pause = 1b 5b 35 3b 5a 7e
 [layouts]
   [[default]]
@@ -95,7 +109,7 @@
     copy_on_selection = True
     cursor_color = "#aaaaaa"
     custom_command = /usr/bin/tmux
-    font = DejaVu Sans Mono 20
+    font = RobotoMono Nerd Font 20
     scrollback_lines = 5000
     scrollbar_position = hidden
     show_titlebar = False

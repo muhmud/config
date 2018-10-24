@@ -3,13 +3,16 @@
 # finds the active sink for pulse audio and increments the volume. useful when you have multiple audio outputs and have a key bound to vol-up and down
 
 osd='no'
-inc='1'
+inc=$2
+if [[ -z $inc ]]; then
+    inc='1'
+fi
 capvol='no'
 maxvol='200'
 tmpfile='/tmp/pasink.tmp'
 autosync='yes'
 
-active_sink=`pacmd list-sinks |awk '/* index:/{print $3}'`
+active_sink=`pacmd list-sinks 2>/dev/null | sed ':begin;$!N;s/\n/ /;tbegin' | sed -r 's/.*?index: ([0-9]+).*?Creative.*/\1/g'`
 limit=$(expr 100 - ${inc})
 maxlimit=$(expr ${maxvol} - ${inc})
 
@@ -83,8 +86,11 @@ function volSync {
 
 function getCurVol {
 
-        curVol=`pacmd list-sinks |grep -A 15 'index: '${active_sink}'' |grep 'volume:' |egrep -v 'base volume:' |awk -F : '{print $3}' |grep -o -P '.{0,3}%'|sed s/.$// |tr -d ' '`
+        curVol=`pacmd list-sinks 2>/dev/null | grep -A 15 'index: '${active_sink}'' |grep 'volume:' |egrep -v 'base volume:' |awk -F : '{print $3}' |grep -o -P '.{0,3}%'|sed s/.$// |tr -d ' '`
 
+        if [[ -z "$curVol" ]]; then
+            curVol=-1
+        fi
 }
 
 function volMute {
@@ -111,10 +117,9 @@ function volMute {
 
 function volMuteStatus {
 
-        curStatus=`pacmd list-sinks |grep -A 15 'index: '${active_sink}'' |awk '/muted/{ print $2}'`
+        curStatus=`pacmd list-sinks 2>/dev/null | grep -A 15 'index: '${active_sink}'' | awk '/muted/{ print $2}'`
 
 }
-
 
 case "$1" in
         --up)
@@ -144,8 +149,10 @@ case "$1" in
         *)
 		getCurVol
 		volMuteStatus
-    if [ ${curStatus} = 'yes' ]; then
+    if [ "${curStatus}" = 'yes' ]; then
 			echo " ${curVol}%"
+    elif [ ${curVol} -eq -1 ]; then
+      echo " %"
     elif [ ${curVol} -eq 0 ]; then
       echo " ${curVol}%"
     elif [ ${curVol} -le 50 ]; then
