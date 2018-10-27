@@ -11,13 +11,16 @@
 
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
+# Font for window titles. Will also be used by the b ar unless a different font
 # is used in the bar {} block below.
 font pango:FantasqueSansMono-Regular 16
 
 # Borders
 # new_window pixel 5
 hide_edge_borders both
+
+# Don't follow the mouse
+focus_follows_mouse no
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -50,8 +53,14 @@ bindsym $mod+Shift+Tab exec ~/.config/i3/scripts/cycle_workspaces.py --rev-switc
 bindsym $mod+Shift+z focus parent
 bindsym $mod+z focus child
 
+# All windows
+bindsym $mod+a exec /usr/bin/skippy-xd
+
+# Jump to window
+bindsym $mod+grave exec /usr/local/bin/i3-easyfocus --font "-misc-hack-medium-r-normal--0-450-0-0-m-0-microsoft-cp1252"
+
 # Layouts
-bindsym $mod+F1 append_layout ~/.config/i3/layouts/split.json;exec /usr/bin/terminator;exec /usr/bin/google-chrome
+# bindsym $mod+F1 append_layout ~/.config/i3/layouts/split.json;exec /usr/bin/terminator;exec /usr/bin/google-chrome
 
 # kill focused window
 bindsym $mod+q kill
@@ -114,15 +123,16 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+d focus mode_toggle
 
 # Workspace names
-set $workspace1 "1: Main "
-set $workspace2 "2: Dev "
-set $workspace3 "3: Term "
-set $workspace4 "4: Firefox "
-set $workspace5 "5: Skype "
-set $workspace6 "6: Toptal "
-set $workspace7 "7: Virtual "
-set $workspace8 "8: Tmp "
-set $workspace9 "9: Other "
+set $workspace1 "01: Main "
+set $workspace2 "02: Dev "
+set $workspace3 "03: Term "
+set $workspace4 "04: Firefox "
+set $workspace5 "05: Skype "
+set $workspace6 "06: Toptal "
+set $workspace7 "07: Virtual "
+set $workspace8 "08: Study "
+set $workspace9 "09: Tmp "
+set $workspace10 "10: Other "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -134,7 +144,7 @@ bindsym $mod+6 workspace $workspace6
 bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace $workspace10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -146,7 +156,7 @@ bindsym $mod+Shift+6 move container to workspace $workspace6
 bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # assign [class="Eclipse"] $workspace2
 
@@ -158,8 +168,8 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to logout?' -b 'Yes, logout' 'i3-msg exit'"
 
-# Suspend key goes to oblogout
-bindsym XF86Sleep oblogout
+# Suspend key causes hibernate
+bindsym XF86Sleep exec "systemctl --user --force stop pulseaudio"; exec "sleep 7"; exec "systemctl hibernate"
 
 # Ctrl+Alt+Del
 bindsym Control+Mod1+Delete exec oblogout
@@ -204,6 +214,9 @@ mode "timer" {
         bindsym t exec --no-startup-id ~/.config/polybar/scripts/timer-change-task.sh;mode "default"
         bindsym w exec --no-startup-id ~/.config/polybar/scripts/timer-switch.sh;mode "default"
 
+        bindsym o exec --no-startup-id ~/.config/polybar/scripts/timer-switch-previous.sh;mode "default"
+        bindsym q exec --no-startup-id ~/.config/i3/scripts/timer-task.sh;mode "default"
+
         # back to normal: Enter or Escape
         bindsym Escape mode "default"
 }
@@ -230,9 +243,9 @@ bindsym $mod+x mode "timer"
 exec_always --no-startup-id ~/.config/polybar/launch
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/polybar/scripts/pavolume.sh --up 5 #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/polybar/scripts/pavolume.sh --down 5 #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id ~/.config/polybar/scripts/pavolume.sh --togmute # mute sound
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
@@ -248,7 +261,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Sound (make sure it starts)
-exec --no-startup-id pulseaudio --daemonize
+exec --no-startup-id systemctl --user --force stop pulseaudio && systemctl --user start pulseaudio
 
 # Get some gnome stuff
 #exec --no-startup-id /usr/lib/gsd-xsettings &
@@ -286,10 +299,13 @@ exec --no-startup-id razer-daemon &
 # Keyboard mouse navigation
 exec --no-startup-id keynav daemonize
 
-# Theme
-client.focused #664477 #664477 #ffffff #e7d8b1
-client.focused_inactive #222133 #222133 #AAAAAA #A074C4
-client.unfocused #222133 #222133 #AAAAAA #A074C4
+# Desktop notifications
+exec --no-startup-id dunst ~/.config/dunst/dunstrc &
+
+# Theme 
+client.focused #FFFFFF #553366 #ffffff #e7d8b1
+client.focused_inactive #CCAADD #111022 #666666 #A074C4
+client.unfocused #CCAADD #111022 #666666 #A074C4
 client.urgent #CE4045 #CE4045 #e7d8b1 #DCCD69
 
 # Make the logout screen fullscreen
@@ -303,8 +319,36 @@ for_window [title="Oracle VM VirtualBox Manager"] floating enable
 for_window [class="fs-uae"] floating enable
 for_window [class="Iscan"] floating enable
 for_window [class="Gnome-calendar"] floating enable
+for_window [class="(?i)vmg"] floating enable
+
+# Per Window Colors
+for_window [class="(?i)firefox"] title_format "<span foreground='yellow'>%title</span>"
+for_window [class="(?i)terminator"] title_format "<span foreground='PapayaWhip'>%title</span>"
 
 # Apps Speed Keys
 bindsym $mod+c exec /usr/bin/google-chrome-stable
 bindsym $mod+i exec /usr/bin/firefox
-bindsym $mod+k exec /usr/bin/keepassxc
+bindsym $mod+k exec QT_QPA_PLATFORMTHEME="qt5ct" QT_AUTO_SCREEN_SCALE_FACTOR=0 /usr/bin/keepassxc
+
+# Other
+bindsym $mod+j exec --no-startup-id ~/.config/dunst/slack-unurgent.sh
+bindsym $mod+o exec /usr/bin/vmg
+
+# Marks
+bindsym $mod+Shift+F1 mark --replace f1
+bindsym $mod+Shift+F2 mark --replace f2
+bindsym $mod+Shift+F3 mark --replace f3
+bindsym $mod+Shift+F4 mark --replace f4
+bindsym $mod+Shift+F5 mark --replace f5
+bindsym $mod+Shift+F6 mark --replace f6
+bindsym $mod+Shift+F7 mark --replace f7
+bindsym $mod+Shift+F8 mark --replace f8
+
+bindsym $mod+F1 [con_mark="f1"] focus
+bindsym $mod+F2 [con_mark="f2"] focus
+bindsym $mod+F3 [con_mark="f3"] focus
+bindsym $mod+F4 [con_mark="f4"] focus
+bindsym $mod+F5 [con_mark="f5"] focus
+bindsym $mod+F6 [con_mark="f6"] focus
+bindsym $mod+F7 [con_mark="f7"] focus
+bindsym $mod+F8 [con_mark="f8"] focus
