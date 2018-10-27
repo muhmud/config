@@ -102,17 +102,16 @@ if [[ ! -z $times ]]; then
     fi
 
     if [[ $islamicDayNumber == 29 || $islamicDayNumber == 30 ]]; then
-        moon="%{T3}A%{T-}"
+        moon="%{T3}1%{T-}"
     elif [[ $islamicDayNumber == 14 || $islamicDayNumber == 15 || $islamicDayNumber == 16 ]]; then
         moon="%{F#fff}%{T3}0%{T-}%{F-}"
     elif [[ $islamicDayNumber -ge 1 && $islamicDayNumber -le 13 ]]; then
-        moon="%{T3}`chr $((78 + $islamicDayNumber - 1))`%{T-}"
+        moon="%{T3}`chr $((77 + $islamicDayNumber - 1))`%{T-}"
     elif [[ $islamicDayNumber -ge 17 && $islamicDayNumber -le 28 ]]; then
-        moon="%{T3}`chr $((76 - $islamicDayNumber + 17))`%{T-}"
+        moon="%{T3}`chr $((90 - $islamicDayNumber + 17))`%{T-}"
     fi
     
-    todayIslamic=" $(echo -e $islamicDayFormatStart)$((10#$islamicDay))`DaySuffix $islamicDay`$(echo -e $islamicDayFormatEnd) $islamicMonthName $islamicYear /"
-    
+    todayIslamic=" $(echo -e $islamicDayFormatStart)$((10#$islamicDay))`DaySuffix $islamicDay`$(echo -e $islamicDayFormatEnd) $islamicMonthName $islamicYear $(echo -e "%{F#FF0}|%{F-}")"
 
     serverTime=`echo $times | jq -r '.serverTime'`
     timeRaw=`rawTime $(date +%H:%M)`
@@ -171,7 +170,7 @@ if [[ ! -z $times ]]; then
       else
           prayerCurrent="Tahajud$clear (${tahajud:0:5})"
       fi
-      prayers=" -  $(echo -e $thisColour)$prayerCurrent$clear | $(echo -e $nextColour)Fajr: ${fajr:0:5}$clear"
+      prayers=" - $(echo -e "%{F#fff}%{F-}") $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $nextColour)Fajr: ${fajr:0:5}$clear"
     elif [[ "$timeRaw" -ge "$fajrRaw" && "$timeRaw" -lt "$syurukRaw" ]]; then
       if [[ "$timeRaw" -eq "$fajrRaw" ]]; then
           prayerCurrent="Fajr: ${fajr:0:5}"
@@ -182,7 +181,7 @@ if [[ ! -z $times ]]; then
       else
           prayerCurrent="Fajr$clear (${fajr:0:5})"
       fi
-      prayers=" -  $(echo -e $thisColour)$prayerCurrent$clear | $(echo -e $nextColour)Syuruk: ${syuruk:0:5}$clear"
+      prayers=" -  $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $nextColour)Syuruk: ${syuruk:0:5}$clear"
     elif [[ "$timeRaw" -ge "$syurukRaw" && "$timeRaw" -lt "$duhaRaw" ]]; then
       thisColour=$nextColour
       if [[ "$timeRaw" -eq "$syurukRaw" ]]; then
@@ -193,7 +192,7 @@ if [[ ! -z $times ]]; then
       else
           prayerCurrent="Syuruk$clear (${syuruk:0:5})"
       fi
-      prayers=" -  $(echo -e $thisColour)$prayerCurrent$clear | $(echo -e $mildColour)Duha: ${duha:0:5}$clear"
+      prayers=" - $(echo -e "%{F#fd0}%{F-}") $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $mildColour)Duha: ${duha:0:5}$clear"
     elif [[ "$timeRaw" -ge "$duhaRaw" && "$timeRaw" -lt "$dhuhrRaw" ]]; then
       if [[ "$timeRaw" -eq "$duhaRaw" ]]; then
           prayerCurrent="Duha: ${duha:0:5}"
@@ -204,7 +203,7 @@ if [[ ! -z $times ]]; then
       else
           prayerCurrent="Duha$clear (${duha:0:5})"
       fi
-      prayers=" -  $(echo -e $thisColour)$prayerCurrent$clear | $(echo -e $afternoonPrayerColour)$afternoonPrayer: ${dhuhr:0:5}$clear"
+      prayers=" - $(echo -e "%{F#fd0}%{F-}") $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $afternoonPrayerColour)$afternoonPrayer: ${dhuhr:0:5}$clear"
     elif [[ "$timeRaw" -ge "$dhuhrRaw" && "$timeRaw" -lt "$asrRaw" ]]; then
       if [[ "$timeRaw" -eq "$dhuhrRaw" ]]; then
           prayerCurrent="$afternoonPrayer: ${dhuhr:0:5}"
@@ -216,9 +215,9 @@ if [[ ! -z $times ]]; then
           prayerCurrent="$afternoonPrayer$clear (${dhuhr:0:5})"
       fi
       if [[ "$timeRaw" -ge "afternoonPrayerEnd" ]]; then
-          prayers=" -  $(echo -e $mildColour)Asr: ${asr:0:5}$clear"
+          prayers=" - $(echo -e "%{F#ff0}%{F-}") $(echo -e $mildColour)Asr: ${asr:0:5}$clear"
       else
-          prayers=" -  $(echo -e $thisColour)$prayerCurrent$clear | $(echo -e $nextColour)Asr: ${asr:0:5}$clear"
+          prayers=" - $(echo -e "%{F#ff0}%{F-}") $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $nextColour)Asr: ${asr:0:5}$clear"
       fi
     elif [[ "$timeRaw" -ge "$asrRaw" && "$timeRaw" -lt "$maghribRaw" ]]; then
       if [[ "$timeRaw" -eq "$asrRaw" ]]; then
@@ -230,7 +229,7 @@ if [[ ! -z $times ]]; then
       else
           prayerCurrent="Asr$clear (${asr:0:5})"
       fi
-      prayers=" -  $(echo -e $thisColour)$prayerCurrent$clear | $(echo -e $nextColour)Maghrib: ${maghrib:0:5}$clear"
+      prayers=" - $(echo -e "%{F#fa0}%{F-}") $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $nextColour)Maghrib: ${maghrib:0:5}$clear"
     elif [[ "$timeRaw" -ge "$maghribRaw" && "$timeRaw" -lt "$ishaRaw" ]]; then
       if [[ "$timeRaw" -eq "$maghribRaw" ]]; then
           prayerCurrent="Maghrib: ${maghrib:0:5}"
@@ -241,7 +240,7 @@ if [[ ! -z $times ]]; then
       else
           prayerCurrent="Maghrib$clear (${maghrib:0:5})"
       fi
-      prayers=" -  $(echo -e $thisColour)$prayerCurrent$clear | $(echo -e $nextColour)Isha: ${isha:0:5}$clear"
+      prayers=" -  $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $nextColour)Isha: ${isha:0:5}$clear"
     elif [[ "$timeRaw" -ge "$ishaRaw" ]]; then
       if [[ "$timeRaw" -eq "$ishaRaw" ]]; then
           prayerCurrent="Isha: ${isha:0:5}"
@@ -252,10 +251,10 @@ if [[ ! -z $times ]]; then
       else
           prayerCurrent="Isha$clear (${isha:0:5})"
       fi
-      prayers=" -  $(echo -e $thisColour)$prayerCurrent$clear | $(echo -e $mildColour)Tahajud: ${tahajud=:0:5}$clear"
+      prayers=" - $(echo -e "%{F#fff}%{F-}") $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $mildColour)Tahajud: ${tahajud=:0:5}$clear"
     else
       thisColour=$mildColour
-      prayers=" -  $(echo -e $thisColour)Tahajud: ${tahajud=:0:5}$clear"
+      prayers=" - $(echo -e "%{F#fff}%{F-}") $(echo -e $thisColour)Tahajud: ${tahajud=:0:5}$clear"
     fi
 fi
 
