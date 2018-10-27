@@ -64,7 +64,7 @@ font-2 = Moon Phases:size=15;3
 
 modules-left = i3
 modules-center = date
-modules-right = updates timer weather pavolume xbanish power
+modules-right = updates timer xe weather pavolume xbanish power
 
 [bar/bottom]
 monitor=DisplayPort-0
@@ -104,7 +104,8 @@ font-0 = Hack-Regular:size=15;3
 font-1 = FontAwesome:pixelsize=19;3
 
 modules-left = hn
-modules-right = keyboard xe memfree load_average
+modules-center = world_time
+modules-right = keyboard windows memfree load_average
 
 [module/i3]
 type = internal/i3
@@ -281,7 +282,7 @@ click-left = ~/.config/polybar/scripts/xbanish.sh
 
 [module/xe]
 type = custom/script
-interval = 3600
+tail = true
 label = %output%
 exec = ~/.config/polybar/scripts/xe.sh
 
@@ -304,3 +305,17 @@ blacklist-0 = num lock
 blacklist-1 = scroll lock
 format = <label-indicator>
 label-indicator = %name:0:4%
+
+[module/windows]
+type = custom/script
+exec = dummy.sh
+format  = <label>
+label = 
+interval = 60480000
+click-left = /usr/bin/skippy-xd
+
+[module/world_time]
+type = custom/script
+label = %output%
+interval = 1
+exec = ~/.config/polybar/scripts/world-time.sh
