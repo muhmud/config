@@ -39,6 +39,12 @@ function addMinutes {
   if [[ $minute -gt 59 ]]; then
     let minute-=60
     let hour+=1
+  elif [[ $minute -lt 0 ]]; then
+    let minute+=60
+    let hour-=1
+    if [[ $hour -lt 0 ]]; then
+      let hour=23
+    fi
   fi
 
   printf "1%02d%02d" $hour $minute
@@ -102,16 +108,15 @@ if [[ ! -z $times ]]; then
     fi
 
     if [[ $islamicDayNumber == 29 || $islamicDayNumber == 30 ]]; then
-        moon="%{T3}1%{T-}"
+        moon="%{T3}@%{T-}"
     elif [[ $islamicDayNumber == 14 || $islamicDayNumber == 15 || $islamicDayNumber == 16 ]]; then
         moon="%{F#fff}%{T3}0%{T-}%{F-}"
     elif [[ $islamicDayNumber -ge 1 && $islamicDayNumber -le 13 ]]; then
-        moon="%{T3}`chr $((77 + $islamicDayNumber - 1))`%{T-}"
+        moon="%{T3}`chr $((78 + $islamicDayNumber - 1))`%{T-}"
     elif [[ $islamicDayNumber -ge 17 && $islamicDayNumber -le 28 ]]; then
-        moon="%{T3}`chr $((90 - $islamicDayNumber + 17))`%{T-}"
+        moon="%{T3}`chr $((65 + $islamicDayNumber - 17))`%{T-}"
     fi
-    
-    todayIslamic=" $(echo -e $islamicDayFormatStart)$((10#$islamicDay))`DaySuffix $islamicDay`$(echo -e $islamicDayFormatEnd) $islamicMonthName $islamicYear $(echo -e "%{F#FF0}|%{F-}")"
+     todayIslamic=" $(echo -e $islamicDayFormatStart)$((10#$islamicDay))`DaySuffix $islamicDay`$(echo -e $islamicDayFormatEnd) $islamicMonthName $islamicYear $(echo -e "%{F#FF0}|%{F-}")"
 
     serverTime=`echo $times | jq -r '.serverTime'`
     timeRaw=`rawTime $(date +%H:%M)`
@@ -130,6 +135,7 @@ if [[ ! -z $times ]]; then
     asrRaw=`rawTime $asr`
     maghrib=`echo $times | jq -r '.prayerTime[0].maghrib'`
     maghribRaw=`rawTime $maghrib`
+    asrNeedRaw=`addMinutes $maghribRaw -60`
     isha=`echo $times | jq -r '.prayerTime[0].isha'`
     ishaRaw=`rawTime $isha`
 
@@ -140,6 +146,7 @@ if [[ ! -z $times ]]; then
     nextColour="%{F#f03}"
     nowColour="%{F#ff0}"
     mildColour="%{F#0ff}"
+    needColour="%{F#fa0}"
     clear="%{F-}"
 
     tahajudRaw="$(($fajrRaw - 100))"
@@ -172,6 +179,7 @@ if [[ ! -z $times ]]; then
       fi
       prayers=" - $(echo -e "%{F#fff}%{F-}") $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $nextColour)Fajr: ${fajr:0:5}$clear"
     elif [[ "$timeRaw" -ge "$fajrRaw" && "$timeRaw" -lt "$syurukRaw" ]]; then
+      thisColour=$needColour
       if [[ "$timeRaw" -eq "$fajrRaw" ]]; then
           prayerCurrent="Fajr: ${fajr:0:5}"
           thisColour=$nowColour
@@ -217,9 +225,13 @@ if [[ ! -z $times ]]; then
       if [[ "$timeRaw" -ge "afternoonPrayerEnd" ]]; then
           prayers=" - $(echo -e "%{F#ff0}%{F-}") $(echo -e $mildColour)Asr: ${asr:0:5}$clear"
       else
-          prayers=" - $(echo -e "%{F#ff0}%{F-}") $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $nextColour)Asr: ${asr:0:5}$clear"
+          prayers=" - $(echo -e "%{F#ff0}%{F-}") $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $needColour)Asr: ${asr:0:5}$clear"
       fi
     elif [[ "$timeRaw" -ge "$asrRaw" && "$timeRaw" -lt "$maghribRaw" ]]; then
+      if [[ "$timeRaw" -ge "$asrNeedRaw" ]]; then
+          thisColour=$needColour
+      fi
+      
       if [[ "$timeRaw" -eq "$asrRaw" ]]; then
           prayerCurrent="Asr: ${asr:0:5}"
           thisColour=$nowColour
@@ -231,6 +243,7 @@ if [[ ! -z $times ]]; then
       fi
       prayers=" - $(echo -e "%{F#fa0}%{F-}") $(echo -e $thisColour)$prayerCurrent$clear $(echo -e "%{F#FF0}|%{F-}") $(echo -e $nextColour)Maghrib: ${maghrib:0:5}$clear"
     elif [[ "$timeRaw" -ge "$maghribRaw" && "$timeRaw" -lt "$ishaRaw" ]]; then
+      thisColour=$needColour
       if [[ "$timeRaw" -eq "$maghribRaw" ]]; then
           prayerCurrent="Maghrib: ${maghrib:0:5}"
           thisColour=$nowColour

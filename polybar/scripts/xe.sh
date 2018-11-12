@@ -15,9 +15,9 @@ do
             TO=$(echo $DATA | jq --raw-output ".to" 2>/dev/null)
             VALUE=$(echo $DATA | jq --raw-output ".value" 2>/dev/null)
             OUTPUT="${FROM}1 = ${TO}${VALUE}"
-            FINAL_OUTPUT=`printf "%-18s" "$OUTPUT"`
+            FINAL_OUTPUT=`printf "%s" "$OUTPUT"`
 
-            zscroll -l 128 -b " %{F#0F0}%{F-} " -d 0.3 -t 60 -p "                    " "$FINAL_OUTPUT" &
+            zscroll -l 128 -b " %{F#0f0}%{F-} " -d 0.3 -t 60 -p "                    " "$FINAL_OUTPUT" &
             wait
         fi
     else

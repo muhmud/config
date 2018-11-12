@@ -13,7 +13,9 @@ function getColor() {
     fi
 }
 
-DATA=`uptime | awk -F 'load average:' '{ print $2 }'`
+UPTIME=`uptime`
+TIME=`echo $UPTIME | awk -F ' ' '{ print $3 }' | sed 's/.$//'`
+DATA=`echo $UPTIME | awk -F 'load average:' '{ print $2 }'`
 
 VALUE_1=`echo $DATA | awk -F ',' '{ print $1 }'`
 VALUE_2=`echo $DATA | awk -F ',' '{ print $2 }'`
