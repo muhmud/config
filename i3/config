@@ -223,6 +223,22 @@ mode "timer" {
 
 bindsym $mod+x mode "timer"
 
+mode "player" {
+        bindsym s exec xdotool mousemove 3795 1900 click 1 key "alt+Tab" mousemove 3745 6;mode "default"
+        bindsym p exec xdotool mousemove 3095 1900 click 1 key "alt+Tab" mousemove 3745 6;mode "default"
+        bindsym f exec xdotool mousemove 3775 2053 click 1 key "alt+Tab" mousemove 3745 6;mode "default"
+        bindsym o exec xdotool mousemove 3095 1900 click 1 key "alt+Tab" mousemove 3745 6;exec --no-startup-id ~/.config/polybar/scripts/timer-pause-continue.sh;mode "default"
+        bindsym n exec xdotool mousemove 3095 1900 click 1 key "space" mousemove 3745 6;mode "default"
+        bindsym m exec xdotool mousemove 3095 1900 click 1 key "space" mousemove 3745 6;exec --no-startup-id ~/.config/polybar/scripts/timer-pause-continue.sh;mode "default"
+        bindsym a exec xdotool mousemove 3705 1850 click 1 key "alt+Tab" mousemove 3745 6;mode "default"
+        bindsym z exec xdotool mousemove 3467 1910 click 1 key "alt+Tab" mousemove 3745 6;mode "default"
+
+        # back to normal: Enter or Escape
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+p mode "player"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 #bar {
