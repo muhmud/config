@@ -512,7 +512,7 @@ This function is called at the very end of Spacemacs initialization."
  '(global-display-line-numbers-mode t)
  '(lsp-enable-semantic-highlighting t)
  '(lsp-java-format-settings-url
-   "file:///home/muhmud/.my-emacs.d/eclipse-java-google-style.xml")
+   "file:///home/muhmud/.spacemacs.d/my/eclipse-java-google-style.xml")
  '(lsp-java-java-path "java")
  '(lsp-java-vmargs
    (quote
