@@ -4,7 +4,7 @@ import urllib.request, json
 import re
 
 #city = "Kuala%20Lumpur"
-city = "Semenyih"
+city = "Putrajaya"
 api_key = "e14523135da6bb74b72f55527eda1126"
 units = "Metric"
 unit_key = "C"

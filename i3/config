@@ -49,6 +49,9 @@ exec --no-startup-id ~/.config/i3/scripts/cycle_workspaces.py &
 bindsym $mod+Tab exec ~/.config/i3/scripts/cycle_workspaces.py --switch
 bindsym $mod+Shift+Tab exec ~/.config/i3/scripts/cycle_workspaces.py --rev-switch
 
+# Ctrl UP tracking
+exec --no-startup-id ~/.config/i3/scripts/cycle_ctrl.py &
+
 # Focus parent/child
 bindsym $mod+Shift+z focus parent
 bindsym $mod+z focus child
@@ -60,13 +63,13 @@ bindsym $mod+a exec /usr/bin/skippy-xd
 bindsym $mod+grave exec /usr/local/bin/i3-easyfocus --font "-misc-hack-medium-r-normal--0-450-0-0-m-0-microsoft-cp1252"
 
 # Layouts
-# bindsym $mod+F1 append_layout ~/.config/i3/layouts/split.json;exec /usr/bin/terminator;exec /usr/bin/google-chrome
+bindsym $mod+Ctrl+1 append_layout ~/.config/i3/layouts/workspace-1.json
 
 # kill focused window
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+space exec rofi -show combi -config ~/.config/i3/rofi.conf
+bindsym $mod+space exec rofi -show combi -config ~/.config/rofi/rofi.conf
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -110,6 +113,11 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+f fullscreen disable_special
+
+bindsym $mod+Ctrl+f exec xdotool mousemove 3095 1900 click --repeat 2 1 mousemove restore key "alt+Tab"
+bindsym $mod+o exec xdotool mousemove 3772 1912 click 1 mousemove restore key "alt+Tab"
+bindsym $mod+Shift+o exec xdotool mousemove 3713 1849 click 1 mousemove restore key "alt+Tab"
+bindsym $mod+Ctrl+o exec xdotool mousemove 3459 1912 click 1 mousemove restore key "alt+Tab"
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -158,6 +166,9 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
+# Assign a floating workspace
+for_window [workspace = $workspace10] floating enable
+
 # assign [class="Eclipse"] $workspace2
 
 # reload the configuration file
@@ -169,7 +180,7 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to logout?' -b 'Yes, logout' 'i3-msg exit'"
 
 # Suspend key causes hibernate
-bindsym XF86Sleep exec "systemctl --user --force stop pulseaudio"; exec "sleep 7"; exec "systemctl hibernate"
+bindsym XF86Sleep exec ~/bin/sony_headphones disconnect;exec sudo systemctl stop bluetooth;exec systemctl --user --force stop pulseaudio; exec sleep 7; exec systemctl hibernate
 
 # Ctrl+Alt+Del
 bindsym Control+Mod1+Delete exec oblogout
@@ -224,14 +235,14 @@ mode "timer" {
 bindsym $mod+x mode "timer"
 
 mode "player" {
-        bindsym s exec xdotool mousemove 3795 1900 click 1 key "alt+Tab" mousemove 3745 6;mode "default"
-        bindsym p exec xdotool mousemove 3095 1900 click 1 key "alt+Tab" mousemove 3745 6;mode "default"
-        bindsym f exec xdotool mousemove 3775 2053 click 1 key "alt+Tab" mousemove 3745 6;mode "default"
-        bindsym o exec xdotool mousemove 3095 1900 click 1 key "alt+Tab" mousemove 3745 6;exec --no-startup-id ~/.config/polybar/scripts/timer-pause-continue.sh;mode "default"
-        bindsym n exec xdotool mousemove 3095 1900 click 1 key "space" mousemove 3745 6;mode "default"
-        bindsym m exec xdotool mousemove 3095 1900 click 1 key "space" mousemove 3745 6;exec --no-startup-id ~/.config/polybar/scripts/timer-pause-continue.sh;mode "default"
-        bindsym a exec xdotool mousemove 3705 1850 click 1 key "alt+Tab" mousemove 3745 6;mode "default"
-        bindsym z exec xdotool mousemove 3467 1910 click 1 key "alt+Tab" mousemove 3745 6;mode "default"
+        bindsym s exec xdotool mousemove 3795 1900 click 1 key "alt+Tab" mousemove restore;mode "default"
+        bindsym p exec xdotool mousemove 3095 1900 click 1 key "alt+Tab" mousemove restore;mode "default"
+        bindsym f exec xdotool mousemove 3095 1900 click --repeat 2 1 mousemove restore key "alt+Tab";mode "default"
+        bindsym o exec xdotool mousemove 3095 1900 click 1 key "alt+Tab" mousemove restore;exec --no-startup-id ~/.config/polybar/scripts/timer-pause-continue.sh;mode "default"
+        bindsym n exec xdotool mousemove 3095 1900 click 1 key "space" mousemove restore;mode "default"
+        bindsym m exec xdotool mousemove 3095 1900 click 1 key "space" mousemove restore;exec --no-startup-id ~/.config/polybar/scripts/timer-pause-continue.sh;mode "default"
+        bindsym a exec xdotool mousemove 3755 1835 click 1 key "alt+Tab" mousemove restore;mode "default"
+        bindsym z exec xdotool mousemove 3498 1895 click 1 key "alt+Tab" mousemove restore;mode "default"
 
         # back to normal: Enter or Escape
         bindsym Escape mode "default"
@@ -271,13 +282,16 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 bindsym XF86TouchpadToggle exec ~/.i3/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec xdotool mousemove 3095 1900 click 1 key "alt+Tab" mousemove restore
+bindsym XF86AudioPause exec xdotool mousemove 3095 1900 click 1 key "alt+Tab" mousemove restore
+bindsym XF86AudioNext exec xdotool mousemove 2719 1096 click 1 key "shift+n" key "alt+Tab" mousemove restore
+bindsym XF86AudioPrev exec xdotool mousemove 3095 1900 click --repeat 2 1 key "alt+Tab" mousemove restore
 
 # Sound (make sure it starts)
 exec --no-startup-id systemctl --user --force stop pulseaudio && systemctl --user start pulseaudio
+
+# Flip sound input
+bindsym $mod+Ctrl+s exec --no-startup-id ~/bin/set_sound
 
 # Get some gnome stuff
 #exec --no-startup-id /usr/lib/gsd-xsettings &
@@ -293,6 +307,9 @@ bindsym $mod+Print exec "gnome-screenshot --window"
 
 # Lock up the mouse
 bindsym $mod+m exec --no-startup-id xdotool mousemove 3745 6 click 1
+
+# Cycle Currency
+bindsym $mod+b exec --no-startup-id kill $(</tmp/currency.sleep.pid)
 
 # Numlock
 exec --no-startup-id numlockx &
@@ -318,6 +335,22 @@ exec --no-startup-id keynav daemonize
 # Desktop notifications
 exec --no-startup-id dunst ~/.config/dunst/dunstrc &
 
+# Restart bluetooth
+exec --no-startup-id ~/bin/restart_bluetooth
+
+# Swap Caps Lock for Escape
+exec /usr/bin/xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+
+# Vim help
+bindsym $mod+Shift+P exec --no-startup-id feh -F ~/pictures/vim-shortcuts-dark_2560x1600.png
+
+# Headphones
+bindsym $mod+Shift+H exec --no-startup-id ~/bin/sony_headphones connect
+bindsym $mod+Shift+D exec --no-startup-id ~/bin/sony_headphones disconnect
+
+# Recycle
+bindsym $mod+Shift+K exec --no-startup-id ~/bin/recycle
+
 # Theme 
 client.focused #FFFFFF #553366 #ffffff #e7d8b1
 client.focused_inactive #CCAADD #111022 #666666 #A074C4
@@ -342,13 +375,14 @@ for_window [class="(?i)firefox"] title_format "<span foreground='yellow'>%title<
 for_window [class="(?i)terminator"] title_format "<span foreground='PapayaWhip'>%title</span>"
 
 # Apps Speed Keys
-bindsym $mod+c exec /usr/bin/google-chrome-stable
-bindsym $mod+i exec /usr/bin/firefox
+bindsym $mod+c exec --no-startup-id /usr/bin/google-chrome-stable
+bindsym $mod+i exec --no-startup-id /usr/bin/firefox
 bindsym $mod+k exec QT_QPA_PLATFORMTHEME="qt5ct" QT_AUTO_SCREEN_SCALE_FACTOR=0 /usr/bin/keepassxc
+#bindsym $mod+e exec tmux select-window -t emacs
+bindsym $mod+e exec --no-startup-id /usr/bin/emacs
 
 # Other
 bindsym $mod+j exec --no-startup-id ~/.config/dunst/slack-unurgent.sh
-bindsym $mod+o exec /usr/bin/vmg
 
 # Marks
 bindsym $mod+Shift+F1 mark --replace f1

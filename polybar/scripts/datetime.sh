@@ -102,7 +102,7 @@ if [[ ! -z $times ]]; then
 
     islamicYear=`echo ${islamicDate:0:4}`
     islamicDayNumber=$((10#$islamicDay))
-    if [[ $islamicDayNumber == 14 || $islamicDayNumber == 15 || $islamicDayNumber == 16 ]]; then
+    if [[ $islamicDayNumber == 13 || $islamicDayNumber == 14 || $islamicDayNumber == 15 ]]; then
         islamicDayFormatStart="%{u#ffffff +u}%{F#fff}"
         islamicDayFormatEnd="%{-u}%{F-}"
     fi
@@ -146,7 +146,7 @@ if [[ ! -z $times ]]; then
     nextColour="%{F#f03}"
     nowColour="%{F#ff0}"
     mildColour="%{F#0ff}"
-    needColour="%{F#fa0}"
+    needColour="%{F#f60}"
     clear="%{F-}"
 
     tahajudRaw="$(($fajrRaw - 100))"

@@ -15,7 +15,7 @@ do
             TITLE=$(echo $DATA | jq --raw-output ".title" 2>/dev/null)
             SCORE=$(echo $DATA | jq --raw-output ".score" 2>/dev/null)
 
-            zscroll -l 128 -b "   %{F#0F0}$SCORE%{F-} " -d 0.3 -t 60 -p "                    " "$TITLE" &
+            zscroll -l 90 -b "   %{F#0F0}$SCORE%{F-} " -d 0.3 -t 60 -p "                    " "$TITLE" &
             wait
         fi
     else

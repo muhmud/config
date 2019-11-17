@@ -25,7 +25,7 @@ background_i3wmthemer 	= ${xrdb:*.background}
 ;
 
 [bar/top]
-monitor=DisplayPort-0
+monitor=DisplayPort-2
 width = 100%
 height = 35
 offset-x = 0
@@ -64,10 +64,10 @@ font-2 = Moon Phases:size=15;3
 
 modules-left = i3
 modules-center = date
-modules-right = updates timer weather pavolume xbanish power
+modules-right = updates timer xe weather pavolume xbanish power
 
 [bar/bottom]
-monitor=DisplayPort-0
+monitor=DisplayPort-2
 width = 100%
 height = 40
 offset-x = 0
@@ -105,7 +105,7 @@ font-1 = FontAwesome:pixelsize=19;3
 
 modules-left = hn
 modules-center = world_time
-modules-right = xe keyboard windows memfree load_average uptime
+modules-right = keyboard windows memfree load_average cpu_temp internet uptime
 
 [module/i3]
 type = internal/i3
@@ -304,7 +304,7 @@ type = internal/xkeyboard
 blacklist-0 = num lock
 blacklist-1 = scroll lock
 format = <label-indicator>
-label-indicator = %name:0:4%
+label-indicator = CAPS
 
 [module/windows]
 type = custom/script
@@ -323,5 +323,18 @@ exec = ~/.config/polybar/scripts/world-time.sh
 [module/uptime]
 type = custom/script
 label = %output%
-interval = 1
+interval = 30
 exec = ~/.config/polybar/scripts/uptime.sh
+
+[module/cpu_temp]
+type = custom/script
+label = %output%
+interval = 30
+exec = ~/.config/polybar/scripts/cpu-temp.sh
+
+[module/internet]
+type = custom/script
+label = %output%
+interval = 30
+exec = ~/.config/polybar/scripts/internet.sh
+

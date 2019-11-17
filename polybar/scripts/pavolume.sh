@@ -12,7 +12,17 @@ maxvol='200'
 tmpfile='/tmp/pasink.tmp'
 autosync='yes'
 
-active_sink=`pacmd list-sinks 2>/dev/null | sed ':begin;$!N;s/\n/ /;tbegin' | sed -r 's/.*?index: ([0-9]+).*?Creative.*/\1/g'`
+active_sink=`pacmd list-sinks 2>/dev/null | sed ':begin;$!N;s/\n/ /;tbegin' | sed -r 's/.*?[*] index: ([0-9]+).*/\1/g'`
+active_sink_name=$(pacmd list-sinks 2>/dev/null | awk '/[*] index/,/[>]/' | tail -n 1 | awk -F ': ' '{ print $2; }')
+
+if [[ "$active_sink_name" =~ Creative ]]; then
+    sink_icon=""
+elif [[ "$active_sink_name" =~ bluez ]]; then
+    sink_icon=" "
+else
+    sink_icon=" "
+fi;
+
 limit=$(expr 100 - ${inc})
 maxlimit=$(expr ${maxvol} - ${inc})
 
@@ -86,7 +96,7 @@ function volSync {
 
 function getCurVol {
 
-        curVol=`pacmd list-sinks 2>/dev/null | grep -A 15 'index: '${active_sink}'' |grep 'volume:' |egrep -v 'base volume:' |awk -F : '{print $3}' |grep -o -P '.{0,3}%'|sed s/.$// |tr -d ' '`
+        curVol=`pacmd list-sinks 2>/dev/null | grep -A 15 'index: '${active_sink}'$' |grep 'volume:' |egrep -v 'base volume:' |awk -F : '{print $3}' |grep -o -P '.{0,3}%'|sed s/.$// |tr -d ' '`
 
         if [[ -z "$curVol" ]]; then
             curVol=-1
@@ -150,15 +160,15 @@ case "$1" in
 		getCurVol
 		volMuteStatus
     if [ "${curStatus}" = 'yes' ]; then
-			echo " ${curVol}%"
+			echo "$sink_icon ${curVol}%"
     elif [ ${curVol} -eq -1 ]; then
-      echo " %"
+        echo "$sink_icon %"
     elif [ ${curVol} -eq 0 ]; then
-      echo " ${curVol}%"
+        echo "$sink_icon ${curVol}%"
     elif [ ${curVol} -le 50 ]; then
-      echo " ${curVol}%"
+        echo "$sink_icon ${curVol}%"
     else
-      echo " ${curVol}%"
+        echo "$sink_icon ${curVol}%"
 		fi
         ;;
 esac

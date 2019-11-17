@@ -1,6 +1,7 @@
 [global_config]
   enabled_plugins = SqlMode, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   putty_paste_style = True
+  scroll_tabbar = True
   suppress_multiple_term_dialog = True
   tab_position = hidden
   title_font = Sans 15
@@ -50,6 +51,12 @@
 [keycodes]
   <Alt><Shift>D = 1b 5b 32 34 3b 39 7d
   <Alt>D = 1b 5b 32 34 3b 39 7b
+  <Alt>F1 = 1b 31 3b 33 50
+  <Alt>F2 = 1b 31 3b 33 51
+  <Alt>F3 = 1b 31 3b 33 52
+  <Alt>F5 = 1b 31 35 3b 33 7e
+  <Alt>F6 = 1b 31 37 3b 33 7e
+  <Alt>F7 = 1b 31 38 3b 33 7e
   <Ctrl><Shift>Down = 1b 5b 36 42 36 7e
   <Ctrl><Shift>End = 1b 5b 31 3b 36 46
   <Ctrl><Shift>F = 1b 5b 36 46 36 7e
@@ -71,11 +78,8 @@
   <Ctrl>End = 1b 5b 31 3b 35 46
   <Ctrl>Home = 1b 5b 31 3b 35 48
   <Ctrl>Insert = 1b 5b 31 31 31 31
-  <Ctrl>KP_0 = 1b 5b 31 31 31 31 7b
-  <Ctrl>Return = 1b 5b 32 34 3b 39 7e
+  <Ctrl>Return = 1b 32 34 3b 33 7e
   <Ctrl>Tab = 1b 5b 31 3b 35 47
-  <Ctrl>Up = 1b 5b 31 3b 36 47
-  <Ctrl>Down = 1b 5b 31 3b 37 47
   <Shift>End = 1b 5b 31 3b 32 46
   <Shift>Home = 1b 5b 31 3b 32 48
   <Shift>Page_Down = 1b 5b 36 3b 32 7e
@@ -98,6 +102,7 @@
   [[default]]
     [[[child1]]]
       parent = window0
+      profile = default
       type = Terminal
     [[[window0]]]
       parent = ""
@@ -105,13 +110,11 @@
 [plugins]
 [profiles]
   [[default]]
-    allow_bold = False
     background_darkness = 0.85
-    background_type = transparent
     copy_on_selection = True
     cursor_color = "#aaaaaa"
-    custom_command = /usr/local/bin/tmux
-    font = Victor Mono Semi-Bold 23
+    custom_command = /usr/bin/tmux
+    font = DejaVu Sans Mono 20
     scrollback_lines = 5000
     scrollbar_position = hidden
     show_titlebar = False
