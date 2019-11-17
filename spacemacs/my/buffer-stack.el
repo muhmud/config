@@ -41,7 +41,7 @@
 ;; This has some further enhancements. You can filter the stack in
 ;; different ways; see `buffer-stack-filter'. You can use the
 ;; frame-local buffer ordering; see `buffer-stack-frame-local'. You
-;; can monitor your position in different ways; see
+7;; can monitor your position in different ways; see
 ;; `buffer-stack-show-position'. And you can bury/kill buffers while
 ;; switching through the stack; see `buffer-stack-bury'.
 ;;
@@ -145,7 +145,7 @@ ordering might be strange."
   :type 'boolean
   :group 'buffer-stack)
 
-(defcustom buffer-stack-show-position 'buffer-stack-show-position-number
+(defcustom buffer-stack-show-position 'buffer-stack-show-position-buffers
   "How do we display our position in the stack while switching?
 \"as number\" prints something like \"BUFFER: 2/4\". \"as surrounding
 buffers\" prints something like \"DOWN: *Next Buffer* ---- UP: *Last
@@ -221,6 +221,8 @@ Remove it from the tracked list, and add it to the untracked list."
   "Move down in the buffer stack.
 Down is the direction of less-recent buffers."
   (interactive)
+  (if (not (peek-buffer-stack-switching-p))
+    (setq start-buffer (buffer-name (current-buffer))))
   (buffer-stack-move 1)
   (buffer-stack-show-position))
 
@@ -229,6 +231,8 @@ Down is the direction of less-recent buffers."
   "Move up in the buffer stack.
 If you were switching, up is where you came from."
   (interactive)
+  (if (not (peek-buffer-stack-switching-p))
+    (setq start-buffer (buffer-name (current-buffer))))
   (buffer-stack-move -1)
   (buffer-stack-show-position))
 
@@ -391,12 +395,23 @@ This is THE switching command; all other motions are based on this."
   (if (not (boundp 'ctrl-up-code))
     (setq ctrl-up-code ""))
   (setq new-ctrl-up-code (with-temp-buffer
-    (insert-file-contents "/tmp/emacs-ctrl-up")
+    (insert-file-contents "/tmp/ctrl-up")
     (buffer-string)))
   (if (string= new-ctrl-up-code ctrl-up-code)
       (setq buffer-stack-is-switching t)
     (setq buffer-stack-is-switching nil))
   (setq ctrl-up-code new-ctrl-up-code)
+  (if buffer-stack-is-switching t))
+
+(defun peek-buffer-stack-switching-p ()
+  (if (not (boundp 'ctrl-up-code))
+      (setq ctrl-up-code ""))
+  (setq tmp-ctrl-up-code (with-temp-buffer
+                           (insert-file-contents "/tmp/ctrl-up")
+                           (buffer-string)))
+  (if (string= tmp-ctrl-up-code ctrl-up-code)
+      (setq buffer-stack-is-switching t)
+    (setq buffer-stack-is-switching nil))
   (if buffer-stack-is-switching t))
 
 ;(defun buffer-stack-switching-p ()
@@ -417,7 +432,7 @@ This is THE switching command; all other motions are based on this."
 
 (defun buffer-stack-assert-not-empty ()
   (if (null buffer-stack)
-      (error "The buffer stack is empty! Please report this as a bug.")))
+      (error "There are no tracked buffers!")))
 
 ;;; show position
 
@@ -438,19 +453,39 @@ That's number/total."
 (defun buffer-stack-show-position-buffers (buffer-stack-index buffer-stack)
   "Show position like this: DOWN: *Next Buffer* ---- UP: *Previous Buffer*"
   (let (up-buffer-index
+        next-up-buffer-index
         down-buffer-index
+        next-down-buffer-index
         (max-index (- (length buffer-stack) 1)))
     (if (eq buffer-stack-index 0)
         (setq up-buffer-index max-index)
       (setq up-buffer-index (- buffer-stack-index 1)))
+    (if (eq up-buffer-index 0)
+        (setq next-up-buffer-index max-index)
+      (setq next-up-buffer-index (- up-buffer-index 1)))
     (if (eq buffer-stack-index max-index)
         (setq down-buffer-index 0)
       (setq down-buffer-index (+ buffer-stack-index 1)))
-    (message (concat "DOWN: "
-                     (buffer-name (nth down-buffer-index buffer-stack))
-                     " ---- " "UP: "
-                     (buffer-name (nth up-buffer-index buffer-stack))))
-    ))
+    (if (eq down-buffer-index max-index)
+        (setq next-down-buffer-index 0)
+      (setq next-down-buffer-index (+ down-buffer-index 1)))
+    (let ((down-buffer (buffer-name (nth down-buffer-index buffer-stack)))
+          (next-down-buffer (buffer-name (nth next-down-buffer-index buffer-stack)))
+          (up-buffer (buffer-name (nth up-buffer-index buffer-stack)))
+          (next-up-buffer (buffer-name (nth next-up-buffer-index buffer-stack))))
+          (if (string= up-buffer down-buffer)
+            (message (concat "<<< "
+                             down-buffer
+                             " >>>"))
+            (message (concat up-buffer
+                             " <<< "
+                             "{"
+                             (number-to-string (length buffer-stack))
+                             "} ["
+                             start-buffer
+                             "]"
+                             " >>> "
+                             down-buffer))))))
 
 ;;; filter stack
 

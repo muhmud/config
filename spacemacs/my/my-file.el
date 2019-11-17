@@ -17,3 +17,8 @@
        (write-region (point-min)
                      (point-max)
                      file t))))
+
+(defun my-treemacs-RET (&optional ARG)
+  (interactive)
+  (treemacs-visit-node-default ARG)
+  (treemacs))

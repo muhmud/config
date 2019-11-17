@@ -56,6 +56,13 @@ If point was already at that position, move point to beginning of line."
   (newline)
   (indent-relative-first-indent-point))
 
+(defun custom-normal-newline ()
+  (interactive "^")
+  (end-of-line)
+  (newline)
+  (indent-relative-first-indent-point)
+  (evil-insert 1))
+
 (defun xah-forward-block (&optional n)
   "Move cursor beginning of next text block.
 A text block is separated by blank lines.
@@ -86,3 +93,11 @@ Version 2016-06-15"
             (progn (goto-char (point-min))
                    (setq -i n)))
           (setq -i (1+ -i)))))))
+
+(defun close-and-kill-next-pane ()
+  "If there are multiple windows, then close the other pane and kill the buffer in it also."
+  (interactive)
+  (other-window 1)
+  (kill-this-buffer)
+  (if (not (one-window-p))
+      (delete-window)))

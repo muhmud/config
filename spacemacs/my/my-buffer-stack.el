@@ -1,8 +1,12 @@
 (load "buffer-stack.el")
 
 (require 'buffer-stack)
-(global-set-key "\e[6;6G" 'buffer-stack-up)     ; Ctrl+Shift+Tab
-(global-set-key "\e[1;5G" 'buffer-stack-down)   ; Ctrl+Tab
+(require 'seq)
+(global-set-key [C-tab] 'buffer-stack-down)
+(global-set-key [C-iso-lefttab] 'buffer-stack-up)
+
+(define-key input-decode-map "\e[1;5G" [C-tab])
+(define-key input-decode-map "\e[6;6G" [C-iso-lefttab])
 
 ; Exlude certain file types from buffer tracking, i.e. Ctrl+Tab will
 ; never cycle to them
@@ -12,8 +16,14 @@
     (not (or (null name)
              (char-equal ?  (string-to-char name))
              (member name buffer-stack-untracked)
-             (string-match "^\*.*\*$" name))
+             (string-match "^\*.*\*$" name)
+             (string-match "^magit[:] .+$" name)
+             (string= (with-current-buffer buffer major-mode) "dired-mode"))
          )))
+
+(defun my-kill-other-buffers ()
+  (interactive)
+  (mapc 'kill-buffer (seq-filter 'buffer-stack-untrack-filter (delq (current-buffer) (buffer-list)))))
 
 ; Use the above function at the buffer stack filter
 (setq buffer-stack-filter 'buffer-stack-untrack-filter)
