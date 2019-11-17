@@ -537,7 +537,8 @@ This function is called at the very end of Spacemacs initialization."
      (tag-node-open . treemacs-toggle-node-prefer-tag-visit)
      (tag-node-closed . treemacs-toggle-node-prefer-tag-visit)
      (tag-node . treemacs-visit-node-default))))
- '(treemacs-position (quote right)))
+ '(treemacs-position (quote right) t)
+ '(which-key-max-display-columns nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
