@@ -68,6 +68,7 @@
   <Ctrl><Shift>Up = 1b 5b 36 41 36 7e
   <Ctrl>BackSpace = 1b 5b 36 3b 35 21
   <Ctrl>Delete = 1b 5b 31 31 31 32
+  <Ctrl>Down = 1b 5b 31 3b 37 47
   <Ctrl>End = 1b 5b 31 3b 35 46
   <Ctrl>Home = 1b 5b 31 3b 35 48
   <Ctrl>Insert = 1b 5b 31 31 31 31
@@ -75,7 +76,6 @@
   <Ctrl>Return = 1b 5b 32 34 3b 39 7e
   <Ctrl>Tab = 1b 5b 31 3b 35 47
   <Ctrl>Up = 1b 5b 31 3b 36 47
-  <Ctrl>Down = 1b 5b 31 3b 37 47
   <Shift>End = 1b 5b 31 3b 32 46
   <Shift>Home = 1b 5b 31 3b 32 48
   <Shift>Page_Down = 1b 5b 36 3b 32 7e
@@ -106,7 +106,7 @@
 [profiles]
   [[default]]
     allow_bold = False
-    background_darkness = 0.85
+    background_darkness = 0.44
     background_type = transparent
     copy_on_selection = True
     cursor_color = "#aaaaaa"
