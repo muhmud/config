@@ -18,12 +18,13 @@
              (member name buffer-stack-untracked)
              (string-match "^\*.*\*$" name)
              (string-match "^magit[:] .+$" name)
+             (not (member buffer (persp-buffer-list)))
              (string= (with-current-buffer buffer major-mode) "dired-mode"))
          )))
 
 (defun my-kill-other-buffers ()
   (interactive)
-  (mapc 'kill-buffer (seq-filter 'buffer-stack-untrack-filter (delq (current-buffer) (buffer-list)))))
+  (mapc 'kill-buffer (seq-filter 'buffer-stack-untrack-filter (delq (current-buffer) (persp-buffer-list)))))
 
 ; Use the above function at the buffer stack filter
 (setq buffer-stack-filter 'buffer-stack-untrack-filter)

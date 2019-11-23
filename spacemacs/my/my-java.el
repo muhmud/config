@@ -4,7 +4,8 @@
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-S-o") 'lsp-organize-imports)
             (define-key map (kbd "C-S-f") 'google-java-format-buffer)
-            (define-key map [f3] 'lsp-goto-implementation)
+            (define-key map [f3] 'lsp-find-definition)
+            (define-key map [C-f3] 'lsp-find-references)
             (define-key map (kbd "C-S-m") 'lsp-java-convert-to-static-import)
             (define-key map (kbd "C-S-t") 'helm-lsp-workspace-symbol)
             (define-key map (kbd "C-S-p") 'lsp-treemacs-errors-list)
@@ -35,5 +36,9 @@
 ;  (define-key lsp-treemacs-errors-mode-map (kbd "M-<up>") nil)
 ;  (define-key lsp-treemacs-errors-mode-map (kbd "M-<down>") nil))
 
+;(defun remap-java-keys ()
+;  (define-key java-mode-map ";" nil))
+
 ;(add-hook 'lsp-treemacs-errors-mode-hook 'remap-java-keys)
 (add-hook 'java-mode-hook 'my-java-mode)
+;(add-hook 'java-mode-hook 'remap-java-keys)

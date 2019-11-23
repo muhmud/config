@@ -42,6 +42,7 @@
 
 (global-set-key (kbd "M-q") 'spacemacs/kill-emacs)
 (global-set-key (kbd "M-w") 'my-kill-other-buffers)
+(global-set-key (kbd "M-e") 'kill-buffer-and-window)
 
 (global-set-key (kbd "C-S-<up>") 'xah-backward-block)
 (global-set-key (kbd "C-S-<down>") 'xah-forward-block)
