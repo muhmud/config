@@ -29,11 +29,13 @@
 
 (global-set-key (kbd "M-SPC") 'yas-expand)
 
-;(defun my-treemacs-keys ()
-;  (define-key treemacs-mode-map (kbd "M-<up>") nil)
-;  (define-key treemacs-mode-map (kbd "M-<down>") nil))
+(defun my-treemacs-keys ()
+  (define-key evil-treemacs-state-local-map (kbd "<right>") 'treemacs-toggle-node)
+  (define-key evil-treemacs-state-local-map (kbd "<left>") 'treemacs-toggle-node)
+  (define-key treemacs-mode-map (kbd "<prior>") nil)
+  (define-key treemacs-mode-map (kbd "<next>") nil))
 
-;(add-hook 'treemacs-mode-hook 'my-treemacs-keys)
+(add-hook 'treemacs-mode-hook 'my-treemacs-keys)
 
 (global-set-key (kbd "C-<prior>") 'previous-buffer)
 (global-set-key (kbd "C-<next>")  'next-buffer)

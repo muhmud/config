@@ -61,7 +61,7 @@ This function should only modify configuration layer settings."
      (treemacs :variables treemacs-use-git-mode 'deferred
                           treemacs-use-follow-mode t)
      lsp
-     dap
+     (dap :variables dap-enable-mouse-support nil)
      ;; version-control
      (java :variables java-backend 'lsp)
      )

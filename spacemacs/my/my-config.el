@@ -12,5 +12,7 @@
 
 (load "my-keys.el")
 
+;(load-theme 'kaolin-eclipse t)
+
 (setq auto-save-default nil)
 (setq make-backup-files nil)

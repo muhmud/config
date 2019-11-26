@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Spring Value
+# key: sv
+# --
+@Value("\${$1}")

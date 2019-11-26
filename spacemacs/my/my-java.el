@@ -33,7 +33,7 @@
           (t nil))))
 
 ;(defun remap-java-keys ()
-;  (define-key lsp-treemacs-errors-mode-map (kbd "M-<up>") nil)
+;  (define-key treemacs-mode-map (kbd "M-<up>") nil)
 ;  (define-key lsp-treemacs-errors-mode-map (kbd "M-<down>") nil))
 
 ;(defun remap-java-keys ()
@@ -42,3 +42,5 @@
 ;(add-hook 'lsp-treemacs-errors-mode-hook 'remap-java-keys)
 (add-hook 'java-mode-hook 'my-java-mode)
 ;(add-hook 'java-mode-hook 'remap-java-keys)
+
+(diminish 'lsp-mode "L")
