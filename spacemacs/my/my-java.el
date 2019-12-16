@@ -6,11 +6,13 @@
             (define-key map (kbd "C-S-f") 'google-java-format-buffer)
             (define-key map [f3] 'lsp-find-definition)
             (define-key map [C-f3] 'lsp-find-references)
+            (define-key map [C-S-f3] 'lsp-goto-implementation)
             (define-key map (kbd "C-S-m") 'lsp-java-convert-to-static-import)
             (define-key map (kbd "C-S-t") 'helm-lsp-workspace-symbol)
-            (define-key map (kbd "C-S-p") 'lsp-treemacs-errors-list)
-            (define-key map (kbd "C-S-e") 'treemacs)
-            (define-key map (kbd "C-S-d") 'lsp-treemacs-java-deps-list)
+            (define-key map (kbd "C-S-p") (lambda () (interactive) (toggle-side "*LSP Error List*" 'lsp-treemacs-errors-list)))
+            (define-key map (kbd "C-S-e") 'open-treemacs)
+            (define-key map (kbd "C-S-d") (lambda () (interactive) (toggle-side "*Java Dependency List*" 'lsp-treemacs-java-deps-list)))
+            (define-key map (kbd "C-S-u") (lambda () (interactive) (toggle-side "*LSP Symbols List*" 'lsp-treemacs-symbols)))
             (define-key map (kbd "C-S-b") 'dap-breakpoint-toggle)
             (define-key map [C-f11] 'dap-java-debug)
             (define-key map [C-S-f11] 'dap-delete-session)
@@ -20,17 +22,56 @@
             (define-key map [f6] 'dap-next)
             (define-key map [f7] 'dap-step-out)
             (define-key map [f8] 'dap-continue)
-            (define-key map [f9] 'goto-java-or-test-file)
+            (define-key map [f9] 'maven-test-toggle-between-test-and-class)
+            (define-key map (kbd ";") (lambda () (interactive) (insert ";")))
+            (define-key map (kbd ",") (lambda () (interactive) (insert ",")))
             map))
 
-(defun goto-java-or-test-file ()
+(defun open-treemacs ()
   (interactive)
-  (let ((file (buffer-file-name))
-        (is-java (string-match-p "/src/main/java/" (buffer-file-name)))
-        (is-test (string-match-p "/src/test/java/" (buffer-file-name))))
-    (cond (is-java (find-file (replace-regexp-in-string "[.]java$" "Test.java" (replace-regexp-in-string "/src/main/java/" "/src/test/java/" file))))
-          (is-test (find-file (replace-regexp-in-string "Test[.]java$" ".java" (replace-regexp-in-string "/src/test/java/" "/src/main/java/" file))))
-          (t nil))))
+  (treemacs)
+  (when (/= my-treemacs-frame-width (frame-width))
+    (setq my-treemacs-frame-width (frame-width))
+    (setq my-treemacs-width (round (* (frame-width) 0.28))))
+  (treemacs--set-width my-treemacs-width))
+
+(defun get-window (prefix)
+  (->> (window-list (selected-frame))
+     (--first (->> it
+                (window-buffer)
+                (buffer-name)
+                (s-starts-with? prefix)))))
+
+(defun toggle-side (prefix side)
+  (interactive)
+  (let ((window (get-window prefix)))
+    (if window
+      (delete-window window)
+      (funcall side))))
+
+(defun java-package-name ()
+  (interactive)
+  (mapconcat 'identity (split-string (replace-regexp-in-string ".*src\\(/\\(main\\|test\\)\\)?\\(/java\\)?" "" default-directory) "/" t) "."))
+
+;(defun java-package-name ()
+;  (interactive)
+;  (-let* ((symbols (lsp--get-document-symbols))
+;          (package-name (-some->> symbols
+;                          (-first (-lambda ((&hash "kind")) (= kind 4)))
+;                          (gethash "name"))))
+;    (prin1 package-name)))
+
+(defun java-class-name ()
+  (interactive)
+  (file-name-sans-extension (buffer-name)))
+
+;(defun java-class-name ()
+;  (interactive)
+;  (-let* ((symbols (lsp--get-document-symbols)))
+;    (->> symbols
+;       (-keep (-lambda ((&hash "children" "kind" "name" class-name))
+;                (if (= kind 5)
+;                   class-name))))))
 
 ;(defun remap-java-keys ()
 ;  (define-key treemacs-mode-map (kbd "M-<up>") nil)
@@ -41,6 +82,24 @@
 
 ;(add-hook 'lsp-treemacs-errors-mode-hook 'remap-java-keys)
 (add-hook 'java-mode-hook 'my-java-mode)
-;(add-hook 'java-mode-hook 'remap-java-keys)
-
-(diminish 'lsp-mode "L")
+(add-hook 'lsp-mode-hook (lambda () (diminish 'lsp-mode)))
+(add-hook 'java-mode-hook
+          (lambda ()
+            (setq c-electric-flag nil)
+            (setq c-syntactic-indentation nil)))
+(add-hook 'dap-mode-hook
+          (lambda ()
+            (dap-register-debug-template "Spring"
+              (list :type "java"
+                    :request "launch"
+                    :args ""
+                    :vmArgs "-Dspring.profiles.active=development"
+                    :cwd nil
+                    :stopOnEntry :json-false
+                    :host "localhost"
+                    :request "launch"
+                    :modulePaths []
+                    :classPaths nil
+                    :name "Spring"
+                    :projectName nil
+                    :mainClass nil))))

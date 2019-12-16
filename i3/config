@@ -402,3 +402,5 @@ bindsym $mod+F5 [con_mark="f5"] focus
 bindsym $mod+F6 [con_mark="f6"] focus
 bindsym $mod+F7 [con_mark="f7"] focus
 bindsym $mod+F8 [con_mark="f8"] focus
+
+# exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/workspace.json'"

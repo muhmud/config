@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Entity Repository
+# key: er
+# --
+package `(java-package-name)`;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface `(java-class-name)` extends JpaRepository<$1, Long> {
+  $2
+}
+

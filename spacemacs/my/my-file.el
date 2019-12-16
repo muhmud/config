@@ -18,7 +18,12 @@
                      (point-max)
                      file t))))
 
+(setq auto-hide-treemacs t)
+(setq my-treemacs-width 0)
+(setq my-treemacs-frame-width 0)
+
 (defun my-treemacs-RET (&optional ARG)
   (interactive)
+  (setq my-treemacs-width (window-width))
   (treemacs-visit-node-default ARG)
-  (treemacs))
+  (when auto-hide-treemacs (treemacs)))

@@ -1,0 +1,281 @@
+{
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": 1,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "normal",
+            "floating": "auto_off",
+            "layout": "tabbed",
+            "percent": 0.6,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "normal",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 801,
+                       "width": 832,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "marks": [
+                       "f1"
+                    ],
+                    "name": "spacemacs",
+                    "percent": 0.25,
+                    "swallows": [
+                       {
+                           "class": "^Emacs$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "normal",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 1106,
+                       "width": 1522,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "marks": [
+                       "f2"
+                    ],
+                    "name": "Terminator",
+                    "percent": 0.25,
+                    "swallows": [
+                       {
+                           "title": "^itachi\\ \\(0\\:0\\.0\\)$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "normal",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 2043,
+                       "width": 2303,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "marks": [
+                       "f3"
+                    ],
+                    "name": "Mozilla Firefox",
+                    "percent": 0.25,
+                    "swallows": [
+                       {
+                           "class": "^firefox$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "normal",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 2043,
+                       "width": 2302,
+                       "x": 0,
+                       "y": 75
+                    },
+                    "name": "Google Chrome",
+                    "percent": 0.25,
+                    "swallows": [
+                       {
+                           "class": "^Google\\-chrome$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+        {
+            "border": "normal",
+            "floating": "auto_off",
+            "layout": "splitv",
+            "percent": 0.4,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "normal",
+                    "floating": "auto_off",
+                    "layout": "tabbed",
+                    "percent": 0.5,
+                    "type": "con",
+                    "nodes": [
+                        {
+                            "border": "normal",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 1106,
+                               "width": 1522,
+                               "x": 0,
+                               "y": 0
+                            },
+                            "marks": [
+                               "f6"
+                            ],
+                            "name": "Terminator",
+                            "percent": 0.25,
+                            "swallows": [
+                               {
+                                   "title": "^itachi\\ \\(1\\:0\\.0\\)$"
+                               }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            "border": "normal",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 1003,
+                               "width": 1534,
+                               "x": 2306,
+                               "y": 75
+                            },
+                            "name": "Slack",
+                            "percent": 0.25,
+                            "swallows": [
+                               {
+                                   "class": "^Slack$"
+                               }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            "border": "normal",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 1003,
+                               "width": 1278,
+                               "x": 3840,
+                               "y": 112
+                            },
+                            "marks": [
+                               "f7"
+                            ],
+                            "name": "RingCentral - Mozilla Firefox",
+                            "percent": 0.25,
+                            "swallows": [
+                               {
+                                   "class": "^firefox$",
+                                   "title": "^RingCentral\\ \\-\\ Mozilla\\ Firefox$"
+                               }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            "border": "normal",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 2043,
+                               "width": 2302,
+                               "x": 4116,
+                               "y": 112
+                            },
+                            "name": "Gitter - Mozilla Firefox",
+                            "percent": 0.25,
+                            "swallows": [
+                               {
+                                   "class": "^firefox$",
+                                   "title": "(Gitter)|(WhatsApp)"
+                               }
+                            ],
+                            "type": "con"
+                        }
+                    ]
+                },
+                {
+                    "border": "normal",
+                    "floating": "auto_off",
+                    "layout": "tabbed",
+                    "percent": 0.5,
+                    "type": "con",
+                    "nodes": [
+                        {
+                            "border": "normal",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 2043,
+                               "width": 2302,
+                               "x": 3294,
+                               "y": 112
+                            },
+                            "marks": [
+                               "f5"
+                            ],
+                            "name": "YouTube - Mozilla Firefox",
+                            "percent": 0.333333333333333,
+                            "swallows": [
+                               {
+                                   "class": "^firefox$",
+                                   "title": "(YouTube)|(Netflix)"
+                               }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            "border": "normal",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 1106,
+                               "width": 1522,
+                               "x": 0,
+                               "y": 0
+                            },
+                            "name": "itachi (2:0.0)",
+                            "percent": 0.333333333333333,
+                            "swallows": [
+                               {
+                                   "class": "^Terminator$",
+                                   "title": "^itachi\\ \\(2\\:0\\.0\\)$"
+                               }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            "border": "normal",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 1003,
+                               "width": 1918,
+                               "x": 2880,
+                               "y": 1671
+                            },
+                            "marks": [
+                               "f8"
+                            ],
+                            "name": "BTCUSD — Bitcoin Chart and Price — TradingView - Mozilla Firefox",
+                            "percent": 0.333333333333333,
+                            "swallows": [
+                               {
+                                   "class": "^firefox$",
+                                   "title": "BTCUSD"
+                               }
+                            ],
+                            "type": "con"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+

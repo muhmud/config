@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Test WebClient Documented
+# key: twd
+# --
+val responseBody =
+    webClient
+        .post()
+        .uri("$1")
+        .header(HttpHeaders.AUTHORIZATION, authenticatedUser($2))
+        .accept(MediaType.APPLICATION_JSON)
+        .body(fromObject($3))
+        .exchange()
+        .expectStatus()
+        .isOk()
+        .expectBody($4.class)
+        .consumeWith(documentor())
+        .returnResult()
+        .getResponseBody();

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Entity Class
+# key: ec
+# --
+package `(java-package-name)`;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import ops.common.db.entity.AbstractEntity;
+
+@Entity
+@Table
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class `(java-class-name)` extends AbstractEntity {
+$1
+}
+

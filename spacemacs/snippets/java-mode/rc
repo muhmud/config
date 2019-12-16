@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Resource Class
+# key: rc
+# --
+package `(java-package-name)`;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class `(java-class-name)` {
+$1
+}
+

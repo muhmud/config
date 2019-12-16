@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Test Method
+# key: tm
+# --
+@Test
+public void $1() {
+  $2
+}

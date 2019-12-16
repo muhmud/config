@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Test Controller
+# key: tc
+# --
+package `(java-package-name)`;
+
+import ops.common.api.test.WebFluxApiTest;
+
+public class `(java-class-name)` extends WebFluxApiTest {
+  $1
+}
+

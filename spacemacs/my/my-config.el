@@ -3,6 +3,7 @@
 (load "my-file.el")
 (load "my-java.el")
 (load "my-sql.el")
+(load "my-email.el")
 
 (load "google-java-format.el")
 (load "font-ligatures.el")

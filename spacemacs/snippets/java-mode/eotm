@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Entity One To Many
+# key: eotm
+# --
+@OneToMany(mappedBy = "$1")
+@EqualsAndHashCode.Exclude
+@ToString.Exclude
+List<$2> $3;

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Value Class
+# key: vc
+# --
+package `(java-package-name)`;
+
+import lombok.Builder;
+import lombok.Value;
+
+@Value
+@Builder
+public class `(java-class-name)` {
+$1
+}
+

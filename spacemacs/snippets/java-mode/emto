@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: emto
+# key: Entity Many To One
+# --
+@ManyToOne
+@JoinColumn(name = "$1")
+@EqualsAndHashCode.Exclude
+@ToString.Exclude
+$2 $3;

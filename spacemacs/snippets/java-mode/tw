@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Test WebClient
+# key: tw
+# --
+val response =
+    webClient
+        .post()
+        .uri("$1")
+        .header(HttpHeaders.AUTHORIZATION, authenticatedUser($2))
+        .accept(MediaType.APPLICATION_JSON)
+        .body(fromObject($3))
+        .exchange()
+        .expectStatus()
+        .isOk()
+        .expectBody($4.class)
+        .returnResult()
+        .getResponseBody();

@@ -10,6 +10,7 @@
 (define-key evil-normal-state-map (kbd "RET") 'custom-normal-newline)
 (define-key evil-insert-state-map (kbd "RET") 'custom-newline)
 (define-key evil-normal-state-map (kbd "DEL") 'backward-delete-char-untabify)
+(define-key evil-normal-state-map [delete] 'delete-char)
 (define-key evil-insert-state-map (kbd "TAB") 'indent-block)
 (define-key evil-insert-state-map [(backtab)] 'unindent-block)
 (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
@@ -20,6 +21,12 @@
 (define-key evil-motion-state-map (kbd "M-<right>") 'evil-jump-forward)
 (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward)
 
+(evil-define-operator my-evil-delete (beg end type yank-handler)
+  (interactive "<R><y>")
+  (evil-delete beg end type ?_ yank-handler))
+
+(define-key evil-normal-state-map "d" 'my-evil-delete)
+
 (with-eval-after-load 'cua-base
   (define-key cua-global-keymap (kbd "C-@") nil)
   (define-key cua-global-keymap (kbd "C-SPC") nil))
@@ -29,11 +36,33 @@
 
 (global-set-key (kbd "M-SPC") 'yas-expand)
 
+(defun shrink-treemacs ()
+  (interactive)
+  (shrink-window-horizontally 3)
+  (setq my-treemacs-width (window-width)))
+
+(defun expand-treemacs ()
+  (interactive)
+  (enlarge-window-horizontally 3)
+  (setq my-treemacs-width (window-width)))
+
 (defun my-treemacs-keys ()
-  (define-key evil-treemacs-state-local-map (kbd "<right>") 'treemacs-toggle-node)
-  (define-key evil-treemacs-state-local-map (kbd "<left>") 'treemacs-toggle-node)
+  (define-key evil-treemacs-state-local-map (kbd "<right>") 'treemacs-TAB-action)
+  (define-key evil-treemacs-state-local-map (kbd "<left>") 'treemacs-TAB-action)
+  (define-key evil-treemacs-state-local-map (kbd "C-<left>") 'expand-treemacs)
+  (define-key evil-treemacs-state-local-map (kbd "C-<right>") 'shrink-treemacs)
+  (define-key evil-treemacs-state-local-map (kbd "/") 'helm-ag)
+  (define-key evil-treemacs-state-local-map (kbd "C-/") 'helm-find)
+  (define-key evil-treemacs-state-local-map (kbd "C-S-p") 'delete-window)
+  (define-key evil-treemacs-state-local-map (kbd "C-S-e") 'delete-window)
+  (define-key evil-treemacs-state-local-map (kbd "C-S-d") 'delete-window)
+  (define-key evil-treemacs-state-local-map (kbd "C-S-u") 'delete-window)
+  (define-key evil-treemacs-state-local-map (kbd "C-S-u") 'delete-window)
+  (define-key evil-treemacs-state-local-map (kbd "C-<insert>") (lambda () (interactive) (if auto-hide-treemacs (setq auto-hide-treemacs nil) (setq auto-hide-treemacs t))))
   (define-key treemacs-mode-map (kbd "<prior>") nil)
-  (define-key treemacs-mode-map (kbd "<next>") nil))
+  (define-key treemacs-mode-map (kbd "<next>") nil)
+  (define-key treemacs-mode-map (kbd "<right>") 'treemacs-TAB-action)
+  (define-key treemacs-mode-map (kbd "<left>") 'treemacs-TAB-action))
 
 (add-hook 'treemacs-mode-hook 'my-treemacs-keys)
 
@@ -65,7 +94,7 @@
 (define-key input-decode-map [?\C-m] [C-m])
 
 (global-set-key [C-m] 'window-toggle-side-windows)
-(global-set-key [C-delete] 'treemacs)
+(global-set-key [C-delete] 'open-treemacs)
 (global-set-key [C-escape] 'evil-append)
 
 ; Use mouse wheel for scrolling through the buffer
