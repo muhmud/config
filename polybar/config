@@ -65,6 +65,7 @@ font-2 = Moon Phases:size=15;3
 modules-left = i3
 modules-center = date
 modules-right = updates timer xe weather pavolume xbanish power
+;modules-right = updates timer weather pavolume xbanish power
 
 [bar/bottom]
 monitor=DisplayPort-2

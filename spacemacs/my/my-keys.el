@@ -21,6 +21,16 @@
 (define-key evil-motion-state-map (kbd "M-<right>") 'evil-jump-forward)
 (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward)
 
+;(define-key evil-normal-state-map (kbd "<escape>") (lambda() (interactive) (cond
+;                                                                            ((eq evil-state 'visual) (forward-char) (evil-normal-state))
+;                                                          ((eq evil-state 'normal) (evil-insert-state))
+;                                                          ((eq evil-state 'insert) (forward-char) (evil-normal-state)))))
+
+(evil-define-key 'normal evil-mc-key-map (kbd "C-n") nil)
+(evil-define-key 'normal evil-mc-key-map (kbd "C-p") nil)
+(evil-define-key 'normal evil-mc-key-map (kbd "C-t") nil)
+(evil-define-key 'normal evil-mc-key-map (kbd "M-t") 'evil-mc-skip-and-goto-next-match)
+
 (evil-define-operator my-evil-delete (beg end type yank-handler)
   (interactive "<R><y>")
   (evil-delete beg end type ?_ yank-handler))
@@ -66,17 +76,20 @@
 
 (add-hook 'treemacs-mode-hook 'my-treemacs-keys)
 
-(global-set-key (kbd "C-<prior>") 'previous-buffer)
-(global-set-key (kbd "C-<next>")  'next-buffer)
+(global-set-key (kbd "C-n") 'spacemacs/new-empty-buffer)
+(global-set-key (kbd "C-<prior>") 'xah-backward-block)
+(global-set-key (kbd "C-<next>")  'xah-forward-block)
 (global-set-key (kbd "C-<up>") (lambda() (interactive) (other-window -1)))
 (global-set-key (kbd "C-<down>") (lambda() (interactive) (other-window 1)))
+
+(global-set-key (kbd "C-f") (lambda() (interactive) (evil-normal-state) (evil-ex-search-forward)))
 
 (global-set-key (kbd "M-q") 'spacemacs/kill-emacs)
 (global-set-key (kbd "M-w") 'my-kill-other-buffers)
 (global-set-key (kbd "M-e") 'kill-buffer-and-window)
 
-(global-set-key (kbd "C-S-<up>") 'xah-backward-block)
-(global-set-key (kbd "C-S-<down>") 'xah-forward-block)
+(global-set-key (kbd "M-<prior>") 'previous-buffer)
+(global-set-key (kbd "M-<next>")  'next-buffer)
 
 (global-set-key [home] 'smart-beginning-of-line)
 
