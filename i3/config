@@ -379,7 +379,7 @@ bindsym $mod+c exec --no-startup-id /usr/bin/google-chrome-stable
 bindsym $mod+i exec --no-startup-id /usr/bin/firefox
 bindsym $mod+k exec QT_QPA_PLATFORMTHEME="qt5ct" QT_AUTO_SCREEN_SCALE_FACTOR=0 /usr/bin/keepassxc
 #bindsym $mod+e exec tmux select-window -t emacs
-bindsym $mod+e exec --no-startup-id /usr/bin/emacs
+bindsym $mod+e exec --no-startup-id /usr/local/bin/emacs
 
 # Other
 bindsym $mod+j exec --no-startup-id ~/.config/dunst/slack-unurgent.sh
