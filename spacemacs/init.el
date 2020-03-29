@@ -69,6 +69,7 @@ This function should only modify configuration layer settings."
      ;; version-control
      (java :variables java-backend 'lsp)
      (c-c++ :variables =c-c++-backend= 'lsp-ccls)
+     (vue :variables vue-backend 'lsp)
      gnus
      )
 

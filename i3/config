@@ -130,6 +130,9 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+d focus mode_toggle
 
+# Copy primary clipboard to main clipboard
+bindsym $mod+Shift+x exec xclip -o selection primary | xclip -selection clipboard
+
 # Workspace names
 set $workspace1 "01: Main "
 set $workspace2 "02: Dev "
