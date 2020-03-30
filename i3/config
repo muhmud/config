@@ -133,6 +133,10 @@ bindsym $mod+d focus mode_toggle
 # Copy primary clipboard to main clipboard
 bindsym $mod+Shift+x exec xclip -o selection primary | xclip -selection clipboard
 
+# Suppress/Unsuppress screensaver
+bindsym $mod+Shift+s exec ~/bin/suppress-screensaver
+bindsym $mod+Shift+u exec ~/bin/unsuppress-screensaver
+
 # Workspace names
 set $workspace1 "01: Main "
 set $workspace2 "02: Dev "
