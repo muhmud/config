@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#recordmydesktop --on-the-fly-encoding --s_quality 10 --v_bitrate 2000000 --v_quality 63 --device pulse --channels 1 --freq 44100 --fps 24 $*
+
+recordmydesktop --s_quality 10 --v_bitrate 2000000 --v_quality 63 --channels 1 --freq 44100 --fps 60 --use-jack system:capture_1 $*

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+jack_connect system:capture_1 "JACK Input Client:in_1"
+jack_connect system:capture_1 "JACK Input Client:in_2"
+

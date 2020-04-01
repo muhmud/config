@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ ! -z $1 ]]; then
+    echo $(curl -s -H 'Accept-Language: en' "https://www.timeanddate.com/worldclock/" | perl -ne '/'$1'[<].*?class=rbi[>](.*?)[<]/ && print $1')
+else
+    #echo $(curl -s -H 'Accept-Language: en' "https://www.timeanddate.com/worldclock/" | perl -ne '[/]worldclock[/].*?[>](.*?)[<] && print $1')
+    echo ""
+fi
+ 

@@ -1,0 +1,5 @@
+
+#!/bin/bash
+
+java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=127.0.0.1:5005  -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=556m  -Xmx768M -jar /opt/scala/sbt-0.13.6/bin/sbt-launch.jar
+

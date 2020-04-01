@@ -1,0 +1,19 @@
+#/bin/bash
+
+interval=$1
+if [ -z $interval ]; then
+    interval=300
+fi
+
+number=$2
+if [ -z $number ]; then
+    number=20
+fi
+
+actions() {
+    clear;
+    hn best $number
+}
+
+actions;
+while sleep $interval; do actions; done

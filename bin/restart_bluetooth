@@ -1,0 +1,9 @@
+#!/bin/bash
+
+sudo systemctl stop bluetooth;
+sleep 2;
+
+sudo usb_modeswitch -R -v 0bda -p b720;
+
+sudo systemctl start bluetooth;
+

@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+# $1 = base (from) currency
+# $2 = target (lookup, to) currency
+# $3 = amount (defaults to 1)
+amount=1
+if ! [ -z "$3" ]; then
+    amount=$3
+fi
+       
+if ! [ -z "$1" ] && ! [ -z "$2" ]; then
+    uri="https://www.xe.com/currencyconverter/convert/?Amount=$amount&From=$1&To=$2"
+    domcurl "$uri" > /tmp/tmp-xe
+    value=`cat /tmp/tmp-xe | perl -l -0777 -ne 'print $1 if /<span class="converterresult-toAmount">(.*?)<\/span/'`
+  
+    if ! [ -z "$value" ]; then
+        echo "$amount $1 = $value $2"
+    fi
+fi

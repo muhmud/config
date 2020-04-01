@@ -1,0 +1,24 @@
+#!/bin/bash
+
+SMART_IP_FILE=/tmp/smart-dns-proxy.ip
+
+if [[ -f "$SMART_IP_FILE" ]]; then
+    SMART_IP=$(cat $SMART_IP_FILE)
+    PUBLIC_IP=`wget http://ipecho.net/plain -O - -q ; echo`
+
+    if [[ "$SMART_IP" == "$PUBLIC_IP" ]]; then
+        echo "IPs match, nothing to do"
+        exit 0;
+    fi
+fi
+
+echo "Updating Smart IP..."
+SMART_IP=$(curl -s https://www.smartdnsproxy.com/api/IP/update/bb6af511ef194fc)
+STATUS=$(echo $SMART_IP | jq '.Status')
+
+if [[ "$STATUS" == "0" ]]; then
+    echo "Update successful"
+    MESSAGE=$(echo $SMART_IP | jq '.Message')
+
+    echo $MESSAGE | awk -F ' ' '{ print $4 }' > $SMART_IP_FILE;
+fi

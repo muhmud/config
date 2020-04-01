@@ -1,0 +1,11 @@
+#!/bin/bash
+
+kill `ps aux | grep cycle_windows | awk -F ' ' '{ print $2; }' | sort | head -n 1`
+
+kill `ps aux | grep cycle_workspaces | awk -F ' ' '{ print $2; }' | sort | head -n 1`
+
+kill `ps aux | grep cycle_ctrl | awk -F ' ' '{ print $2; }' | sort | head -n 1`
+
+i3-msg 'exec --no-startup-id /home/muhmud/.config/i3/scripts/cycle_windows.py &'
+i3-msg 'exec --no-startup-id /home/muhmud/.config/i3/scripts/cycle_workspaces.py &'
+i3-msg 'exec --no-startup-id /home/muhmud/.config/i3/scripts/cycle_ctrl.py &'

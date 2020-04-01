@@ -1,0 +1,4 @@
+#!/bin/bash
+
+DIR=$PWD
+find $DIR -maxdepth 1 -type f | perl -MURI::file -e 'while(<STDIN>) { print URI::file->new($_)."\n" }'

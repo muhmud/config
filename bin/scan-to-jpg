@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo scanimage --device=genesys --mode=Color --resolution=300 --format=jpeg > "$1"

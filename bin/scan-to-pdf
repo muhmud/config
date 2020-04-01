@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo scanimage --device=genesys --mode=Color --resolution=300 --format=jpeg > /tmp/scan.jpg
+
+convert -density 300 /tmp/scan.jpg "$1"
+

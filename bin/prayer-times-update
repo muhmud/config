@@ -1,0 +1,27 @@
+#!/bin/bash
+
+timesFile=/tmp/esolat.json
+timesFileDateTime=`stat -c %y "$timesFile" 2>/dev/null`
+timesFileDate=${timesFileDateTime:0:10}
+today=`date +%Y-%m-%d`
+if [[ ! -f "$timesFile" || "${timesFileDate//-/}" -ne "${today//-/}" ]]; then
+  /usr/bin/rm -f $timesFile
+  try=0
+  while [[ $try -lt 5 ]]; do
+    times=`/usr/bin/curl -s 'https://www.e-solat.gov.my/index.php?r=esolatApi/TakwimSolat&period=today&zone=WLY01'`
+
+    serverDateTime=`echo $times | /usr/bin/jq -r '.serverTime'`
+    if [[ ! -z $serverDateTime ]]; then
+      serverDate=`echo ${serverDateTime:0:10}`
+      if [[ "${serverDate//-/}" -ne "${timesFileDate//-/}" ]]; then
+          echo $times > $timesFile
+      fi
+
+      break
+    else
+      sleep 2
+    fi
+
+    let try+=1
+  done
+fi

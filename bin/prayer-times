@@ -1,0 +1,129 @@
+#!/bin/bash
+
+timesFile=/tmp/esolat.json
+timesFileDateTime=`stat -c %y "$timesFile" 2>/dev/null`
+timesFileDate=${timesFileDateTime:0:10}
+today=`date +%Y-%m-%d`
+if [[ ! -f "$timesFile" || "${timesFileDate//-/}" -ne "${today//-/}" ]]; then
+  try=0
+  while [[ $try -lt 10 ]]; do
+    times=`curl -s 'https://www.e-solat.gov.my/index.php?r=esolatApi/TakwimSolat&period=today&zone=SGR01'`
+
+    if [[ ! -z $times ]]; then
+      echo $times > $timesFile
+      break
+    fi
+  done
+fi
+
+times=`cat $timesFile` 
+
+function rawTime {
+  p=$1
+  q=${p/:/}
+  echo "1${q:0:4}"
+}
+
+if [[ ! -z $times ]]; then
+  islamicDate=`echo $times | jq -r '.prayerTime[0].hijri'`
+  islamicDay=`echo ${islamicDate:8:2}`
+  islamicMonth=`echo ${islamicDate:5:2}`
+  case $islamicMonth in
+    "01")
+      islamicMonthName="Muharram"
+      ;;
+    "02")
+      islamicMonthName="Safar"
+      ;;
+    "03")
+      islamicMonthName="Rabi Al-Awwal"
+      ;;
+    "04")
+      islamicMonthName="Rabi Al-Thani"
+      ;;
+    "05")
+      islamicMonthName="Jumada Al-Ula"
+      ;;
+    "06")
+      islamicMonthName="Jumada Al-Akhirah"
+      ;;
+    "07")
+      islamicMonthName="Rajab"
+      ;;
+    "08")
+      islamicMonthName="Shaban"
+      ;;
+    "09")
+      islamicMonthName="Ramadan"
+      ;;
+    "10")
+      islamicMonthName="Shawwal"
+      ;;
+    "11")
+      islamicMonthName="Dhu Al-Qadah"
+      ;;
+    "01")
+      islamicMonthName="Dhu Al-Hijjah"
+      ;;
+  esac
+
+  islamicYear=`echo ${islamicDate:0:4}`
+
+  serverTime=`echo $times | jq -r '.serverTime'`
+  timeRaw=`rawTime $(date +%H:%M)`
+
+  calendarDate=`echo $times | jq -r '.prayerTime[0].date'`
+  
+  imsak=`echo $times | jq -r '.prayerTime[0].imsak'`
+  imsakRaw=`rawTime $imsak`
+  fajr=`echo $times | jq -r '.prayerTime[0].fajr'`
+  fajrRaw=`rawTime $fajr`
+  syuruk=`echo $times | jq -r '.prayerTime[0].syuruk'`
+  syurukRaw=`rawTime $syuruk`
+  dhuhr=`echo $times | jq -r '.prayerTime[0].dhuhr'`
+  dhuhrRaw=`rawTime $dhuhr`
+  asr=`echo $times | jq -r '.prayerTime[0].asr'`
+  asrRaw=`rawTime $asr`
+  maghrib=`echo $times | jq -r '.prayerTime[0].maghrib'`
+  maghribRaw=`rawTime $maghrib`
+  isha=`echo $times | jq -r '.prayerTime[0].isha'`
+  ishaRaw=`rawTime $isha`
+  
+  thisColour="\e[1m\e[32m"
+  nextColour="\e[31m"
+  
+  if [[ "$timeRaw" -ge "$fajrRaw" && "$timeRaw" -lt "$syurukRaw" ]]; then
+    fajrColour=$thisColour;
+    dhuhrColour=$nextColour
+  fi
+  
+  if [[ "$timeRaw" -ge "$dhuhrRaw" && "$timeRaw" -lt "$asrRaw" ]]; then
+    dhuhrColour=$thisColour;
+    asrColour=$nextColour
+  fi
+  
+  if [[ "$timeRaw" -ge "$asrRaw" && "$timeRaw" -lt "$maghribRaw" ]]; then
+    asrColour=$thisColour;
+    maghribColour=$nextColour;
+  fi
+  
+  if [[ "$timeRaw" -ge "$maghribRaw" && "$timeRaw" -lt "$ishaRaw" ]]; then
+    maghribColour=$thisColour;
+    ishaColour=$nextColour;
+  fi
+  
+  if [[ "$timeRaw" -ge "$ishaRaw" ]]; then
+    ishaColour=$thisColour;
+  fi
+
+  echo "$islamicDay $islamicMonthName ($islamicMonth) $islamicYear / $calendarDate"
+  echo "Server Time: ${serverTime:11:8}"
+  echo ""
+  echo -e "$(echo -e $imsakColour)Imsak:$(echo -e '\t\t')$imsak\e[0m"
+  echo -e "$(echo -e $fajrColour)Fajr:$(echo -e '\t\t')$fajr\e[0m"
+  echo -e "$(echo -e $syurukColour)Syuruk:$(echo -e '\t\t')$syuruk\e[0m"
+  echo -e "$(echo -e $dhuhrColour)Dhuhr:$(echo -e '\t\t')$dhuhr\e[0m"
+  echo -e "$(echo -e $asrColour)Asr:$(echo -e '\t\t')$asr\e[0m"
+  echo -e "$(echo -e $maghribColour)Maghrib:$(echo -e '\t')$maghrib\e[0m"
+  echo -e "$(echo -e $ishaColour)Isha:$(echo -e '\t\t')$isha\e[0m"
+fi

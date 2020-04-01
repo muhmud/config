@@ -1,0 +1,3 @@
+#!/bin/bash
+
+node ~/code/js/node/domcurl/node_modules/domcurl/index.js $*

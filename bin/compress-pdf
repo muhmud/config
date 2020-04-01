@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dPDFSETTINGS=/ebook -dNOPAUSE -dBATCH  -dQUIET -sOutputFile="$2" "$1"

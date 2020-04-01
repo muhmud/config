@@ -1,0 +1,4 @@
+#/bin/bash
+
+/usr/bin/jackd -dalsa -dhw:USB -r48000 -p1024 -n2
+

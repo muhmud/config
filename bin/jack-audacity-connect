@@ -1,0 +1,8 @@
+#!/bin/bash
+
+INPUT_1=`jack_lsp | grep "alsa.*000"`
+INPUT_2=`jack_lsp | grep "alsa.*001"`
+
+jack_connect system:capture_1 "$INPUT_1"
+jack_connect system:capture_1 "$INPUT_2"
+

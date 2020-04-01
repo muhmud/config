@@ -106,7 +106,7 @@ font-1 = FontAwesome:pixelsize=19;3
 
 modules-left = hn
 modules-center = world_time
-modules-right = keyboard windows memfree load_average cpu_temp internet uptime
+modules-right = keyboard screensaver windows memfree load_average cpu_temp internet uptime
 
 [module/i3]
 type = internal/i3
@@ -254,6 +254,12 @@ click-left = ~/.config/polybar/scripts/timer-pause-continue.sh
 click-middle = ~/.config/polybar/scripts/timer-switch.sh
 click-right = ~/.config/polybar/scripts/timer-stop.sh
 scroll-down = ~/.config/polybar/scripts/timer-change-task.sh
+
+[module/screensaver]
+type = custom/script
+interval = 1
+label = %output%
+exec = ~/.config/polybar/scripts/screensaver-suppressed.sh
 
 [module/power]
 type = custom/text

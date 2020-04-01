@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ps aux | grep 'suppress-screensaver' | awk -F ' ' '{ print $2 }' | xargs kill -9
+

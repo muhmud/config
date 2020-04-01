@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd ~/.config/config
+git add -A .
+git commit -am "config update"
+git push

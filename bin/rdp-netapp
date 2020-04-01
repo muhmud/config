@@ -1,0 +1,3 @@
+#rdesktop -g 2560x1600 52.11.188.115 -u "WIN-NP4G784U8M4\\muhmud.ahmad"
+
+rdesktop -g 2560x1600 52.11.188.115 -u ".\\muhmud.ahmad"
