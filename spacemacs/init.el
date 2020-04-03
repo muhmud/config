@@ -517,6 +517,7 @@ This function is called at the very end of Spacemacs initialization."
  '(cua-remap-control-v t)
  '(dap-java-java-command "java")
  '(global-display-line-numbers-mode t)
+ '(lsp-enable-file-watchers nil)
  '(lsp-enable-semantic-highlighting t)
  '(lsp-java-format-settings-url
    "file:///home/muhmud/.spacemacs.d/my/eclipse-java-google-style.xml")
