@@ -3,6 +3,8 @@
 echo "$1 CC:98:8B:F5:0A:AE" | bluetoothctl
 
 if [[ "$1" == "connect" ]]; then
+  sleep 1;
+
   NEW_SINK=`pacmd list-sinks | grep -zoP 'index[:] ([0-9]+).*\n.*bluez.*' | head -n 1 | awk -F ': ' '{ print $2; }'`
   NEW_SOURCE=`pacmd list-sources | grep -zoP 'index[:] ([0-9]+).*\n.*bluez.*' | head -n 1 | awk -F ': ' '{ print $2; }'`
 
