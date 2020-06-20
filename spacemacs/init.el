@@ -72,6 +72,7 @@ This function should only modify configuration layer settings."
      (vue :variables vue-backend 'lsp)
      gnus
      terraform
+     shell
      )
 
    ;; List of additional packages that will be installed without being
@@ -240,7 +241,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; The leader key accessible in `emacs state' and `insert state'
    ;; (default "M-m")
-   dotspacemacs-emacs-leader-key "M-m"
+   dotspacemacs-emacs-leader-key "S-SPC"
 
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
@@ -495,6 +496,7 @@ before packages are loaded."
   (add-to-list 'spacemacs-indent-sensitive-modes 'java-mode)
 
   (set-face-attribute 'spacemacs-normal-face nil :background "#444444" :foreground "#FFFFFF")
+  (setq-default evil-default-state 'insert)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -524,7 +526,7 @@ This function is called at the very end of Spacemacs initialization."
    "file:///home/muhmud/.spacemacs.d/my/eclipse-java-google-style.xml")
  '(lsp-java-java-path "java")
  '(lsp-java-vmargs
-   '("-noverify" "-Xmx1G" "-XX:+UseG1GC" "-XX:+UseStringDeduplication" "-javaagent:/home/muhmud/.m2/repository/org/projectlombok/lombok/1.18.8/lombok-1.18.8.jar"))
+   '("-noverify" "-Xmx2G" "-XX:+UseG1GC" "-XX:+UseStringDeduplication" "-javaagent:/home/muhmud/.m2/repository/org/projectlombok/lombok/1.18.8/lombok-1.18.8.jar"))
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-doc-max-height 20)
  '(lsp-ui-doc-max-width 75)
@@ -533,6 +535,7 @@ This function is called at the very end of Spacemacs initialization."
  '(menu-bar-mode nil)
  '(package-selected-packages
    '(systemd nginx-mode ansi package-build shut-up epl git commander f dash s web-mode tagedit slim-mode scss-mode sass-mode pug-mode impatient-mode helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path posframe company-lua lua-mode phpunit phpcbf php-extras php-auto-yasnippets drupal-mode company-php ac-php-core php-mode vimrc-mode dactyl-mode yapfify stickyfunc-enhance pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements lsp-python-ms live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags dap-mode bui tree-mode cython-mode counsel-gtags counsel swiper ivy company-anaconda blacken anaconda-mode pythonic yasnippet-snippets yaml-mode xclip ws-butler writeroom-mode winum which-key web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-magit treemacs-evil toc-org symon symbol-overlay string-inflection sql-indent spaceline-all-the-icons smeargle restart-emacs rainbow-delimiters prettier-js popwin persp-mode pcre2el password-generator paradox overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-bullets org-brain open-junk-file nodejs-repl nameless mvn move-text mmm-mode meghanada maven-test-mode markdown-toc magit-svn magit-gitflow macrostep lsp-ui lsp-treemacs lsp-java lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc indent-guide hybrid-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-gitignore helm-git-grep helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag groovy-mode groovy-imports gradle-mode google-translate golden-ratio gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy font-lock+ flycheck-pos-tip flycheck-package flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish devdocs define-word company-tern company-statistics company-lsp column-enforce-mode clean-aindent-mode centered-cursor-mode auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adoc-mode ace-link ace-jump-helm-line ac-ispell))
+ '(paradox-github-token t)
  '(standard-indent 2)
  '(tool-bar-mode nil)
  '(treemacs-RET-actions-config

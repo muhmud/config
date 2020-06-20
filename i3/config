@@ -311,6 +311,7 @@ bindsym $mod+l exec "xscreensaver-command --lock"
 # Screenshot the screen
 bindsym Print exec gnome-screenshot
 bindsym $mod+Print exec "gnome-screenshot --window"
+bindsym $mod+Shift+Print exec flameshot gui
 
 # Lock up the mouse
 bindsym $mod+m exec --no-startup-id xdotool mousemove 3745 6 click 1

@@ -5,6 +5,7 @@
 (define-key evil-insert-state-map (kbd "C-v") nil)
 (define-key evil-insert-state-map (kbd "C-x") nil)
 (define-key evil-motion-state-map (kbd "C-w") nil)
+(define-key evil-insert-state-map (kbd "C-w") 'spacemacs/kill-this-buffer)
 (define-key evil-insert-state-map (kbd "C-a") 'select-whole-buffer)
 (define-key evil-insert-state-map "\e[6;5!" 'evil-delete-backward-word) ; Ctrl+Backspace
 (define-key evil-normal-state-map (kbd "RET") 'custom-normal-newline)
@@ -18,7 +19,9 @@
 (define-key evil-normal-state-map (kbd "C-SPC") 'evil-append)
 (define-key evil-normal-state-map (kbd "C-@") 'evil-append)
 (define-key evil-motion-state-map (kbd "M-<left>") 'evil-jump-backward)
+(define-key evil-insert-state-map (kbd "M-<left>") 'evil-jump-backward)
 (define-key evil-motion-state-map (kbd "M-<right>") 'evil-jump-forward)
+(define-key evil-insert-state-map (kbd "M-<right>") 'evil-jump-forward)
 (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward)
 
 ;(define-key evil-normal-state-map (kbd "<escape>") (lambda() (interactive) (cond

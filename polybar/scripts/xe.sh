@@ -75,7 +75,7 @@ do
                 FOR=$(echo $XRP_XDATA | jq --raw-output ".for" 2>/dev/null)
 
                 if [[ ! -z $AMOUNT && $AMOUNT != 'null' ]]; then
-                    AMOUNT_VALUE=$(echo "scale=2; $AMOUNT * ($XTEST_VALUE - $XTEST_VALUE * 0.015)" | bc);
+                    AMOUNT_VALUE=$(echo "scale=2; $AMOUNT * ($XTEST_VALUE - $XTEST_VALUE * 0.025)" | bc);
                     AMOUNT_CHANGE=$(printf "%0.2f" $(echo "scale=2; $AMOUNT_VALUE - $FOR" | bc));
                     LESS_THAN_ZERO=$(echo "scale=3; $AMOUNT_CHANGE < 0" | bc);
                     if [[ $LESS_THAN_ZERO = 1 ]]; then
