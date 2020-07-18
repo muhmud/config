@@ -16,6 +16,7 @@
 (define-key evil-insert-state-map [(backtab)] 'unindent-block)
 (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
 (define-key evil-insert-state-map (kbd "C-@") 'company-complete)
+(define-key evil-insert-state-map (kbd "S-SPC") 'yas-expand-snippet)
 (define-key evil-normal-state-map (kbd "C-SPC") 'evil-append)
 (define-key evil-normal-state-map (kbd "C-@") 'evil-append)
 (define-key evil-motion-state-map (kbd "M-<left>") 'evil-jump-backward)
@@ -34,6 +35,11 @@
 (evil-define-key 'normal evil-mc-key-map (kbd "C-t") nil)
 (evil-define-key 'normal evil-mc-key-map (kbd "M-t") 'evil-mc-skip-and-goto-next-match)
 
+(define-key evil-normal-state-map (kbd "C-n") 'evil-mc-make-and-goto-next-match)
+(define-key evil-normal-state-map (kbd "C-S-n") 'evil-mc-skip-and-goto-next-match)
+(define-key evil-normal-state-map (kbd "C-p") 'evil-mc-make-and-goto-prev-match)
+(define-key evil-normal-state-map (kbd "C-S-p") 'evil-mc-skip-and-goto-prev-match)
+
 (evil-define-operator my-evil-delete (beg end type yank-handler)
   (interactive "<R><y>")
   (evil-delete beg end type ?_ yank-handler))
@@ -46,8 +52,6 @@
 
 (global-set-key (kbd "C-SPC") nil)
 (global-set-key (kbd "C-@") nil)
-
-(global-set-key (kbd "M-SPC") 'yas-expand)
 
 (defun shrink-treemacs ()
   (interactive)
@@ -82,17 +86,23 @@
 (global-set-key (kbd "C-n") 'spacemacs/new-empty-buffer)
 (global-set-key (kbd "C-<prior>") 'xah-backward-block)
 (global-set-key (kbd "C-<next>")  'xah-forward-block)
+
 (global-set-key (kbd "C-<up>") (lambda() (interactive) (other-window -1)))
 (global-set-key (kbd "C-<down>") (lambda() (interactive) (other-window 1)))
+(global-set-key (kbd "C-S-<up>") (lambda() (interactive) (shrink-window -1)))
+(global-set-key (kbd "C-S-<down>") (lambda() (interactive) (shrink-window 1)))
 
 (global-set-key (kbd "C-f") (lambda() (interactive) (evil-normal-state) (evil-ex-search-forward)))
 
 (global-set-key (kbd "M-q") 'spacemacs/kill-emacs)
 (global-set-key (kbd "M-w") 'my-kill-other-buffers)
 (global-set-key (kbd "M-e") 'kill-buffer-and-window)
+(global-set-key (kbd "M-S-e") (lambda() (interactive) (other-window 1) (kill-buffer-and-window)))
 
 (global-set-key (kbd "M-<prior>") 'previous-buffer)
 (global-set-key (kbd "M-<next>")  'next-buffer)
+
+(global-set-key (kbd "M-c") 'company-abort)
 
 (global-set-key [home] 'smart-beginning-of-line)
 
@@ -116,6 +126,12 @@
 ; Use mouse wheel for scrolling through the buffer
 (global-set-key (kbd "<mouse-4>") (lambda () (interactive) (scroll-down-line 3)))
 (global-set-key (kbd "<mouse-5>") (lambda () (interactive) (scroll-up-line 3)))
+
+; Changes for org mode
+(defun my-org-mode-keys ()
+  (define-key org-mode-map [C-tab] nil))
+
+(add-hook 'org-mode-hook 'my-org-mode-keys)
 
 (fset 'select-whole-buffer
       (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([C-home C-S-end])) arg)))

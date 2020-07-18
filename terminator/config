@@ -94,6 +94,10 @@
   <Super><Alt>W = 1b 5b 30 30 57 39 7b
   <Super><Alt>X = 1b 5b 30 30 58 39 7b
   Pause = 1b 5b 35 3b 5a 7e
+  F5 = 1b 5b 39 35 7e
+  F6 = 1b 5b 39 37 7e
+  F7 = 1b 5b 39 38 7e
+  F8 = 1b 5b 39 39 7e
 [layouts]
   [[default]]
     [[[child1]]]

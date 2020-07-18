@@ -241,7 +241,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; The leader key accessible in `emacs state' and `insert state'
    ;; (default "M-m")
-   dotspacemacs-emacs-leader-key "S-SPC"
+   dotspacemacs-emacs-leader-key "M-SPC"
 
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
@@ -249,7 +249,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m")
-   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   dotspacemacs-major-mode-emacs-leader-key "C-M-SPC"
 
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs `C-i', `TAB' and `C-m', `RET'.
@@ -471,6 +471,7 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq org-support-shift-select t)
+  (setq org-CUA-compatible t)
 
   (setq-default c-syntactic-indentation nil)
   (setq-default c-electric-flag nil)
@@ -497,7 +498,9 @@ before packages are loaded."
 
   (set-face-attribute 'spacemacs-normal-face nil :background "#444444" :foreground "#FFFFFF")
   (setq-default evil-default-state 'insert)
-  )
+
+  (spacemacs/toggle-camel-case-motion-globally-on)
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -521,6 +524,7 @@ This function is called at the very end of Spacemacs initialization."
  '(dap-java-java-command "java")
  '(global-display-line-numbers-mode t)
  '(lsp-enable-file-watchers nil)
+ '(lsp-enable-folding t)
  '(lsp-enable-semantic-highlighting t)
  '(lsp-java-format-settings-url
    "file:///home/muhmud/.spacemacs.d/my/eclipse-java-google-style.xml")
