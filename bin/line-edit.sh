@@ -1,0 +1,10 @@
+#!/bin/bash
+
+OUTPUT_FILE=$1
+
+RESULT_FILE=/tmp/line-edit.data
+rm -f $RESULT_FILE
+
+$VISUAL $INPUT_LINE_EDIT_FILE
+mv $RESULT_FILE $OUTPUT_FILE
+
