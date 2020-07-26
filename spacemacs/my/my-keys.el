@@ -16,7 +16,7 @@
 (define-key evil-insert-state-map [(backtab)] 'unindent-block)
 (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
 (define-key evil-insert-state-map (kbd "C-@") 'company-complete)
-;(define-key evil-insert-state-map (kbd "S-SPC") 'yas-expand)
+(define-key evil-insert-state-map (kbd "C-M-SPC") 'yas-expand)
 (define-key evil-normal-state-map (kbd "C-SPC") 'evil-append)
 (define-key evil-normal-state-map (kbd "C-@") 'evil-append)
 (define-key evil-motion-state-map (kbd "M-<left>") 'evil-jump-backward)
@@ -26,8 +26,8 @@
 (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward)
 
 (define-key evil-motion-state-map (kbd "C-f") 'evil-ex-search-forward)
-(define-key evil-motion-state-map (kbd "C-S-f") 'evil-ex-search-backward)
-(define-key evil-insert-state-map (kbd "C-S-f") 'evil-ex-search-backward)
+(define-key evil-motion-state-map (kbd "C-M-f") 'evil-ex-search-backward)
+(define-key evil-insert-state-map (kbd "C-M-f") 'evil-ex-search-backward)
 
 ;(define-key evil-normal-state-map (kbd "<escape>") (lambda() (interactive) (cond
 ;                                                                            ((eq evil-state 'visual) (forward-char) (evil-normal-state))

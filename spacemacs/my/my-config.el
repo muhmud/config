@@ -2,6 +2,7 @@
 (load "my-buffer-stack.el")
 (load "my-file.el")
 (load "my-java.el")
+(load "my-cpp.el")
 (load "my-sql.el")
 ;(load "my-email.el")
 

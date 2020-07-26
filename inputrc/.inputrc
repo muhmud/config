@@ -1,0 +1,23 @@
+set editing-mode emacs
+
+"\e[6_": "\C-d"
+
+$if gdb
+  "\C-r": "refresh\C-m"
+
+  "\e[95~": "step\C-m"
+  "\e[97~": "next\C-m"
+  "\e[98~": "finish\C-m"
+  "\e[99~": "continue\C-m"
+$endif
+
+$if mysql
+  "\e ": '\\e;\C-m'
+  "\e[1111": '\\e;\C-m'
+$endif
+
+$if mclient
+  "\e ": '\\v\C-m'
+  "\e[1111": '\\v\C-m'
+$endif
+

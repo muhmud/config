@@ -60,6 +60,7 @@
   <Ctrl><Shift>O = 1b 5b 36 4f 36 7e
   <Ctrl><Shift>Page_Down = 1b 5b 36 3b 36 7e
   <Ctrl><Shift>Page_Up = 1b 5b 35 3b 36 7e
+  <Ctrl>Q = 1b 5b 36 5f 3f 7f
   <Ctrl><Shift>Q = 1b 5b 36 51 36 7e
   <Ctrl><Shift>R = 1b 5b 36 52 36 7e
   <Ctrl><Shift>Right = 1b 5b 36 43 36 7e
