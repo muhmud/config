@@ -4,7 +4,11 @@ OUTPUT_FILE=$1
 
 # Ensure we have an input file, even if one isn't setup
 if [[ -z "$EDITOR_FILE" ]]; then
-  EDITOR_FILE=/tmp/tmp.sql
+  if [[ ! -z "$DEFAULT_EDITOR_FILE" ]]; then
+    EDITOR_FILE=$DEFAULT_EDITOR_FILE 
+  else
+    EDITOR_FILE=/tmp/tmp.sql
+  fi;
 fi;
 
 # Set the result file
@@ -15,5 +19,9 @@ rm -f $RESULT_FILE
 $VISUAL $EDITOR_FILE
 
 # Make the result file the requested output file
-mv $RESULT_FILE $OUTPUT_FILE > /dev/null 2>&1
+if [[ -f $RESULT_FILE ]]; then
+  mv $RESULT_FILE $OUTPUT_FILE > /dev/null 2>&1
+else
+  echo ';' > $OUTPUT_FILE;
+fi;
 

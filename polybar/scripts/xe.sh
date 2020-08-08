@@ -87,7 +87,7 @@ do
                 fi
             fi
 
-            OUTPUT="${FROM} 1 = ${TO} ${COLOUR}${VALUE}%{F-}${CHANGE}${XRP_CHANGE}"
+            OUTPUT="${FROM} 1 = ${TO} ${COLOUR}${VALUE}%{F-}${XRP_CHANGE}"
             FINAL_OUTPUT=`printf "%s" "$OUTPUT"`
 
             zscroll -l 128 -b " %{F#0f0}%{F-} " -d 0.3 -t $TICK_TIME -p "                    " "$FINAL_OUTPUT" &
