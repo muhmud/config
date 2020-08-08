@@ -81,6 +81,8 @@ snoremap <buffer> <silent> <Esc>[5;2~ <S-PageUp>
 inoremap <buffer> <silent> <Esc>[6;2~ <S-PageDown>
 snoremap <buffer> <silent> <Esc>[6;2~ <S-PageDown>
 
+snoremap <buffer> <silent> <Esc>[3;2~ <Del>
+
 inoremap <buffer> <silent> <Esc>[6;5! <C-O>db
 
 nnoremap <silent> <Esc>[5;5~ :bnext<CR>
