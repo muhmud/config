@@ -21,3 +21,8 @@ $if mclient
   "\e[1111": '\\v\C-m'
 $endif
 
+$if MAPIClient
+  "\e ": '\\v\C-m'
+  "\e[1111": '\\v\C-m'
+$endif
+
