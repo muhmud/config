@@ -226,6 +226,7 @@ bindsym $mod+r mode "resize"
 
 # timer commands
 mode "timer" {
+        bindsym b exec --no-startup-id ~/.config/polybar/scripts/timer-set-base.sh;mode "default"
         bindsym s exec --no-startup-id ~/.config/polybar/scripts/timer-stop.sh;mode "default"
         bindsym p exec --no-startup-id ~/.config/polybar/scripts/timer-pause-continue.sh;mode "default"
         bindsym r exec --no-startup-id ~/.config/polybar/scripts/timer-pause-continue.sh;mode "default"
