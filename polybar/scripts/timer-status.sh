@@ -11,7 +11,7 @@ get_details() {
 
   if [[ "$STATUS" == "PAUSED" ]]; then
     if [[ -f "$TIMER_BASE" ]]; then
-      CURRENT_TIMER_DATE=$(cat "$TIMER_BASE");
+      CURRENT_TIMER_DATE=$(tail -n 1 "$TIMER_BASE");
       TOTAL_WORK=$(~/bin/timer -D "$TIMER_DIRECTORY" \
         --report date \
         --start-date $(date +'%Y-%m-%d' -d '6 month ago') \
@@ -19,7 +19,7 @@ get_details() {
         | sort \
         | awk -v "CURRENT_TIMER_DATE=$CURRENT_TIMER_DATE" -F '  ' '$1 >= CURRENT_TIMER_DATE' \
         | sed 's/.*(\(.*\))$/\1/g' \
-        | awk '{ sum += $1 } END { print sum }')
+        | awk '{ sum += $1 } END { printf "%0.2f", sum }')
 
       TOTAL_WORK_DONE=" %{F#fff}(%{F#0ff}$TOTAL_WORK%{F#fff})"
     fi;
