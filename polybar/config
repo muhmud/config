@@ -64,8 +64,7 @@ font-2 = Moon Phases:size=15;3
 
 modules-left = i3
 modules-center = date
-modules-right = updates timer xe weather pavolume xbanish power
-;modules-right = updates timer weather pavolume xbanish power
+modules-right = updates timer xe weather xbanish power
 
 [bar/bottom]
 monitor=DisplayPort-2
@@ -106,7 +105,7 @@ font-1 = FontAwesome:pixelsize=19;3
 
 modules-left = hn
 modules-center = world_time
-modules-right = keyboard screensaver windows memfree load_average cpu_temp internet uptime
+modules-right = keyboard screensaver windows memfree load_average cpu_temp internet pavolume uptime
 
 [module/i3]
 type = internal/i3
