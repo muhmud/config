@@ -87,6 +87,7 @@
           (lambda ()
             (setq c-electric-flag nil)
             (setq c-syntactic-indentation nil)))
+
 (add-hook 'dap-mode-hook
           (lambda ()
             (dap-register-debug-template "Spring"
@@ -97,9 +98,20 @@
                     :cwd nil
                     :stopOnEntry :json-false
                     :host "localhost"
-                    :request "launch"
                     :modulePaths []
                     :classPaths nil
                     :name "Spring"
                     :projectName nil
-                    :mainClass nil))))
+                    :mainClass nil))
+
+            (dap-register-debug-template "Open"
+              (list :type "java"
+                    :args "/cfg=/home/muhmud/toptal/clients/open-practice/code/gitlab/openpm/openpm/openpm-ui/openpm.cfg"
+                    :cwd nil
+                    :host "localhost"
+                    :request "compile_attach"
+                    :modulePaths []
+                    :classPaths nil
+                    :name "Open"
+                    :projectName nil
+                    :mainClass "com.fkc.opm.startServer"))))

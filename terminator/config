@@ -11,8 +11,8 @@
   broadcast_off = <Primary><Shift>o
   close_window = <Alt>F4
   copy = <Primary><Shift>c
-  cycle_next = <Primary>Down
-  cycle_prev = <Primary>Up
+  cycle_next = <Primary><Alt>Down
+  cycle_prev = <Primary><Alt>Up
   go_down = <Shift>F9
   go_left = <Primary><Alt>Left
   go_right = <Primary><Alt>Right
@@ -60,7 +60,6 @@
   <Ctrl><Shift>O = 1b 5b 36 4f 36 7e
   <Ctrl><Shift>Page_Down = 1b 5b 36 3b 36 7e
   <Ctrl><Shift>Page_Up = 1b 5b 35 3b 36 7e
-  <Ctrl>Q = 1b 5b 36 5f 3f 7f
   <Ctrl><Shift>Q = 1b 5b 36 51 36 7e
   <Ctrl><Shift>R = 1b 5b 36 52 36 7e
   <Ctrl><Shift>Right = 1b 5b 36 43 36 7e
@@ -74,6 +73,7 @@
   <Ctrl>Home = 1b 5b 31 3b 35 48
   <Ctrl>Insert = 1b 5b 31 31 31 31
   <Ctrl>KP_0 = 1b 5b 31 31 31 31 7b
+  <Ctrl>Q = 1b 5b 36 5f 3f 7f
   <Ctrl>Return = 1b 5b 32 34 3b 39 7e
   <Ctrl>Tab = 1b 5b 31 3b 35 47
   <Ctrl>Up = 1b 5b 31 3b 36 47
@@ -94,11 +94,11 @@
   <Super><Alt>V = 1b 5b 30 30 56 39 7b
   <Super><Alt>W = 1b 5b 30 30 57 39 7b
   <Super><Alt>X = 1b 5b 30 30 58 39 7b
-  Pause = 1b 5b 35 3b 5a 7e
   F5 = 1b 5b 39 35 7e
   F6 = 1b 5b 39 37 7e
   F7 = 1b 5b 39 38 7e
   F8 = 1b 5b 39 39 7e
+  Pause = 1b 5b 35 3b 5a 7e
 [layouts]
   [[default]]
     [[[child1]]]

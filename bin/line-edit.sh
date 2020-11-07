@@ -16,7 +16,10 @@ RESULT_FILE=/tmp/line-edit.data
 rm -f $RESULT_FILE
 
 # Edit the input file
-$VISUAL $EDITOR_FILE
+tmux split-window $VISUAL $EDITOR_FILE \; resize-pane -Z
+while [[ $(tmux list-panes | wc -l) -gt 1 ]]; do
+  sleep 0.5;
+done;
 
 # Make the result file the requested output file
 if [[ -f $RESULT_FILE ]]; then

@@ -20,7 +20,7 @@ This function should only modify configuration layer settings."
    ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
    ;; (default 'unused)
-   dotspacemacs-enable-lazy-installation 'unused
+   dotspacemacs-enable-lazy-installation nil
 
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
@@ -49,7 +49,7 @@ This function should only modify configuration layer settings."
      ;; better-defaults
      yaml
      asciidoc
-     sql
+     ;;sql
      emacs-lisp
      git
      helm
@@ -470,8 +470,8 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq org-support-shift-select t)
-  (setq org-CUA-compatible t)
+  (setq-default org-support-shift-select t)
+  (setq-default org-CUA-compatible t)
 
   (setq-default c-syntactic-indentation nil)
   (setq-default c-electric-flag nil)
@@ -500,7 +500,6 @@ before packages are loaded."
   (setq-default evil-default-state 'insert)
 
   (spacemacs/toggle-camel-case-motion-globally-on)
-  (cua-mode)
 
   (defvaralias 'helm-c-yas-space-match-any-greedy 'helm-yas-space-match-any-greedy "Temporary alias for Emacs27")
 )
@@ -533,7 +532,7 @@ This function is called at the very end of Spacemacs initialization."
    "file:///home/muhmud/.spacemacs.d/my/eclipse-java-google-style.xml")
  '(lsp-java-java-path "java")
  '(lsp-java-vmargs
-   '("-noverify" "-Xmx2G" "-XX:+UseG1GC" "-XX:+UseStringDeduplication" "-javaagent:/home/muhmud/.m2/repository/org/projectlombok/lombok/1.18.8/lombok-1.18.8.jar"))
+   '("-noverify" "-Xmx4G" "-XX:+UseG1GC" "-XX:+UseStringDeduplication" "-javaagent:/home/muhmud/.m2/repository/org/projectlombok/lombok/1.18.8/lombok-1.18.8.jar"))
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-doc-max-height 20)
  '(lsp-ui-doc-max-width 75)
