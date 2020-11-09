@@ -23,8 +23,11 @@ OUTPUT_FILE=$1
 
 # Query editor options & default values
 QUERY_EDITOR_PAGER=${QUERY_EDITOR_PAGER:-pspg}
-QUERY_EDITOR_COMMAND=${QUERY_EDITOR_COMMAND:-"\\e\;"}
+QUERY_EDITOR_COMMAND=${QUERY_EDITOR_COMMAND:-'\e\;'}
 QUERY_EDITOR_SWITCH_ON_EXECUTE=${QUERY_EDITOR_SWITCH_ON_EXECUTE:-1}
+
+# The editor to use
+EDITOR=${VISUAL:-$EDITOR}
 
 # If neither pane file exists, it must mean that this is the first time we are running in this
 # window. In that case, perform one-time initialization.
@@ -35,9 +38,12 @@ if [ ! -f "$CLIENT_PANE_FILE" ] && [ ! -f "$EDITOR_PANE_FILE" ]; then
   fi;
 
   # Create the editor pane
-  EDITOR_PANE_ID=$(tmux split-window "export QUERY_EDITOR=$QUERY_EDITOR \
-                                             QUERY_EDITOR_EXECUTE_FILE=$QUERY_EDITOR_EXECUTE_FILE; \
-                                      $VISUAL $EDITOR_FILE" \; \
+  EDITOR_PANE_ID=$(tmux split-window "export QUERY_EDITOR='$QUERY_EDITOR' \
+                                             QUERY_EDITOR_EXECUTE_FILE='$QUERY_EDITOR_EXECUTE_FILE' \
+                                             QUERY_EDITOR_PAGER='$QUERY_EDITOR_PAGER' \
+                                             QUERY_EDITOR_COMMAND='$QUERY_EDITOR_COMMAND' \
+                                             QUERY_EDITOR_SWITCH_ON_EXECUTE='$QUERY_EDITOR_SWITCH_ON_EXECUTE'; \
+                                      $EDITOR $EDITOR_FILE" \; \
                    swap-pane -U \; \
                    display-message -p '#{pane_id}');
 
@@ -69,7 +75,7 @@ if [[ -f "$EDITOR_PANE_FILE" ]]; then
   fi;
 
   # Switch over to the SQL client pane when executing a query, if configured to
-  if [[ "$QUERY_EDITOR_SWITCH_ON_EXECUTE" == 1 ]]; then
+  if [[ "$QUERY_EDITOR_SWITCH_ON_EXECUTE" == "1" ]]; then
     tmux select-pane -t $CLIENT_PANE_ID;
   fi;
 
