@@ -16,8 +16,9 @@ RESULT_FILE=/tmp/line-edit.data
 rm -f $RESULT_FILE
 
 # Edit the input file
-tmux split-window $VISUAL $EDITOR_FILE \; resize-pane -Z
-while [[ $(tmux list-panes | wc -l) -gt 1 ]]; do
+PANE_COUNT=$(tmux list-panes | wc -l);
+tmux split-window "$VISUAL $EDITOR_FILE" \; swap-pane -U \; resize-pane -Z
+while [[ $(tmux list-panes | wc -l) -gt $PANE_COUNT ]]; do
   sleep 0.5;
 done;
 

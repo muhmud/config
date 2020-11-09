@@ -94,14 +94,18 @@ inoremap <silent> <Esc>[6;5~ <C-O>:bprevious<CR>
 inoremap <silent> <Esc>[1;5H <C-O>gg
 inoremap <silent> <Esc>[1;5F <C-O>G<End>
 
-snoremap <silent> <Esc>[95~ <C-O>yiT<Esc><C-O>u<C-O>:tabnew<CR>p<Esc>::w! /tmp/line-edit.data<CR><Esc>::xa<CR>
-inoremap <silent> <Esc>[24;3~ T<BS><Esc>::?;<CR><Down>^md::/;<CR>y'd::tabnew<CR>p<Esc>::w! /tmp/line-edit.data<CR><Esc>::xa<CR>
+"snoremap <silent> <Esc>[95~ <C-O>yiT<Esc><C-O>u<C-O>:tabnew<CR>p<Esc>::w! /tmp/line-edit.data<CR><Esc>::xa<CR>
+snoremap <silent> <Esc>[95~ <C-O>:'<,'>!tee $QUERY_EDITOR_EXECUTE_FILE<CR><Esc>::call system("$QUERY_EDITOR")<CR>
+
+#inoremap <silent> <Esc>[24;3~ T<BS><Esc>::?;<CR><Down>^md::/;<CR>y'd::tabnew<CR>p<Esc>::w! /tmp/line-edit.data<CR><Esc>::xa<CR>
+inoremap <silent> <Esc>[24;3~ T<BS><Esc>::?;<CR><Down>^md::/;<CR><Esc>::'<,'>!tee $QUERY_EDITOR_EXECUTE_FILE<CR><Esc>::call system("$QUERY_EDITOR")<CR>
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'tombh/novim-mode'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'pgavlin/pulumi.vim'
+Plug 'https://github.com/hardcoreplayers/sql.vim'
 
 call plug#end()
 

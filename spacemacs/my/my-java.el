@@ -82,6 +82,10 @@
 
 ;(add-hook 'lsp-treemacs-errors-mode-hook 'remap-java-keys)
 (add-hook 'java-mode-hook 'my-java-mode)
+
+;(add-hook 'java-mode-hook #'tree-sitter-mode)
+;(add-hook 'java-mode-hook #'tree-sitter-hl-mode)
+
 (add-hook 'lsp-mode-hook (lambda () (diminish 'lsp-mode)))
 (add-hook 'java-mode-hook
           (lambda ()

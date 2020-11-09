@@ -82,7 +82,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(posframe)
+   dotspacemacs-additional-packages '(posframe tree-sitter tree-sitter-langs)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -527,7 +527,8 @@ This function is called at the very end of Spacemacs initialization."
  '(global-display-line-numbers-mode t)
  '(lsp-enable-file-watchers nil)
  '(lsp-enable-folding t)
- '(lsp-enable-semantic-highlighting t)
+ '(lsp-enable-semantic-highlighting nil)
+ '(lsp-enable-text-document-color nil)
  '(lsp-java-format-settings-url
    "file:///home/muhmud/.spacemacs.d/my/eclipse-java-google-style.xml")
  '(lsp-java-java-path "java")
@@ -544,6 +545,7 @@ This function is called at the very end of Spacemacs initialization."
  '(paradox-github-token t)
  '(standard-indent 2)
  '(tool-bar-mode nil)
+ '(tree-sitter-major-mode-language-alist '((java-mode . java)))
  '(treemacs-RET-actions-config
    '((root-node-open . treemacs-toggle-node)
      (root-node-closed . treemacs-toggle-node)

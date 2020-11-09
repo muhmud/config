@@ -41,8 +41,8 @@ if [[ -f $TIMER ]]; then
   fi
 
   if [[ "$STATUS" == "RUNNING" ]]; then
-    if [[ -f "$TIMER_STATUS" ]]; then
-      rm -f $TIMER_STATUS;
+    if [[ -f "$TIMER_WORK" ]]; then
+      rm -f $TIMER_WORK;
     fi;
 
     echo " $PROJECT - %{F#f00}${WORK_DONE}%{F-}"
