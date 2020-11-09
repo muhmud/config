@@ -5,16 +5,19 @@ QUERY_EDITOR=$0
 PANE_ID=$(tmux display-message -p '#{pane_id}')
 PID=$$
 
+# Base directory for query editor tmp files
+QUERY_EDITOR_BASE=/tmp/query-editor
+
 # The client pane file, which hosts the SQL client session, and the editor pane file, which is
 # running the editor, e.g. vim. Each file will store data related to the opposite pane, so that
 # when that pane executes this script it can easily access the information for it's related pane.
-CLIENT_PANE_FILE=/tmp/query-editor.$PANE_ID.client.pane
-EDITOR_PANE_FILE=/tmp/query-editor.$PANE_ID.editor.pane
+CLIENT_PANE_FILE=$QUERY_EDITOR_BASE/query-editor.$PANE_ID.client.pane
+EDITOR_PANE_FILE=$QUERY_EDITOR_BASE/query-editor.$PANE_ID.editor.pane
 
 # The default editor file to be used if an explicit $EDITOR_FILE has not been defined, and the
 # query file that will be used to transport the single query batch to be executed to the client.
-DEFAULT_EDITOR_FILE=/tmp/query-editor.$PANE_ID.query.sql
-QUERY_EDITOR_EXECUTE_FILE=/tmp/query-editor.$PANE_ID.query.execute
+DEFAULT_EDITOR_FILE=$QUERY_EDITOR_BASE/query-editor.$PANE_ID.query.sql
+QUERY_EDITOR_EXECUTE_FILE=$QUERY_EDITOR_BASE/query-editor.$PANE_ID.query.execute
 
 # When invoked from the SQL client, this will contain the file it expects to contain the query
 # to execute. The script can, however, also be involved by the editor, in which case this
@@ -32,6 +35,9 @@ EDITOR=${VISUAL:-$EDITOR}
 # If neither pane file exists, it must mean that this is the first time we are running in this
 # window. In that case, perform one-time initialization.
 if [ ! -f "$CLIENT_PANE_FILE" ] && [ ! -f "$EDITOR_PANE_FILE" ]; then
+  # Ensure the base directory exists
+  mkdir -p $QUERY_EDITOR_BASE;
+
   # Ensure we have an input file, even if one isn't setup
   if [[ -z "$EDITOR_FILE" ]]; then
     EDITOR_FILE=$DEFAULT_EDITOR_FILE
@@ -52,7 +58,7 @@ if [ ! -f "$CLIENT_PANE_FILE" ] && [ ! -f "$EDITOR_PANE_FILE" ]; then
 
   # Store this (the SQL client) pane ID and parent PID file in the editor pane file
   PARENT_PID=$(ps -o ppid= -p $PID);
-  echo ${PANE_ID}.$PARENT_PID > /tmp/query-editor.$EDITOR_PANE_ID.editor.pane;
+  echo ${PANE_ID}.$PARENT_PID > $QUERY_EDITOR_BASE/query-editor.$EDITOR_PANE_ID.editor.pane;
 
   # Put up a nice message up to let the user know we're good to go
   echo "select 'INITIALIZED' as 'Query Editor';" > $OUTPUT_FILE;
