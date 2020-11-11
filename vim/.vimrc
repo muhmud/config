@@ -71,6 +71,11 @@ snoremap <buffer> <silent> <Esc>[1;6H <C-S-Home>
 inoremap <buffer> <silent> <Esc>[1;6F <C-S-End>
 snoremap <buffer> <silent> <Esc>[1;6F <C-S-End>
 
+inoremap <buffer> <silent> <Esc>[1;5H <C-Home>
+snoremap <buffer> <silent> <Esc>[1;5H <C-Home>
+inoremap <buffer> <silent> <Esc>[1;5F <C-End>
+snoremap <buffer> <silent> <Esc>[1;5F <C-End>
+
 inoremap <buffer> <silent> <Esc>[1;2A <S-Up>
 snoremap <buffer> <silent> <Esc>[1;2A <S-Up>
 inoremap <buffer> <silent> <Esc>[1;2B <S-Down>

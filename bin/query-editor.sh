@@ -45,8 +45,6 @@ if [ ! -f "$CLIENT_PANE_FILE" ] && [ ! -f "$EDITOR_PANE_FILE" ]; then
     EDITOR_FILE=$QUERY_EDITOR_BASE/query-editor.${PARENT_PID}.query.sql
   fi;
 
-  echo $EDITOR_FILE;
-
   # Create the editor pane, and pass all options and other values to it. Also ensure that if the
   # editor is closed, all pane files are cleaned up. This allows for the editor to be re-opened
   # again in the same tmux window without issue, and reduces the proliferation of tmp files
@@ -69,7 +67,7 @@ if [ ! -f "$CLIENT_PANE_FILE" ] && [ ! -f "$EDITOR_PANE_FILE" ]; then
   echo ${PANE_ID}.$PARENT_PID > $QUERY_EDITOR_BASE/query-editor.${EDITOR_PANE_ID}.editor.pane;
 
   # Put up a nice message up to let the user know we're good to go
-  echo "select 'INITIALIZED' as 'Query Editor';" > $OUTPUT_FILE;
+  echo "select 'INITIALIZED' as \"Query Editor\";" > $OUTPUT_FILE;
   exit 0;
 fi;
 
@@ -84,8 +82,14 @@ if [[ -f "$EDITOR_PANE_FILE" ]]; then
   # There may be results currently being displayed in the SQL client with a pager, so in that case
   # we'll need to exit out of the pager before sending over the new query
   if [[ ! -z "$(pstree $CLIENT_PID | grep $QUERY_EDITOR_PAGER)" ]]; then
-    tmux send-keys -t $CLIENT_PANE_ID "C-c";
+    tmux send-keys -t $CLIENT_PANE_ID "C-m";
     tmux send-keys -t $CLIENT_PANE_ID "q";
+
+    # If there are a lot of results, sometimes it can take a little while for the pager to exit,
+    # so loop until we can be sure it has stopped
+    while [[ ! -z "$(pstree $CLIENT_PID | grep $QUERY_EDITOR_PAGER)" ]]; do
+      sleep 0.5;
+    done;
   fi;
 
   # Switch over to the SQL client pane when executing a query, to ensure it becomes visible
