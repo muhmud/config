@@ -16,6 +16,11 @@ $if mysql
   "\e[1111": '\\e;\C-m'
 $endif
 
+$if psql
+  "\e ": '\\e\C-m'
+  "\e[1111": '\\e\C-m'
+$endif
+
 $if mclient
   "\e ": '\\v\C-m'
   "\e[1111": '\\v\C-m'

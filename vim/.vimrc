@@ -52,12 +52,16 @@ snoremap <buffer> <silent> <Esc>[1;2C <S-Right>
 inoremap <buffer> <silent> <Esc>[1;2D <S-Left>
 snoremap <buffer> <silent> <Esc>[1;2D <S-Left>
 
+nnoremap <buffer> <silent> <Esc>[1;5D <C-Left>
 inoremap <buffer> <silent> <Esc>[1;5D <C-Left>
+snoremap <buffer> <silent> <Esc>[1;5D <C-Left>
+
+nnoremap <buffer> <silent> <Esc>[1;5C <C-Right>
 inoremap <buffer> <silent> <Esc>[1;5C <C-Right>
+snoremap <buffer> <silent> <Esc>[1;5C <C-Right>
 
 inoremap <buffer> <silent> <Esc>[6D6~ <C-S-Left>
 snoremap <buffer> <silent> <Esc>[6D6~ <C-S-Left>
-
 inoremap <buffer> <silent> <Esc>[6C6~ <C-S-Right>
 snoremap <buffer> <silent> <Esc>[6C6~ <C-S-Right>
 
@@ -71,8 +75,11 @@ snoremap <buffer> <silent> <Esc>[1;6H <C-S-Home>
 inoremap <buffer> <silent> <Esc>[1;6F <C-S-End>
 snoremap <buffer> <silent> <Esc>[1;6F <C-S-End>
 
+nnoremap <buffer> <silent> <Esc>[1;5H <C-Home>
 inoremap <buffer> <silent> <Esc>[1;5H <C-Home>
 snoremap <buffer> <silent> <Esc>[1;5H <C-Home>
+
+nnoremap <buffer> <silent> <Esc>[1;5F <C-End>
 inoremap <buffer> <silent> <Esc>[1;5F <C-End>
 snoremap <buffer> <silent> <Esc>[1;5F <C-End>
 
@@ -99,10 +106,16 @@ inoremap <silent> <Esc>[6;5~ <C-O>:bprevious<CR>
 inoremap <silent> <Esc>[1;5H <C-O>gg
 inoremap <silent> <Esc>[1;5F <C-O>G<End>
 
-snoremap <silent> <Esc>[95~ <C-O>:'<,'>!tee $QUERY_EDITOR_EXECUTE_FILE<CR><Esc>::call system("$QUERY_EDITOR")<CR>
+" F5 for qsh
+snoremap <silent> <Esc>[95~ <C-O>:call QshExecuteSelection()<CR>
 
-"inoremap <silent> <Esc>[24;3~ T<BS><Esc>::?;<CR><Down>^md::/;<CR>y'd::tabnew<CR>p<Esc>::w! /tmp/line-edit.data<CR><Esc>::xa<CR>
-"noremap <silent> <Esc>[24;3~ T<BS><Esc>::?;<CR><Down>^md::/;<CR><Esc>::'<,'>!tee $QUERY_EDITOR_EXECUTE_FILE<CR><Esc>::call system("$QUERY_EDITOR")<CR>
+" Ctrl+Enter for qsh
+inoremap <silent> <Esc>[24;3~ <C-O>:call QshExecute()<CR>
+nnoremap <silent> <Esc>[24;3~ <C-O>:call QshExecute()<CR>
+
+" F7 for qsh
+inoremap <silent> <Esc>[98~ <C-O>:call QshExecuteAll()<CR>
+nnoremap <silent> <Esc>[98~ <C-O>:call QshExecuteAll()<CR>
 
 call plug#begin('~/.vim/plugged')
 
@@ -110,6 +123,8 @@ Plug 'tombh/novim-mode'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'pgavlin/pulumi.vim'
 Plug 'https://github.com/hardcoreplayers/sql.vim'
+
+Plug 'muhmud/qsh', { 'dir': '~/.qsh/editors/vim' }
 
 call plug#end()
 

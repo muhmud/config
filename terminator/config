@@ -75,6 +75,7 @@
   <Ctrl>KP_0 = 1b 5b 31 31 31 31 7b
   <Ctrl>Q = 1b 5b 36 5f 3f 7f
   <Ctrl>Return = 1b 5b 32 34 3b 39 7e
+  <Ctrl><Shift>Return = 1b 5b 32 34 3b 49 7e
   <Ctrl>Tab = 1b 5b 31 3b 35 47
   <Ctrl>Up = 1b 5b 31 3b 36 47
   <Shift>End = 1b 5b 31 3b 32 46
