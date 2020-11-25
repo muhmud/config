@@ -113,6 +113,10 @@ snoremap <silent> <Esc>[95~ <C-O>:call QshExecuteSelection()<CR>
 inoremap <silent> <Esc>[24;3~ <C-O>:call QshExecute()<CR>
 nnoremap <silent> <Esc>[24;3~ <C-O>:call QshExecute()<CR>
 
+" Ctrl+Shift+Enter for qsh
+inoremap <silent> <Esc>[24;I~ <C-O>:call QshExecute("---", 0)<CR>
+nnoremap <silent> <Esc>[24;I~ <C-O>:call QshExecute("---", 0)<CR>
+
 " F7 for qsh
 inoremap <silent> <Esc>[98~ <C-O>:call QshExecuteAll()<CR>
 nnoremap <silent> <Esc>[98~ <C-O>:call QshExecuteAll()<CR>

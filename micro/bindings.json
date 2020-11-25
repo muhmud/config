@@ -24,8 +24,9 @@
     "Ctrl-h": "SelectLine",
     "Ctrl-j": "CopyLine",
     "CtrlUnderscore": "lua:comment.comment",
-    "\u001b[24;3~": "lua:qsh.Execute",
-    "\u001b[95~": "lua:qsh.ExecuteSelection",
-    "\u001b[98~": "lua:qsh.ExecuteAll"
+    "\u001b[24;3~": "command:QshExecute",
+    "\u001b[24;I~": "command:QshExecute '---' 0",
+    "\u001b[95~": "command:QshExecuteSelection",
+    "\u001b[98~": "command:QshExecuteAll"
 }
 

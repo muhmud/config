@@ -62,6 +62,7 @@
   <Ctrl><Shift>Page_Up = 1b 5b 35 3b 36 7e
   <Ctrl><Shift>Q = 1b 5b 36 51 36 7e
   <Ctrl><Shift>R = 1b 5b 36 52 36 7e
+  <Ctrl><Shift>Return = 1b 5b 32 34 3b 49 7e
   <Ctrl><Shift>Right = 1b 5b 36 43 36 7e
   <Ctrl><Shift>S = 1b 5b 36 53 36 7e
   <Ctrl><Shift>Tab = 1b 5b 36 3b 36 47
@@ -75,7 +76,6 @@
   <Ctrl>KP_0 = 1b 5b 31 31 31 31 7b
   <Ctrl>Q = 1b 5b 36 5f 3f 7f
   <Ctrl>Return = 1b 5b 32 34 3b 39 7e
-  <Ctrl><Shift>Return = 1b 5b 32 34 3b 49 7e
   <Ctrl>Tab = 1b 5b 31 3b 35 47
   <Ctrl>Up = 1b 5b 31 3b 36 47
   <Shift>End = 1b 5b 31 3b 32 46
@@ -120,6 +120,5 @@
     font = Victor Mono Semi-Bold 23
     scrollback_lines = 5000
     scrollbar_position = hidden
-    show_titlebar = False
     use_custom_command = True
     use_system_font = False
