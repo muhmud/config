@@ -1,33 +1,34 @@
 set editing-mode emacs
 
 "\e[6_": "\C-d"
+"\e[178": backward-kill-word
 
 $if gdb
   "\C-r": "refresh\C-m"
 
-  "\e[95~": "step\C-m"
-  "\e[97~": "next\C-m"
-  "\e[98~": "finish\C-m"
-  "\e[99~": "continue\C-m"
+  "\e[15~": "step\C-m"
+  "\e[17~": "next\C-m"
+  "\e[18~": "finish\C-m"
+  "\e[19~": "continue\C-m"
 $endif
 
 $if mysql
   "\e ": '\\e;\C-m'
-  "\e[1111": '\\e;\C-m'
+  "\e[2;5~": '\\e;\C-m'
 $endif
 
 $if psql
   "\e ": '\\e\C-m'
-  "\e[1111": '\\e\C-m'
+  "\e[2;5~": '\\e\C-m'
 $endif
 
 $if mclient
   "\e ": '\\v\C-m'
-  "\e[1111": '\\v\C-m'
+  "\e[2;5~": '\\v\C-m'
 $endif
 
 $if MAPIClient
   "\e ": '\\v\C-m'
-  "\e[1111": '\\v\C-m'
+  "\e[2;5~": '\\v\C-m'
 $endif
 

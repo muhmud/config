@@ -60,24 +60,24 @@ nnoremap <buffer> <silent> <Esc>[1;5C <C-Right>
 inoremap <buffer> <silent> <Esc>[1;5C <C-Right>
 snoremap <buffer> <silent> <Esc>[1;5C <C-Right>
 
-inoremap <buffer> <silent> <Esc>[6D6~ <C-S-Left>
-snoremap <buffer> <silent> <Esc>[6D6~ <C-S-Left>
-inoremap <buffer> <silent> <Esc>[6C6~ <C-S-Right>
-snoremap <buffer> <silent> <Esc>[6C6~ <C-S-Right>
+inoremap <buffer> <silent> <Esc>[1;6D <C-S-Left>
+snoremap <buffer> <silent> <Esc>[1;6D <C-S-Left>
+inoremap <buffer> <silent> <Esc>[1;6C <C-S-Right>
+snoremap <buffer> <silent> <Esc>[1;6C <C-S-Right>
 
 inoremap <buffer> <silent> <Esc>[1;2H <S-Home>
 snoremap <buffer> <silent> <Esc>[1;2H <S-Home>
 inoremap <buffer> <silent> <Esc>[1;2F <S-End>
 snoremap <buffer> <silent> <Esc>[1;2F <S-End>
 
-inoremap <buffer> <silent> <Esc>[1;6H <C-S-Home>
-snoremap <buffer> <silent> <Esc>[1;6H <C-S-Home>
-inoremap <buffer> <silent> <Esc>[1;6F <C-S-End>
-snoremap <buffer> <silent> <Esc>[1;6F <C-S-End>
+inoremap <buffer> <silent> <Esc>[1;5EK <C-S-Home>
+snoremap <buffer> <silent> <Esc>[1;5EK <C-S-Home>
+inoremap <buffer> <silent> <Esc>[1;5FK <C-S-End>
+snoremap <buffer> <silent> <Esc>[1;5FK <C-S-End>
 
-nnoremap <buffer> <silent> <Esc>[1;5H <C-Home>
-inoremap <buffer> <silent> <Esc>[1;5H <C-Home>
-snoremap <buffer> <silent> <Esc>[1;5H <C-Home>
+nnoremap <buffer> <silent> <Esc>[1;5E <C-Home>
+inoremap <buffer> <silent> <Esc>[1;5E <C-Home>
+snoremap <buffer> <silent> <Esc>[1;5E <C-Home>
 
 nnoremap <buffer> <silent> <Esc>[1;5F <C-End>
 inoremap <buffer> <silent> <Esc>[1;5F <C-End>
@@ -93,7 +93,7 @@ snoremap <buffer> <silent> <Esc>[5;2~ <S-PageUp>
 inoremap <buffer> <silent> <Esc>[6;2~ <S-PageDown>
 snoremap <buffer> <silent> <Esc>[6;2~ <S-PageDown>
 
-snoremap <buffer> <silent> <Esc>[3;2~ <Del>
+snoremap <buffer> <silent> <Esc>[3~ <Del>
 
 inoremap <buffer> <silent> <Esc>[6;5! <C-O>db
 
@@ -103,23 +103,20 @@ inoremap <silent> <Esc>[5;5~ <C-O>:bnext<CR>
 nnoremap <silent> <Esc>[6;5~ :bprevious<CR>
 inoremap <silent> <Esc>[6;5~ <C-O>:bprevious<CR>
 
-inoremap <silent> <Esc>[1;5H <C-O>gg
-inoremap <silent> <Esc>[1;5F <C-O>G<End>
-
 " F5 for qsh
-snoremap <silent> <Esc>[95~ <C-O>:call QshExecuteSelection()<CR>
+snoremap <silent> <Esc>[15~ <C-O>:call QshExecuteSelection()<CR>
 
 " Ctrl+Enter for qsh
-inoremap <silent> <Esc>[24;3~ <C-O>:call QshExecute()<CR>
-nnoremap <silent> <Esc>[24;3~ <C-O>:call QshExecute()<CR>
+inoremap <silent> <Esc>[XB <C-O>:call QshExecute()<CR>
+nnoremap <silent> <Esc>[XB <C-O>:call QshExecute()<CR>
 
 " Ctrl+Shift+Enter for qsh
-inoremap <silent> <Esc>[24;I~ <C-O>:call QshExecute("---", 0)<CR>
-nnoremap <silent> <Esc>[24;I~ <C-O>:call QshExecute("---", 0)<CR>
+inoremap <silent> <Esc>[XD <C-O>:call QshExecute("---", 0)<CR>
+nnoremap <silent> <Esc>[XD <C-O>:call QshExecute("---", 0)<CR>
 
 " F7 for qsh
-inoremap <silent> <Esc>[98~ <C-O>:call QshExecuteAll()<CR>
-nnoremap <silent> <Esc>[98~ <C-O>:call QshExecuteAll()<CR>
+inoremap <silent> <Esc>[18~ <C-O>:call QshExecuteAll()<CR>
+nnoremap <silent> <Esc>[18~ <C-O>:call QshExecuteAll()<CR>
 
 call plug#begin('~/.vim/plugged')
 
