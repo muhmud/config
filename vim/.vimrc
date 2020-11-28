@@ -47,6 +47,9 @@ set secure
 
 inoremap <buffer> <silent> <Esc>o <C-O>
 
+inoremap <buffer> <silent> <Esc>[1;2R <S-F3>
+nnoremap <buffer> <silent> <Esc>[1;2R <S-F3>
+
 inoremap <buffer> <silent> <Esc>[1;2C <S-Right>
 snoremap <buffer> <silent> <Esc>[1;2C <S-Right>
 inoremap <buffer> <silent> <Esc>[1;2D <S-Left>
