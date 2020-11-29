@@ -1,6 +1,7 @@
 
-autocmd BufRead,BufNewFile * start 
+autocmd VimEnter,BufReadPre,BufNewFile * startinsert
 autocmd BufReadPost * silent! exe "normal! '."
+
 set timeoutlen=10 ttimeoutlen=0
 
 set nocompatible  " be iMproved, required
@@ -45,60 +46,61 @@ let g:pymode_indent = 0
 command JsonPretty execute ":%!python -m json.tool"
 set secure
 
-inoremap <buffer> <silent> <Esc>o <C-O>
+inoremap <silent> <Esc>o <C-O>
 
-inoremap <buffer> <silent> <Esc>[1;2R <S-F3>
-nnoremap <buffer> <silent> <Esc>[1;2R <S-F3>
+inoremap <silent> <Esc>[1;2R <S-F3>
+nnoremap <silent> <Esc>[1;2R <S-F3>
 
-inoremap <buffer> <silent> <Esc>[1;2C <S-Right>
-snoremap <buffer> <silent> <Esc>[1;2C <S-Right>
-inoremap <buffer> <silent> <Esc>[1;2D <S-Left>
-snoremap <buffer> <silent> <Esc>[1;2D <S-Left>
+inoremap <silent> <Esc>[1;2C <S-Right>
+snoremap <silent> <Esc>[1;2C <S-Right>
+inoremap <silent> <Esc>[1;2D <S-Left>
+snoremap <silent> <Esc>[1;2D <S-Left>
 
-nnoremap <buffer> <silent> <Esc>[1;5D <C-Left>
-inoremap <buffer> <silent> <Esc>[1;5D <C-Left>
-snoremap <buffer> <silent> <Esc>[1;5D <C-Left>
+nnoremap <silent> <Esc>[1;5D <C-Left>
+inoremap <silent> <Esc>[1;5D <C-Left>
+snoremap <silent> <Esc>[1;5D <C-Left>
 
-nnoremap <buffer> <silent> <Esc>[1;5C <C-Right>
-inoremap <buffer> <silent> <Esc>[1;5C <C-Right>
-snoremap <buffer> <silent> <Esc>[1;5C <C-Right>
+nnoremap <silent> <Esc>[1;5C <C-Right>
+inoremap <silent> <Esc>[1;5C <C-Right>
+snoremap <silent> <Esc>[1;5C <C-Right>
 
-inoremap <buffer> <silent> <Esc>[1;6D <C-S-Left>
-snoremap <buffer> <silent> <Esc>[1;6D <C-S-Left>
-inoremap <buffer> <silent> <Esc>[1;6C <C-S-Right>
-snoremap <buffer> <silent> <Esc>[1;6C <C-S-Right>
+inoremap <silent> <Esc>[1;6D <C-S-Left>
+snoremap <silent> <Esc>[1;6D <C-S-Left>
+inoremap <silent> <Esc>[1;6C <C-S-Right>
+snoremap <silent> <Esc>[1;6C <C-S-Right>
 
-inoremap <buffer> <silent> <Esc>[1;2H <S-Home>
-snoremap <buffer> <silent> <Esc>[1;2H <S-Home>
-inoremap <buffer> <silent> <Esc>[1;2F <S-End>
-snoremap <buffer> <silent> <Esc>[1;2F <S-End>
+inoremap <silent> <Esc>[1;2H <S-Home>
+snoremap <silent> <Esc>[1;2H <S-Home>
+inoremap <silent> <Esc>[1;2F <S-End>
+snoremap <silent> <Esc>[1;2F <S-End>
 
-inoremap <buffer> <silent> <Esc>[1;5EK <C-S-Home>
-snoremap <buffer> <silent> <Esc>[1;5EK <C-S-Home>
-inoremap <buffer> <silent> <Esc>[1;5FK <C-S-End>
-snoremap <buffer> <silent> <Esc>[1;5FK <C-S-End>
+inoremap <silent> <Esc>[1;5EK <C-S-Home>
+snoremap <silent> <Esc>[1;5EK <C-S-Home>
+inoremap <silent> <Esc>[1;5FK <C-S-End>
+snoremap <silent> <Esc>[1;5FK <C-S-End>
 
-nnoremap <buffer> <silent> <Esc>[1;5E <C-Home>
-inoremap <buffer> <silent> <Esc>[1;5E <C-Home>
-snoremap <buffer> <silent> <Esc>[1;5E <C-Home>
+nnoremap <silent> <Esc>[1;5E <C-Home>
+inoremap <silent> <Esc>[1;5E <C-Home>
+snoremap <silent> <Esc>[1;5E <C-Home>
 
-nnoremap <buffer> <silent> <Esc>[1;5F <C-End>
-inoremap <buffer> <silent> <Esc>[1;5F <C-End>
-snoremap <buffer> <silent> <Esc>[1;5F <C-End>
+nnoremap <silent> <Esc>[1;5F <C-End>
+inoremap <silent> <Esc>[1;5F <C-End>
+snoremap <silent> <Esc>[1;5F <C-End>
 
-inoremap <buffer> <silent> <Esc>[1;2A <S-Up>
-snoremap <buffer> <silent> <Esc>[1;2A <S-Up>
-inoremap <buffer> <silent> <Esc>[1;2B <S-Down>
-snoremap <buffer> <silent> <Esc>[1;2B <S-Down>
+inoremap <silent> <Esc>[1;2A <S-Up>
+snoremap <silent> <Esc>[1;2A <S-Up>
+inoremap <silent> <Esc>[1;2B <S-Down>
+snoremap <silent> <Esc>[1;2B <S-Down>
 
-inoremap <buffer> <silent> <Esc>[5;2~ <S-PageUp>
-snoremap <buffer> <silent> <Esc>[5;2~ <S-PageUp>
-inoremap <buffer> <silent> <Esc>[6;2~ <S-PageDown>
-snoremap <buffer> <silent> <Esc>[6;2~ <S-PageDown>
+inoremap <silent> <Esc>[5;2~ <S-PageUp>
+snoremap <silent> <Esc>[5;2~ <S-PageUp>
+inoremap <silent> <Esc>[6;2~ <S-PageDown>
+snoremap <silent> <Esc>[6;2~ <S-PageDown>
 
-snoremap <buffer> <silent> <Esc>[3~ <Del>
+snoremap <silent> <Esc>[3~ <Del>
 
-inoremap <buffer> <silent> <Esc>[6;5! <C-O>db
+" inoremap <buffer> <silent> <C-S-Left> <C-O>db
+" inoremap <buffer> <silent> <C-S-Right> <C-O>de
 
 nnoremap <silent> <Esc>[5;5~ :bnext<CR>
 inoremap <silent> <Esc>[5;5~ <C-O>:bnext<CR>
@@ -127,10 +129,22 @@ Plug 'tombh/novim-mode'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'pgavlin/pulumi.vim'
 Plug 'https://github.com/hardcoreplayers/sql.vim'
+Plug 'morhetz/gruvbox'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-Plug 'muhmud/qsh', { 'dir': '~/.qsh/editors/vim' }
+Plug 'muhmud/qsh', { 'dir': '~/.qsh', 'branch': 'main', 'rtp': 'editors/vim' }
 
 call plug#end()
+
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
+
+nnoremap <C-p> :GFiles<CR>
+inoremap <C-p> <C-O>:GFiles<CR>
+nnoremap <C-b> :Buffers<CR>
+inoremap <C-b> <C-O>:Buffers<CR>
 
 set rtp+=/usr/lib/python3.8/site-packages/powerline/bindings/vim
 
