@@ -125,7 +125,7 @@ nnoremap <silent> <Esc>[18~ <C-O>:call QshExecuteAll()<CR>
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'tombh/novim-mode'
+Plug 'muhmud/novim-mode'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'pgavlin/pulumi.vim'
 Plug 'https://github.com/hardcoreplayers/sql.vim'
