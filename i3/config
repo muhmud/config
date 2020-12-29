@@ -37,7 +37,7 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec ~/bin/terminal.sh
+bindsym $mod+Return exec st -e tmux
 
 # Alt+Tab window switching!
 exec --no-startup-id ~/.config/i3/scripts/cycle_windows.py &

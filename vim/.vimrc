@@ -1,6 +1,9 @@
 
-autocmd VimEnter,BufReadPre,BufNewFile * startinsert
+" autocmd VimEnter,BufReadPre,BufNewFile * startinsert
 autocmd BufReadPost * silent! exe "normal! '."
+
+autocmd InsertEnter * set cul
+autocmd InsertLeave * set nocul
 
 set timeoutlen=10 ttimeoutlen=0
 
@@ -110,29 +113,67 @@ inoremap <silent> <Esc>[6;5~ <C-O>:bprevious<CR>
 
 " F5 for qsh
 snoremap <silent> <Esc>[15~ <C-O>:call QshExecuteSelection()<CR>
+vnoremap <silent> <Esc>[15~ :call QshExecuteSelection()<CR>
 
 " Ctrl+Enter for qsh
 inoremap <silent> <Esc>[XB <C-O>:call QshExecute()<CR>
-nnoremap <silent> <Esc>[XB <C-O>:call QshExecute()<CR>
+nnoremap <silent> <Esc>[XB :call QshExecute()<CR>
 
 " Ctrl+Shift+Enter for qsh
 inoremap <silent> <Esc>[XD <C-O>:call QshExecute("---", 0)<CR>
-nnoremap <silent> <Esc>[XD <C-O>:call QshExecute("---", 0)<CR>
+nnoremap <silent> <Esc>[XD :call QshExecute("---", 0)<CR>
+
+" Scripts
+snoremap <silent> <Esc>[1;3P <C-O>:call QshExecuteNamedQuery("describe")<CR>
+vnoremap <silent> <Esc>[1;3P :call QshExecuteNamedQuery("describe")<CR>
+
+snoremap <silent> <Esc>[1;3Q <C-O>:call QshExecuteNamedQuery("select")<CR>
+vnoremap <silent> <Esc>[1;3Q :call QshExecuteNamedQuery("select")<CR>
+
+snoremap <silent> <Esc>[1;3R <C-O>:call QshExecuteQuery()<CR>
+vnoremap <silent> <Esc>[1;3R :call QshExecuteQuery()<CR>
+
+snoremap <silent> <Esc><Space> <C-O>:call QshExecuteResultQuery()<CR>
+vnoremap <silent> <Esc><Space> :call QshExecuteResultQuery()<CR>
+nnoremap <silent> <Esc><Space> :call QshExecuteResultQuery()<CR>
+inoremap <silent> <Esc><Space> <C-O>:call QshExecuteResultQuery()<CR>
 
 " F7 for qsh
 inoremap <silent> <Esc>[18~ <C-O>:call QshExecuteAll()<CR>
-nnoremap <silent> <Esc>[18~ <C-O>:call QshExecuteAll()<CR>
+nnoremap <silent> <Esc>[18~ :call QshExecuteAll()<CR>
+
+nnoremap , @@
+
+"nnoremap x "_x
+"nnoremap X "_X
+"nnoremap d "_d
+"nnoremap D "_D
+"vnoremap d "_d
+
+"nnoremap <leader>dd ""dd
+"nnoremap <leader>d ""d
+"nnoremap <leader>D ""D
+"vnoremap <leader>d ""d
+
+:set number relativenumber
+
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'muhmud/novim-mode'
+"Plug 'muhmud/novim-mode'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'pgavlin/pulumi.vim'
 Plug 'https://github.com/hardcoreplayers/sql.vim'
 Plug 'morhetz/gruvbox'
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-surround'
 
 Plug 'muhmud/qsh', { 'dir': '~/.qsh', 'branch': 'main', 'rtp': 'editors/vim' }
 
@@ -141,8 +182,8 @@ call plug#end()
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
 
-nnoremap <C-p> :GFiles<CR>
-inoremap <C-p> <C-O>:GFiles<CR>
+nnoremap <C-p> :Files<CR>
+inoremap <C-p> <C-O>:Files<CR>
 nnoremap <C-b> :Buffers<CR>
 inoremap <C-b> <C-O>:Buffers<CR>
 

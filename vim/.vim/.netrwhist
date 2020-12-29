@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/muhmud/code/github.com/muhmud/certbot-acm/certbot_acm'
 let g:netrw_dirhist_5='/home/muhmud/toptal/clients/open-practice/code/gitlab/devops/openpm/terraform/modules/server-target'
 let g:netrw_dirhist_4='/home/muhmud/toptal/clients/open-practice/code/gitlab/devops/openpm/terraform/modules/security-group-rules'
 let g:netrw_dirhist_3='/home/muhmud/toptal/clients/open-practice/code/gitlab/devops/openpm/terraform/modules/server-target'

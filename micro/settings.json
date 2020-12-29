@@ -1,1 +1,8 @@
-{}
+{
+    "colorscheme": "dracula-tc",
+    "linter": false,
+    "statusformatl": "$(filename) $(modified)",
+    "statusformatr": "$(opt:fileformat) | $(opt:encoding) | $(opt:filetype)  [ $(line):$(col) ]",
+    "tabsize": 2,
+    "tabstospaces": true
+}

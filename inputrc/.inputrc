@@ -1,7 +1,6 @@
 set editing-mode emacs
 
 "\e[6_": "\C-d"
-"\e[178": backward-kill-word
 
 $if gdb
   "\C-r": "refresh\C-m"
@@ -29,6 +28,6 @@ $endif
 
 $if MAPIClient
   "\e ": '\\v\C-m'
-  "\e[2;5~": '\\v\C-m'
+  "\e[2;5~": '\ee'
 $endif
 

@@ -1,10 +1,4 @@
 
 
+columns(sdaf)
 
-select 1;
-
-
-:
-
-
-select 2:
