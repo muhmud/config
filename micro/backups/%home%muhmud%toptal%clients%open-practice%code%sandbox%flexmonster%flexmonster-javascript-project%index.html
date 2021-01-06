@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flexmonster Pivot Table & Charts</title>
+    <!-- Styling for the demo (optional) -->
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <section id="app">
+        <div class="wrap">
+            <!-- 1. Create a DIV container to insert the component -->
+            <div id="pivot-container" style="padding-bottom: 30px;"></div>
+
+            <!-- 2. Include flexmonster.js and CSS files -->
+            <script src="flexmonster/flexmonster.js" type="text/javascript"></script>
+            <link href="flexmonster/theme/purple/flexmonster.min.css" rel="stylesheet" type="text/css" />
+            <!-- You can use a different theme by specifying the corresponding path. -->
+            <!-- For example, to load the Green theme: -->
+            <!-- <link href="flexmonster/theme/green/flexmonster.min.css" rel="stylesheet" type="text/css" />  -->
+            <!-- See the full list of available themes: https://www.flexmonster.com/doc/customizing-appearance/#built-in-themes -->
+
+            <!-- 3. Create an instance of the component using new Flexmonster() -->
+            <script type="text/javascript">
+                pivot = new Flexmonster({
+                    container: "pivot-container",
+                    toolbar: true,
+                    height: 600,
+                    simplifyFieldListFolders: true,
+                    report: {
+                        dataSource: {
+                            type: "mondrian",
+
+                            /* URL to XMLA provider */
+                            proxyUrl: "http://ops102-db.staging.ops.aws:8000/api/xmla",
+                            /* proxyUrl: "https://olap-api.api1t.test.ops.aws/api/xmla", */
+                            
+                            /* Catalog name */
+                            catalog: "openpm",
+
+                            /* Cube name */
+                            cube: "Patient Billing",
+
+                            requestHeaders: {
+                              "Authorization": "Bearer eyJraWQiOiJvbGFwIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJTZXJ2ZXIiLCJyb2xlcyI6W10sImlzcyI6Im9sYXAiLCJleHAiOjM3NTQ5MjYxMjUsInRva2VuVHlwZSI6IlNFUlZFUiIsImlhdCI6MTYwNzQ0MjQ3OCwianRpIjoiMGNkZGJlNDgtYjk1ZS00MTNiLWFhZGItMWU0ZWI3OGRjNWE1In0.iB_afnWboSrRX7uvOxSnYF9qxzAbd1Ost_AT4pHJK_G03TaH4MQipEsuX7jx4r6G7WqI5ErM-IBKpr_AtaOCUVzgr_4VuO02fnaGuaChuvQuvxKMIWDMoKGAZuLQ6B6dKuKplwyYlMlW-DW5yIFZx1RRy9qtF7IWjOux6N1nAVk2XjQ21Eh1QoO3lXgy5lNWsJ4eoGUMpShXq1IEud8Ts15b3Sk3jsanUPf0VGGtQ_6b3tMQtVqK3cy7TWtnBq9HNpSBqHgND6xx6K47ztK5MjW8v2vuB8rVmmX4CmEOS7Op39JS80XXOWjsPMqNSasU-e3IatU1T_BNRQYNMo9YRw",
+                              "Accept": "text/xml"
+                            }
+
+                            /*requestHeaders: {
+                              "Authorization": "Bearer eyJraWQiOiJvcGVucG0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJTZXJ2ZXIiLCJyb2xlcyI6W10sImlzcyI6Im9wZW5wbSIsImV4cCI6Mzc1NDk2ODQyNywidG9rZW5UeXBlIjoiU0VSVkVSIiwiaWF0IjoxNjA3NDg0NzgwLCJqdGkiOiI3ZWIxNzhiMy0xYzNjLTRhYzktODAxNy03ODlhMWM4NDczZWIifQ.kBFqeVYoljow6Y9xPdMIEljdtUpYSY_D3uMx1zd7atUfvpzgsGaZKBHSksO3fO4jQCSJz5bXADd18fCNqb_gxpPd6RX3BW6j2gEWi1ifi54q_0ZD3hes4NjdQnmcxpYuaTdZbIBtvgM_Xm7RlkbpKDkf_ApxHImcn5sAdolcGK1y7Vog6p6r4Q8CnLCtZTqtb2xubh6vX1H5-ejWD_jythMjOgFBbyH5iw5d8tt87ikUiZyifIglJEKf5DmcsYPVfGXRa2v-A1Pwhq0h3s3G4W1dG0Tj0dQui4afIH8cZyD92zPtXC1mD96A0eIRPBvgUouyNFDfgSoVB85sxZ5VFw",
+                              "Accept": "text/xml"
+                            }*/
+                        }
+                    },
+                    licenseKey: "Z7MY-10E504-403L5L-475C0Q-6X1E1U-230Z0G-5A6X6N-3D2A60-2U4A03-1N213Y-6S586Z-613U6A"
+                });
+            </script>
+        </div>
+    </section>
+</body>
+
+</html>
+

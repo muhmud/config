@@ -73,6 +73,7 @@ This function should only modify configuration layer settings."
      gnus
      terraform
      shell
+     theming
      )
 
    ;; List of additional packages that will be installed without being
@@ -475,6 +476,9 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   (setq-default c-syntactic-indentation nil)
   (setq-default c-electric-flag nil)
+
+  (setq theming-modifications '((spacemacs-dark (default :background "#1C1F22")
+                                                (hl-line :background "#32393E"))))
   )
 
 (defun dotspacemacs/user-load ()
@@ -500,6 +504,13 @@ before packages are loaded."
   (setq-default evil-default-state 'insert)
 
   (spacemacs/toggle-camel-case-motion-globally-on)
+
+  (with-eval-after-load 'treemacs
+    (treemacs-resize-icons 18))
+  (setq lsp-headerline-arrow ">")
+
+  (require 'tree-sitter)
+  (require 'tree-sitter-langs)
 
   (defvaralias 'helm-c-yas-space-match-any-greedy 'helm-yas-space-match-any-greedy "Temporary alias for Emacs27")
 )
@@ -528,12 +539,15 @@ This function is called at the very end of Spacemacs initialization."
  '(lsp-enable-file-watchers nil)
  '(lsp-enable-folding t)
  '(lsp-enable-semantic-highlighting nil)
+ '(lsp-enable-semantic-tokens nil)
  '(lsp-enable-text-document-color nil)
+ '(lsp-headerline-breadcrumb-enable t)
  '(lsp-java-format-settings-url
    "file:///home/muhmud/.spacemacs.d/my/eclipse-java-google-style.xml")
  '(lsp-java-java-path "java")
  '(lsp-java-vmargs
    '("-noverify" "-Xmx4G" "-XX:+UseG1GC" "-XX:+UseStringDeduplication" "-javaagent:/home/muhmud/.m2/repository/org/projectlombok/lombok/1.18.8/lombok-1.18.8.jar"))
+ '(lsp-semantic-tokens-enable nil)
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-doc-max-height 20)
  '(lsp-ui-doc-max-width 75)
@@ -564,6 +578,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(hl-line ((t (:background "#32393E"))))
  '(lsp-face-highlight-read ((t (:inherit highlight :box nil :overline nil :underline t :height 1.0 :width normal))))
  '(lsp-face-semhl-field-static ((t (:inherit lsp-face-semhl-field :foreground "light sky blue" :slant italic :weight bold))))
  '(lsp-face-semhl-function ((t (:inherit font-lock-function-name-face :foreground "green yellow" :weight light))))
@@ -583,6 +598,16 @@ This function is called at the very end of Spacemacs initialization."
  '(markup-title-0-face ((t (:inherit markup-gen-face :height 1.7))))
  '(markup-title-1-face ((t (:inherit markup-gen-face :height 1.6))))
  '(markup-title-2-face ((t (:inherit markup-gen-face :height 1.5))))
+ '(tree-sitter-hl-face:attribute ((t (:inherit font-lock-preprocessor-face :slant italic))))
+ '(tree-sitter-hl-face:constant ((t (:inherit font-lock-constant-face :foreground "cyan" :slant italic :weight bold))))
+ '(tree-sitter-hl-face:constructor ((t (:inherit tree-sitter-hl-face:type :foreground "#A7EC21"))))
+ '(tree-sitter-hl-face:formal\.type ((t nil)))
+ '(tree-sitter-hl-face:function ((t (:inherit font-lock-function-name-face))))
+ '(tree-sitter-hl-face:function\.call ((t (:inherit (link font-lock-function-name-face) :foreground "#99DA21" :underline nil))))
+ '(tree-sitter-hl-face:keyword ((t (:inherit font-lock-keyword-face :foreground "#C5681C" :weight semi-light))))
+ '(tree-sitter-hl-face:method ((t (:inherit \#1C9D3E))))
+ '(tree-sitter-hl-face:operator ((t (:inherit tree-sitter-hl-face:attribute))))
+ '(tree-sitter-hl-face:type ((t (:inherit font-lock-type-face :foreground "#118BBD" :weight semi-light))))
  '(treemacs-git-added-face ((t (:background "#293235" :foreground "#67b11d" :slant oblique))))
  '(treemacs-git-conflict-face ((t (:background "#3c2a2c" :foreground "#f2241f" :slant oblique))))
  '(treemacs-git-modified-face ((t (:background "#293239" :foreground "#4f97d7" :slant oblique))))

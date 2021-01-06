@@ -124,19 +124,19 @@ inoremap <silent> <Esc>[XD <C-O>:call QshExecute("---", 0)<CR>
 nnoremap <silent> <Esc>[XD :call QshExecute("---", 0)<CR>
 
 " Scripts
-snoremap <silent> <Esc>[1;3P <C-O>:call QshExecuteNamedQuery("describe")<CR>
-vnoremap <silent> <Esc>[1;3P :call QshExecuteNamedQuery("describe")<CR>
+snoremap <silent> <Esc>[1;3P <C-O>:call QshExecuteNamedScript("describe")<CR>
+vnoremap <silent> <Esc>[1;3P :call QshExecuteNamedScript("describe")<CR>
 
-snoremap <silent> <Esc>[1;3Q <C-O>:call QshExecuteNamedQuery("select")<CR>
-vnoremap <silent> <Esc>[1;3Q :call QshExecuteNamedQuery("select")<CR>
+snoremap <silent> <Esc>[1;3Q <C-O>:call QshExecuteNamedScript("select")<CR>
+vnoremap <silent> <Esc>[1;3Q :call QshExecuteNamedScript("select")<CR>
 
-snoremap <silent> <Esc>[1;3R <C-O>:call QshExecuteQuery()<CR>
-vnoremap <silent> <Esc>[1;3R :call QshExecuteQuery()<CR>
+snoremap <silent> <Esc>[1;3R <C-O>:call QshExecuteScript()<CR>
+vnoremap <silent> <Esc>[1;3R :call QshExecuteScript()<CR>
 
-snoremap <silent> <Esc><Space> <C-O>:call QshExecuteResultQuery()<CR>
-vnoremap <silent> <Esc><Space> :call QshExecuteResultQuery()<CR>
-nnoremap <silent> <Esc><Space> :call QshExecuteResultQuery()<CR>
-inoremap <silent> <Esc><Space> <C-O>:call QshExecuteResultQuery()<CR>
+snoremap <silent> <Esc><Space> <C-O>:call QshExecuteSnippet()<CR>
+vnoremap <silent> <Esc><Space> :call QshExecuteSnippet()<CR>
+nnoremap <silent> <Esc><Space> :call QshExecuteSnippet()<CR>
+inoremap <silent> <Esc><Space> <C-O>:call QshExecuteSnippet()<CR>
 
 " F7 for qsh
 inoremap <silent> <Esc>[18~ <C-O>:call QshExecuteAll()<CR>

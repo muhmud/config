@@ -29,10 +29,11 @@
     "\u001b[XD": "command:QshExecute '---' 0",
     "F5": "command:QshExecuteSelection",
     "F7": "command:QshExecuteAll",
-    "Alt-F1": "command:QshExecuteNamedQuery 'describe'",
-    "Alt-F2": "command:QshExecuteNamedQuery 'select'",
-    "Alt-F3": "command:QshExecuteQuery",
-    "Alt-F4": "command:QshExecuteNamedQuery 'columns'",
-    "\u001b ": "command:QshExecuteResultQuery"
+    "Alt-F1": "command:QshExecuteNamedScript 'describe'",
+    "Alt-F2": "command:QshExecuteNamedScript 'select'",
+    "Alt-F3": "command:QshExecuteScript",
+    "Alt-F4": "command:QshExecuteNamedScript 'columns'",
+    "Alt-F5": "command:QshExecuteNamedSnippet 'format'",
+    "\u001b ": "command:QshExecuteSnippet"
 }
 
