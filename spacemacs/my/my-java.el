@@ -147,8 +147,6 @@
   "Face for Java annotations" :group 'tree-sitter-hl-faces)
 (defface tree-sitter-hl-face:method.logMethod '((t :foreground "#80F6A7"))
   "Face for Java annotations" :group 'tree-sitter-hl-faces)
-(defface tree-sitter-hl-face:function.method '((t :foreground "#1DAF3E"))
-  "Face for Java annotations" :group 'tree-sitter-hl-faces)
 (defface tree-sitter-hl-face:inscope.identifier '((t :foreground "#F2F200"))
   "Face for Java annotations" :group 'tree-sitter-hl-faces)
 (defface tree-sitter-hl-face:locals.variable '((t :foreground "#F3EC79"))

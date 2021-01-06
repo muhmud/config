@@ -605,7 +605,7 @@ This function is called at the very end of Spacemacs initialization."
  '(tree-sitter-hl-face:function ((t (:inherit font-lock-function-name-face))))
  '(tree-sitter-hl-face:function\.call ((t (:inherit (link font-lock-function-name-face) :foreground "#99DA21" :underline nil))))
  '(tree-sitter-hl-face:keyword ((t (:inherit font-lock-keyword-face :foreground "#C5681C" :weight semi-light))))
- '(tree-sitter-hl-face:method ((t (:inherit \#1C9D3E))))
+ '(tree-sitter-hl-face:method ((t (:inherit tree-sitter-hl-face:function :foreground "#1DAF3E" :weight semi-light))))
  '(tree-sitter-hl-face:operator ((t (:inherit tree-sitter-hl-face:attribute))))
  '(tree-sitter-hl-face:type ((t (:inherit font-lock-type-face :foreground "#118BBD" :weight semi-light))))
  '(treemacs-git-added-face ((t (:background "#293235" :foreground "#67b11d" :slant oblique))))
