@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "resuming from sleep..."
+systemctl --user start pulseaudio.socket
+systemctl --user start pulseaudio
+
+~/bin/recycle
+~/bin/reset_sound
+~/bin/restart_bluetooth
+

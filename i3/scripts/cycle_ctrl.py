@@ -7,6 +7,7 @@ import selectors
 import threading
 import time
 from argparse import ArgumentParser
+
 import i3ipc
 from cycler import Cycler
 

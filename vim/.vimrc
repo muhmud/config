@@ -187,7 +187,7 @@ inoremap <C-p> <C-O>:Files<CR>
 nnoremap <C-b> :Buffers<CR>
 inoremap <C-b> <C-O>:Buffers<CR>
 
-set rtp+=/usr/lib/python3.8/site-packages/powerline/bindings/vim
+set rtp+=/usr/lib/python3.9/site-packages/powerline/bindings/vim
 
 " Always show statusline
 set laststatus=2

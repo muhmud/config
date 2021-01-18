@@ -6,6 +6,7 @@ import socket
 import selectors
 import threading
 from argparse import ArgumentParser
+
 import i3ipc
 from cycler import Cycler
 

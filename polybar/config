@@ -1,4 +1,6 @@
 
+[bar/top]
+
 # Theme
 color15_i3wmthemer	    = ${xrdb:*.color15}
 color14_i3wmthemer	    = ${xrdb:*.color14}
@@ -24,7 +26,6 @@ background_i3wmthemer 	= ${xrdb:*.background}
 ; it might need some tweaking to run on the latest released version... try for yourself
 ;
 
-[bar/top]
 monitor=DisplayPort-2
 width = 100%
 height = 35
@@ -67,6 +68,27 @@ modules-center = date
 modules-right = updates timer xe weather xbanish power
 
 [bar/bottom]
+
+# Theme
+color15_i3wmthemer	    = ${xrdb:*.color15}
+color14_i3wmthemer	    = ${xrdb:*.color14}
+color13_i3wmthemer	    = ${xrdb:*.color13}
+color12_i3wmthemer	    = ${xrdb:*.color12}
+color11_i3wmthemer	    = ${xrdb:*.color11}
+color10_i3wmthemer	    = ${xrdb:*.color10}
+color09_i3wmthemer	    = ${xrdb:*.color9}
+color08_i3wmthemer	    = ${xrdb:*.color8}
+color07_i3wmthemer	    = ${xrdb:*.color7}
+color06_i3wmthemer	    = ${xrdb:*.color6}
+color05_i3wmthemer	    = ${xrdb:*.color5}
+color04_i3wmthemer	    = ${xrdb:*.color4}
+color03_i3wmthemer	    = ${xrdb:*.color3}
+color02_i3wmthemer	    = ${xrdb:*.color2}
+color01_i3wmthemer      = ${xrdb:*.color1}
+color00_i3wmthemer	    = ${xrdb:*.color0}
+foreground_i3wmthemer 	= ${xrdb:*.foreground}
+background_i3wmthemer 	= ${xrdb:*.background}
+
 monitor=DisplayPort-2
 width = 100%
 height = 40

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "headphones ...";
+#~/bin/sony_headphones disconnect;
+
+echo "bluetooth ...";
+sudo systemctl stop bluetooth;
+
+echo "sound ...";
+systemctl --user --force stop pulseaudio;
+
+echo "sleep ...";
+sleep 7;
+
+systemctl suspend
+

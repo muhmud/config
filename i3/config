@@ -186,8 +186,8 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to logout?' -b 'Yes, logout' 'i3-msg exit'"
 
-# Suspend key causes hibernate
-bindsym XF86Sleep exec ~/bin/sony_headphones disconnect;exec sudo systemctl stop bluetooth;exec systemctl --user --force stop pulseaudio; exec sleep 7; exec systemctl hibernate
+# Suspend key causes sleep
+bindsym XF86Sleep exec ~/bin/go-sleep
 
 # Ctrl+Alt+Del
 bindsym Control+Mod1+Delete exec oblogout
