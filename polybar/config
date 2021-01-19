@@ -274,7 +274,7 @@ exec = ~/.config/polybar/scripts/timer-status.sh
 click-left = ~/.config/polybar/scripts/timer-pause-continue.sh
 click-middle = ~/.config/polybar/scripts/timer-switch.sh
 click-right = ~/.config/polybar/scripts/timer-stop.sh
-scroll-down = ~/.config/polybar/scripts/timer-change-task.sh
+scroll-down = /bin/flock -n /tmp ~/.config/polybar/scripts/timer-change-task.sh
 
 [module/screensaver]
 type = custom/script
