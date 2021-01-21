@@ -1,2 +1,0 @@
-
-olap.patient_billing_fact

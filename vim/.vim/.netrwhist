@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =7
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/muhmud/toptal/clients/open-practice/code/gitlab/openpm/microservices/openpm-server/openpm-api'
 let g:netrw_dirhist_7='/home/muhmud/.qsh/clients/mysql'
 let g:netrw_dirhist_6='/home/muhmud/code/github.com/muhmud/certbot-acm/certbot_acm'
 let g:netrw_dirhist_5='/home/muhmud/toptal/clients/open-practice/code/gitlab/devops/openpm/terraform/modules/server-target'
