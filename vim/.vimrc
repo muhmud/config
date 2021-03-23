@@ -5,7 +5,7 @@ autocmd BufReadPost * silent! exe "normal! '."
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
 
-set timeoutlen=10 ttimeoutlen=0
+set timeoutlen=500 ttimeoutlen=-1
 
 set nocompatible  " be iMproved, required
 filetype off  " required
@@ -144,6 +144,16 @@ nnoremap <silent> <Esc>[18~ :call QshExecuteAll()<CR>
 
 nnoremap , @@
 
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
+nmap <Leader>gd <Plug>(coc-definition)
+nmap <Leader>gr <Plug>(coc-references)
+
+nmap <Leader>fh :call fzf#run({'options': '--reverse', 'down': 20, 'dir': '~', 'sink': 'e' })<CR>
+nmap <Leader>ff :call fzf#run({'options': '--reverse', 'down': 20, 'sink': 'e' })<CR>
+nmap <Leader>fb :Buffers<CR>
+
 "nnoremap x "_x
 "nnoremap X "_X
 "nnoremap d "_d
@@ -178,14 +188,6 @@ Plug 'tpope/vim-surround'
 Plug 'muhmud/qsh', { 'dir': '~/.qsh', 'branch': 'main', 'rtp': 'editors/vim' }
 
 call plug#end()
-
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gr <Plug>(coc-references)
-
-nnoremap <C-p> :Files<CR>
-inoremap <C-p> <C-O>:Files<CR>
-nnoremap <C-b> :Buffers<CR>
-inoremap <C-b> <C-O>:Buffers<CR>
 
 set rtp+=/usr/lib/python3.9/site-packages/powerline/bindings/vim
 

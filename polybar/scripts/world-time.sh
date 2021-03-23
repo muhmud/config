@@ -8,5 +8,6 @@ SARAJEVO=`TZ="Europe/Sarajevo" date +"%H:%M"`
 TEL_AVIV=`TZ="Asia/Tel_Aviv" date +"%H:%M"`
 EASTERN=`TZ="America/New_York" date +"%H:%M"`
 SLOVAKIA=`TZ="Europe/Bratislava" date +"%H:%M"`
+ISTANBUL=`TZ="Europe/Istanbul" date +"%H:%M"`
 
-echo -e " London: $LONDON %{F#FF0}|%{F-} Islamabad: $ISLAMABAD %{F#FF0}|%{F-} UTC: $UTC %{F#FF0}|%{F-} Sarajevo: $SARAJEVO %{F#FF0}|%{F-} Eastern: $EASTERN"
+echo -e " London: $LONDON %{F#FF0}|%{F-} Islamabad: $ISLAMABAD %{F#FF0}|%{F-} UTC: $UTC %{F#FF0}|%{F-} Istanbul: $ISTANBUL %{F#FF0}|%{F-} Eastern: $EASTERN"

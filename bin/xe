@@ -7,13 +7,20 @@ amount=1
 if ! [ -z "$3" ]; then
     amount=$3
 fi
-       
+
+API_KEY=a4bb38023b09597d38ff
+
+SOURCE=$1
+DESTINATION=$2
+
+SOURCE_DESTINATION="${SOURCE}_${DESTINATION}"
+
 if ! [ -z "$1" ] && ! [ -z "$2" ]; then
-    uri="https://www.xe.com/currencyconverter/convert/?Amount=$amount&From=$1&To=$2"
-    domcurl "$uri" > /tmp/tmp-xe
-    value=`cat /tmp/tmp-xe | perl -l -0777 -ne 'print $1 if /<span class="converterresult-toAmount">(.*?)<\/span/'`
-  
+    value="$(curl -s https://free.currconv.com/api/v7/convert\?q\=${SOURCE_DESTINATION}\&compact\=ultra\&apiKey\=$API_KEY \
+      | jq -r ".${SOURCE_DESTINATION}")"
+ 
     if ! [ -z "$value" ]; then
-        echo "$amount $1 = $value $2"
+        echo "$amount $1 = $(printf '%.5f\n' $(echo "$value * $amount" | bc)) $2"
     fi
 fi
+

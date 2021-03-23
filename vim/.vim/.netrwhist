@@ -1,10 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =8
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/muhmud/.qsh/scripts'
+let g:netrw_dirhist_1='/home/muhmud/toptal/clients/open-practice/code/gitlab/devops/openpm/terraform/config/bi/ops-services/files/config'
+let g:netrw_dirhist_0='/home/muhmud/toptal/clients/open-practice/code/gitlab/devops/openpm/terraform/modules/database'
+let g:netrw_dirhist_9='/home/muhmud/toptal/clients/open-practice/code/gitlab/devops/openpm/terraform/modules'
 let g:netrw_dirhist_8='/home/muhmud/toptal/clients/open-practice/code/gitlab/openpm/microservices/openpm-server/openpm-api'
 let g:netrw_dirhist_7='/home/muhmud/.qsh/clients/mysql'
 let g:netrw_dirhist_6='/home/muhmud/code/github.com/muhmud/certbot-acm/certbot_acm'
 let g:netrw_dirhist_5='/home/muhmud/toptal/clients/open-practice/code/gitlab/devops/openpm/terraform/modules/server-target'
 let g:netrw_dirhist_4='/home/muhmud/toptal/clients/open-practice/code/gitlab/devops/openpm/terraform/modules/security-group-rules'
 let g:netrw_dirhist_3='/home/muhmud/toptal/clients/open-practice/code/gitlab/devops/openpm/terraform/modules/server-target'
-let g:netrw_dirhist_2='/home/muhmud/.oh-my-zsh/plugins/vi-mode'
-let g:netrw_dirhist_1='/home/muhmud/.oh-my-zsh/plugins'

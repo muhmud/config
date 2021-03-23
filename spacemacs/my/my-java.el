@@ -89,6 +89,7 @@
   (lambda () (diminish 'tree-sitter-mode))
   (tree-sitter-hl-add-patterns 'java [
     (generic_type (type_identifier) @generic.type)
+    (import_declaration "static" (scoped_identifier name: (identifier) @method.staticMethod))
     (object_creation_expression (type_identifier) @constructor.call)
     (
      (field_declaration (modifiers) @keyword (variable_declarator (identifier) @class.staticField))

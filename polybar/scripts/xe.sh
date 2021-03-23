@@ -2,8 +2,8 @@
 
 FILE=/tmp/currency-all
 TICK_TIME=15
-XBT_INDEX=3
-XRP_INDEX=4
+XBT_INDEX=4
+XRP_INDEX=5
 
 INDEX=-1
 while true

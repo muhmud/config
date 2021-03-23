@@ -347,6 +347,9 @@ exec --no-startup-id dunst ~/.config/dunst/dunstrc &
 # Restart bluetooth
 exec --no-startup-id ~/bin/restart_bluetooth
 
+# XE
+exec --no-startup-id ~/.config/polybar/scripts/xe-update.sh
+
 # Swap Caps Lock for Escape
 exec /usr/bin/xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 

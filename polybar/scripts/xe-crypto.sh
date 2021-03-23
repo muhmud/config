@@ -8,7 +8,7 @@ DATA=`cat /tmp/currency-all`
 BTC_RATE_FINAL=`printf "%.7s" $BTC_RATE`
 XRP_RATE_FINAL=`printf "%.7s" $XRP_RATE`
 
-NEW_DATA=`echo $DATA | jq --raw-output ".list[3].value = $BTC_RATE_FINAL"`
-NEW_DATA=`echo $NEW_DATA | jq --raw-output ".list[4].value = $XRP_RATE_FINAL"`
+NEW_DATA=`echo $DATA | jq --raw-output ".list[4].value = $BTC_RATE_FINAL"`
+NEW_DATA=`echo $NEW_DATA | jq --raw-output ".list[5].value = $XRP_RATE_FINAL"`
 
 echo $NEW_DATA > /tmp/currency-all
