@@ -5,7 +5,7 @@ autocmd BufReadPost * silent! exe "normal! '."
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
 
-set timeoutlen=500 ttimeoutlen=-1
+set timeoutlen=550 ttimeoutlen=-1
 
 set nocompatible  " be iMproved, required
 filetype off  " required
@@ -152,19 +152,21 @@ nmap <Leader>gr <Plug>(coc-references)
 
 nmap <Leader>fh :call fzf#run({'options': '--reverse', 'down': 20, 'dir': '~', 'sink': 'e' })<CR>
 nmap <Leader>ff :call fzf#run({'options': '--reverse', 'down': 20, 'sink': 'e' })<CR>
-nmap <Leader>fb :Buffers<CR>
+nmap <Leader>fg :GitFiles<CR>
+nmap <Leader>bb :Buffers<CR>
 
-"nnoremap x "_x
-"nnoremap X "_X
-"nnoremap d "_d
-"nnoremap D "_D
-"vnoremap d "_d
+nnoremap x "_x
+nnoremap X "_X
+nnoremap d "_d
+nnoremap D "_D
+vnoremap d "_d
 
-"nnoremap <leader>dd ""dd
-"nnoremap <leader>d ""d
-"nnoremap <leader>D ""D
-"vnoremap <leader>d ""d
+nnoremap <Leader>dd ""dd
+nnoremap <Leader>d ""d
+nnoremap <Leader>D ""D
+vnoremap <Leader>d ""d
 
+:set clipboard=unnamedplus
 :set number relativenumber
 
 :augroup numbertoggle
