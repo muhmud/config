@@ -5,6 +5,10 @@ autocmd BufReadPost * silent! exe "normal! '."
 autocmd InsertEnter * set cul
 autocmd InsertLeave * set nocul
 
+autocmd VimEnter * silent exec "! echo -ne '\e[1 q'"
+autocmd InsertEnter * silent exec "! echo -ne '\e[5 q'"
+autocmd InsertLeave * silent exec "! echo -ne '\e[1 q'"
+
 set timeoutlen=550 ttimeoutlen=-1
 
 set nocompatible  " be iMproved, required
@@ -166,7 +170,7 @@ nnoremap <Leader>d ""d
 nnoremap <Leader>D ""D
 vnoremap <Leader>d ""d
 
-:set clipboard=unnamedplus
+":set clipboard=unnamedplus
 :set number relativenumber
 
 :augroup numbertoggle
@@ -182,11 +186,9 @@ Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'pgavlin/pulumi.vim'
 Plug 'https://github.com/hardcoreplayers/sql.vim'
 Plug 'morhetz/gruvbox'
-" Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
-Plug 'wincent/terminus'
 
 Plug 'muhmud/qsh', { 'dir': '~/.qsh', 'branch': 'main', 'rtp': 'editors/vim' }
 
