@@ -33,6 +33,7 @@ set colorcolumn=100
 set noinsertmode
 set noshowmode
 set cursorline
+set nostartofline
 
 colorscheme atom-dark-256
 
@@ -131,8 +132,8 @@ nnoremap <silent> <Esc>[XD :call QshExecute("---", 0)<CR>
 snoremap <silent> <Esc>[1;3P <C-O>:call QshExecuteNamedScript("describe")<CR>
 vnoremap <silent> <Esc>[1;3P :call QshExecuteNamedScript("describe")<CR>
 
-snoremap <silent> <Esc>[1;3Q <C-O>:call QshExecuteNamedScript("select")<CR>
-vnoremap <silent> <Esc>[1;3Q :call QshExecuteNamedScript("select")<CR>
+snoremap <silent> <Esc>[1;3Q <C-O>:call QshExecuteNamedScript("select-some")<CR>
+vnoremap <silent> <Esc>[1;3Q :call QshExecuteNamedScript("select-some")<CR>
 
 snoremap <silent> <Esc>[1;3R <C-O>:call QshExecuteScript()<CR>
 vnoremap <silent> <Esc>[1;3R :call QshExecuteScript()<CR>
@@ -159,16 +160,16 @@ nmap <Leader>ff :call fzf#run({'options': '--reverse', 'down': 20, 'sink': 'e' }
 nmap <Leader>fg :GitFiles<CR>
 nmap <Leader>bb :Buffers<CR>
 
-nnoremap x "_x
-nnoremap X "_X
-nnoremap d "_d
-nnoremap D "_D
-vnoremap d "_d
+"nnoremap x "_x
+"nnoremap X "_X
+"nnoremap d "_d
+"nnoremap D "_D
+"vnoremap d "_d
 
-nnoremap <Leader>dd ""dd
-nnoremap <Leader>d ""d
-nnoremap <Leader>D ""D
-vnoremap <Leader>d ""d
+"nnoremap <Leader>dd ""dd
+"nnoremap <Leader>d ""d
+"nnoremap <Leader>D ""D
+"vnoremap <Leader>d ""d
 
 ":set clipboard=unnamedplus
 :set number relativenumber

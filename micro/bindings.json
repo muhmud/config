@@ -30,7 +30,7 @@
     "F5": "command:QshExecuteSelection",
     "F7": "command:QshExecuteAll",
     "Alt-F1": "command:QshExecuteNamedScript 'describe'",
-    "Alt-F2": "command:QshExecuteNamedScript 'select'",
+    "Alt-F2": "command:QshExecuteNamedScript 'select-some'",
     "Alt-F3": "command:QshExecuteScript",
     "Alt-F4": "command:QshExecuteNamedScript 'columns'",
     "Alt-F5": "command:QshExecuteNamedSnippet 'format'",
